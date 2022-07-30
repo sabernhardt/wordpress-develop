@@ -125,6 +125,20 @@ p {
 	position: relative;
 }
 
+.js.login .has-password-toggle {
+	display: flex;
+}
+
+.js.login .has-password-toggle .password-input {
+	padding-right: 0.3125rem;
+}
+
+.js.login .has-password-toggle .button.wp-hide-pw {
+	border-color: currentColor;
+	border-radius: 4px;
+	position: static;
+}
+
 .no-js .hide-if-no-js {
 	display: none;
 }
