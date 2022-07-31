@@ -247,11 +247,6 @@ html:lang(he-il) .rtl #wpadminbar * {
 #wpadminbar #adminbarsearch:before {
 	color: #a7aaad;
 	color: rgba(240, 246, 252, 0.6);
-}
-
-#wpadminbar .ab-icon:before,
-#wpadminbar .ab-item:before,
-#wpadminbar #adminbarsearch:before {
 	position: relative;
 	transition: color .1s ease-in-out;
 }
