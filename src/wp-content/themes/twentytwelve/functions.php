@@ -138,52 +138,49 @@ require get_template_directory() . '/inc/custom-header.php';
 require get_template_directory() . '/inc/block-patterns.php';
 
 /**
- * Return the font stylesheet URL if available.
+ * Return the Google font stylesheet URL if available.
+ *
+ * The use of Open Sans by default is localized. For languages that use
+ * characters not supported by the font, the font can be disabled.
  *
  * @since Twenty Twelve 1.2
  *
  * @return string Font stylesheet or empty string if disabled.
  */
 function twentytwelve_get_font_url() {
-	return '';
-}
+	$font_url = '';
 
-if ( ! function_exists( 'twentytwelve_fonts_urls' ) ) :
-	/**
-	 * Return an array of font URLs to be enqueued in Twenty Thirteen.
-	 *
-	 * Create your own twentytwelve_fonts_urls() function to override in a child theme.
-	 * The use of Open Sans by default is localized. For languages
-	 * that use characters not supported by the font, the font can be disabled.
-	 *
-	 * @since Twenty Twelve 3.8
-	 *
-	 * @return array<string,string> Font URLs for the theme.
+	/*
+	 * translators: If there are characters in your language that are not supported
+	 * by Open Sans, translate this to 'off'. Do not translate into your own language.
 	 */
-	function twentytwelve_fonts_urls() {
-		$font_urls = array();
+	if ( 'off' !== _x( 'on', 'Open Sans font: on or off', 'twentytwelve' ) ) {
+		$subsets = 'latin,latin-ext';
 
 		/*
-		* translators: If there are characters in your language that are not supported
-		* by Open Sans, translate this to 'off'. Do not translate into your own language.
-		*/
-		if ( 'off' !== _x( 'on', 'Open Sans font: on or off', 'twentytwelve' ) ) {
-			$font_urls['open-sans'] = get_stylesheet_directory_uri() . '/fonts/open-sans/font-open-sans.css';
-		}
-
-		/**
-		 * If the `twentytwelve_fonts_url` function does not return an empty string,
-		 * we can assume that the user has defined a custom font URL.
+		 * translators: To add an additional Open Sans character subset specific to your language,
+		 * translate this to 'greek', 'cyrillic' or 'vietnamese'. Do not translate into your own language.
 		 */
-		if ( ! empty( twentytwelve_get_font_url() ) ) {
-			// Empty the fonts urls array to prevent loading of fonts the user did not intent to load.
-			$font_urls           = array();
-			$font_urls['legacy'] = twentytwelve_get_font_url();
+		$subset = _x( 'no-subset', 'Open Sans font: add new subset (greek, cyrillic, vietnamese)', 'twentytwelve' );
+
+		if ( 'cyrillic' === $subset ) {
+			$subsets .= ',cyrillic,cyrillic-ext';
+		} elseif ( 'greek' === $subset ) {
+			$subsets .= ',greek,greek-ext';
+		} elseif ( 'vietnamese' === $subset ) {
+			$subsets .= ',vietnamese';
 		}
 
-		return $font_urls;
+		$query_args = array(
+			'family'  => urlencode( 'Open Sans:400italic,700italic,400,700' ),
+			'subset'  => urlencode( $subsets ),
+			'display' => urlencode( 'fallback' ),
+		);
+		$font_url   = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
 	}
-endif;
+
+	return $font_url;
+}
 
 /**
  * Enqueue scripts and styles for front end.
@@ -204,14 +201,10 @@ function twentytwelve_scripts_styles() {
 	// Adds JavaScript for handling the navigation menu hide-and-show behavior.
 	wp_enqueue_script( 'twentytwelve-navigation', get_template_directory_uri() . '/js/navigation.js', array( 'jquery' ), '20141205', true );
 
-	// Add custom fonts, used in the main stylesheet.
-	foreach ( twentytwelve_fonts_urls() as $font_slug => $font_url ) {
-		wp_enqueue_style( 'twentytwelve-font-' . $font_slug, $font_url, array(), null );
+	$font_url = twentytwelve_get_font_url();
+	if ( ! empty( $font_url ) ) {
+		wp_enqueue_style( 'twentytwelve-fonts', esc_url_raw( $font_url ), array(), null );
 	}
-
-	// Register the style 'twentytwelve-fonts' for backwards compatibility.
-	wp_register_style( 'twentytwelve-fonts', false );
-	wp_enqueue_style( 'twentytwelve-fonts' );
 
 	// Loads our main stylesheet.
 	wp_enqueue_style( 'twentytwelve-style', get_stylesheet_uri(), array(), '20190507' );
@@ -233,20 +226,13 @@ add_action( 'wp_enqueue_scripts', 'twentytwelve_scripts_styles' );
 function twentytwelve_block_editor_styles() {
 	// Block styles.
 	wp_enqueue_style( 'twentytwelve-block-editor-style', get_template_directory_uri() . '/css/editor-blocks.css', array(), '20190406' );
-
-	// Add custom fonts, used in the main stylesheet.
-	foreach ( twentytwelve_fonts_urls() as $font_slug => $font_url ) {
-		wp_enqueue_style( 'twentytwelve-font-' . $font_slug, $font_url, array(), null );
-	}
-
-	// Register the style 'twentytwelve-fonts' for backwards compatibility.
-	wp_register_style( 'twentytwelve-fonts', false );
-	wp_enqueue_style( 'twentytwelve-fonts' );
+	// Add custom fonts.
+	wp_enqueue_style( 'twentytwelve-fonts', twentytwelve_get_font_url(), array(), null );
 }
 add_action( 'enqueue_block_editor_assets', 'twentytwelve_block_editor_styles' );
 
 /**
- * Add preconnect for Fonts.
+ * Add preconnect for Google Fonts.
  *
  * @since Twenty Twelve 2.2
  *
@@ -255,6 +241,17 @@ add_action( 'enqueue_block_editor_assets', 'twentytwelve_block_editor_styles' );
  * @return array URLs to print for resource hints.
  */
 function twentytwelve_resource_hints( $urls, $relation_type ) {
+	if ( wp_style_is( 'twentytwelve-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
+		if ( version_compare( $GLOBALS['wp_version'], '4.7-alpha', '>=' ) ) {
+			$urls[] = array(
+				'href' => 'https://fonts.gstatic.com',
+				'crossorigin',
+			);
+		} else {
+			$urls[] = 'https://fonts.gstatic.com';
+		}
+	}
+
 	return $urls;
 }
 add_filter( 'wp_resource_hints', 'twentytwelve_resource_hints', 10, 2 );
@@ -272,7 +269,7 @@ add_filter( 'wp_resource_hints', 'twentytwelve_resource_hints', 10, 2 );
  * @return string Filtered CSS path.
  */
 function twentytwelve_mce_css( $mce_css ) {
-	$font_url = implode( ',', twentytwelve_fonts_urls() );
+	$font_url = twentytwelve_get_font_url();
 
 	if ( empty( $font_url ) ) {
 		return $mce_css;
