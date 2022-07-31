@@ -358,21 +358,6 @@ html:lang(he-il) .rtl #wpadminbar * {
 	color: #72aee6;
 }
 
-#wpadminbar .quicklinks a span#ab-updates {
-	background: #f0f0f1;
-	color: #2c3338;
-	display: inline;
-	padding: 2px 5px;
-	font-size: 10px;
-	font-weight: 600;
-	border-radius: 10px;
-}
-
-#wpadminbar .quicklinks a:hover span#ab-updates {
-	background: #fff;
-	color: #000;
-}
-
 #wpadminbar .ab-top-secondary {
 	float: right;
 }
