@@ -244,12 +244,13 @@ function twentythirteen_setup() {
 add_action( 'after_setup_theme', 'twentythirteen_setup' );
 
 /**
- * Return the Google font stylesheet URL, if available.
+ * Return the hosted font stylesheet URL, if available.
  *
  * The use of Source Sans Pro and Bitter by default is localized. For languages
  * that use characters not supported by the font, the font can be disabled.
  *
  * @since Twenty Thirteen 1.0
+ * @since Twenty Thirteen 3.7 Replaced Google URL with self-hosted fonts.
  *
  * @return string Font stylesheet or empty string if disabled.
  */
@@ -272,19 +273,14 @@ function twentythirteen_fonts_url() {
 		$font_families = array();
 
 		if ( 'off' !== $source_sans_pro ) {
-			$font_families[] = 'Source Sans Pro:300,400,700,300italic,400italic,700italic';
+			$font_families[] = 'source-sans-pro';
 		}
 
 		if ( 'off' !== $bitter ) {
-			$font_families[] = 'Bitter:400,700';
+			$font_families[] = 'bitter';
 		}
 
-		$query_args = array(
-			'family'  => urlencode( implode( '|', $font_families ) ),
-			'subset'  => urlencode( 'latin,latin-ext' ),
-			'display' => urlencode( 'fallback' ),
-		);
-		$fonts_url  = add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
+		$fonts_url = get_template_directory_uri() . '/fonts/' . implode( '-plus-', $font_families ) . '.css';
 	}
 
 	return $fonts_url;
@@ -334,6 +330,7 @@ add_action( 'wp_enqueue_scripts', 'twentythirteen_scripts_styles' );
  * Add preconnect for Google Fonts.
  *
  * @since Twenty Thirteen 2.1
+ * @deprecated Twenty Thirteen 3.7 Removed filter because, by default, fonts are self-hosted.
  *
  * @param array   $urls          URLs to print for resource hints.
  * @param string  $relation_type The relation type the URLs are printed.
@@ -353,7 +350,6 @@ function twentythirteen_resource_hints( $urls, $relation_type ) {
 
 	return $urls;
 }
-add_filter( 'wp_resource_hints', 'twentythirteen_resource_hints', 10, 2 );
 
 /**
  * Enqueue styles for the block-based editor.
