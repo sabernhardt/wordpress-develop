@@ -82,7 +82,7 @@ function twentythirteen_setup() {
 	 * This theme styles the visual editor to resemble the theme style,
 	 * specifically font, colors, icons, and column width.
 	 */
-	add_editor_style( array( 'css/editor-style.css', 'genericons/genericons.css', twentythirteen_fonts_url() ) );
+	add_editor_style( array( 'css/editor-style.css', 'genericons/genericons.css' ) );
 
 	// Load regular editor styles into the new block-based editor.
 	add_theme_support( 'editor-styles' );
@@ -350,6 +350,35 @@ function twentythirteen_resource_hints( $urls, $relation_type ) {
 
 	return $urls;
 }
+
+/**
+ * Filter TinyMCE CSS path to include hosted fonts.
+ *
+ * Adds additional stylesheets to the TinyMCE editor if needed.
+ *
+ * @uses twentythirteen_fonts_url() To get the font stylesheet URL.
+ *
+ * @since Twenty Thirteen 3.7
+ *
+ * @param string $mce_css CSS path to load in TinyMCE.
+ * @return string Filtered CSS path.
+ */
+function twentythirteen_mce_css( $mce_css ) {
+	$font_url = twentythirteen_fonts_url();
+
+	if ( empty( $font_url ) ) {
+		return $mce_css;
+	}
+
+	if ( ! empty( $mce_css ) ) {
+		$mce_css .= ',';
+	}
+
+	$mce_css .= esc_url_raw( str_replace( ',', '%2C', $font_url ) );
+
+	return $mce_css;
+}
+add_filter( 'mce_css', 'twentythirteen_mce_css' );
 
 /**
  * Enqueue styles for the block-based editor.
