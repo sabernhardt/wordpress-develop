@@ -68,7 +68,7 @@ if ( ! function_exists( 'twentyfourteen_setup' ) ) :
 		load_theme_textdomain( 'twentyfourteen' );
 
 		// This theme styles the visual editor to resemble the theme style.
-		add_editor_style( array_merge( array( 'css/editor-style.css', 'genericons/genericons.css' ) ) );
+		add_editor_style( array( 'css/editor-style.css', 'genericons/genericons.css' ) );
 
 		// Load regular editor styles into the new block-based editor.
 		add_theme_support( 'editor-styles' );
