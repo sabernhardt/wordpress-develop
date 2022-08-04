@@ -172,7 +172,7 @@ if ( ! function_exists( 'twentyfifteen_setup' ) ) :
 		 * This theme styles the visual editor to resemble the theme style,
 		 * specifically font, colors, icons, and column width.
 		 */
-		add_editor_style( array_merge( array( 'css/editor-style.css', 'genericons/genericons.css' ), twentyfifteen_fonts_urls() ) );
+		add_editor_style( array( 'css/editor-style.css', 'genericons/genericons.css' ) );
 
 		// Load regular editor styles into the new block-based editor.
 		add_theme_support( 'editor-styles' );
@@ -510,6 +510,40 @@ function twentyfifteen_resource_hints( $urls, $relation_type ) {
 	return $urls;
 }
 add_filter( 'wp_resource_hints', 'twentyfifteen_resource_hints', 10, 2 );
+
+/**
+* Filter TinyMCE CSS path to include fonts.
+*
+* Adds additional stylesheets to the TinyMCE editor if needed.
+*
+* @uses twentyfifteen_fonts_urls() To get font stylesheet URLs.
+*
+* @since Twenty Fifteen 3.3
+*
+* @param string $mce_css CSS path to load in TinyMCE.
+* @return string Filtered CSS path.
+*/
+function twentyfifteen_mce_css( $mce_css ) {
+   $font_url_array = twentyfifteen_fonts_urls();
+
+   if ( empty( $font_url_array ) ) {
+	   return $mce_css;
+   }
+
+   if ( ! empty( $mce_css ) ) {
+	   $mce_css .= ',';
+   }
+
+   $font_list = array();
+   foreach ( $font_url_array as $font_slug => $font_url ) {
+	   $font_list[] = esc_url_raw( str_replace( ',', '%2C', $font_url ) );
+   }
+
+   $mce_css .= implode( ',', $font_list );
+
+   return $mce_css;
+}
+add_filter( 'mce_css', 'twentyfifteen_mce_css' );
 
 /**
  * Add featured image as background image to post navigation elements.
