@@ -494,7 +494,7 @@ function twentyfifteen_resource_hints( $urls, $relation_type ) {
 *
 * Adds additional stylesheets to the TinyMCE editor if needed.
 *
-* @uses twentyfifteen_fonts_urls() To get font stylesheet URLs.
+* @uses twentyfifteen_fonts_url() To get font stylesheet URLs.
 *
 * @since Twenty Fifteen 3.3
 *
@@ -502,24 +502,19 @@ function twentyfifteen_resource_hints( $urls, $relation_type ) {
 * @return string Filtered CSS path.
 */
 function twentyfifteen_mce_css( $mce_css ) {
-   $font_url_array = twentyfifteen_fonts_urls();
+	$font_url = twentyfifteen_fonts_url();
 
-   if ( empty( $font_url_array ) ) {
-	   return $mce_css;
-   }
+	if ( empty( $font_url ) ) {
+		return $mce_css;
+	}
 
-   if ( ! empty( $mce_css ) ) {
-	   $mce_css .= ',';
-   }
+	if ( ! empty( $mce_css ) ) {
+		$mce_css .= ',';
+	}
 
-   $font_list = array();
-   foreach ( $font_url_array as $font_slug => $font_url ) {
-	   $font_list[] = esc_url_raw( str_replace( ',', '%2C', $font_url ) );
-   }
+	$mce_css .= esc_url_raw( str_replace( ',', '%2C', $font_url ) );
 
-   $mce_css .= implode( ',', $font_list );
-
-   return $mce_css;
+	return $mce_css;
 }
 add_filter( 'mce_css', 'twentyfifteen_mce_css' );
 
