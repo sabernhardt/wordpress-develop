@@ -383,7 +383,7 @@ if ( ! function_exists( 'twentyfifteen_fonts_url' ) ) :
 		}
 
 		if ( $fonts ) {
-			$fonts_url = get_template_directory_uri() . '/fonts/' . implode( '-plus-', $fonts ) . '.css';
+			$fonts_url = get_template_directory_uri() . '/assets/fonts/' . implode( '-plus-', $fonts ) . '.css';
 		}
 
 		return $fonts_url;
