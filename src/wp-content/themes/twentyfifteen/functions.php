@@ -410,8 +410,9 @@ add_action( 'wp_head', 'twentyfifteen_javascript_detection', 0 );
  * @since Twenty Fifteen 1.0
  */
 function twentyfifteen_scripts() {
-	// Add custom fonts, used in the main stylesheet.
-	wp_enqueue_style( 'twentyfifteen-fonts', twentyfifteen_fonts_url(), array(), null );
+	// Add custom fonts, used in the main stylesheet, and include a version for the default self-hosted fonts.
+	$font_version = ( 0 === strpos( twentyfifteen_fonts_url(), get_template_directory_uri() . '/' ) ) ? '20221101' : null;
+	wp_enqueue_style( 'twentyfifteen-fonts', twentyfifteen_fonts_url(), array(), $font_version );
 
 	// Add Genericons, used in the main stylesheet.
 	wp_enqueue_style( 'genericons', get_template_directory_uri() . '/genericons/genericons.css', array(), '20201208' );
@@ -460,8 +461,9 @@ add_action( 'wp_enqueue_scripts', 'twentyfifteen_scripts' );
 function twentyfifteen_block_editor_styles() {
 	// Block styles.
 	wp_enqueue_style( 'twentyfifteen-block-editor-style', get_template_directory_uri() . '/css/editor-blocks.css', array(), '20201208' );
-	// Add custom fonts.
-	wp_enqueue_style( 'twentyfifteen-fonts', twentyfifteen_fonts_url(), array(), null );
+	// Add custom fonts, and include a version for the default self-hosted fonts.
+	$font_version = ( 0 === strpos( twentyfifteen_fonts_url(), get_template_directory_uri() . '/' ) ) ? '20221101' : null;
+	wp_enqueue_style( 'twentyfifteen-fonts', twentyfifteen_fonts_url(), array(), $font_version );
 }
 add_action( 'enqueue_block_editor_assets', 'twentyfifteen_block_editor_styles' );
 
