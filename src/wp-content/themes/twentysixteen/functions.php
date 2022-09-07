@@ -241,15 +241,22 @@ add_action( 'after_setup_theme', 'twentysixteen_content_width', 0 );
  * Add preconnect for Google Fonts.
  *
  * @since Twenty Sixteen 1.6
+ * @deprecated Twenty Sixteen 2.8 Removed filter because, by default, fonts are self-hosted.
  *
  * @param array  $urls          URLs to print for resource hints.
  * @param string $relation_type The relation type the URLs are printed.
  * @return array URLs to print for resource hints.
  */
 function twentysixteen_resource_hints( $urls, $relation_type ) {
+	if ( wp_style_is( 'twentysixteen-fonts', 'queue' ) && 'preconnect' === $relation_type ) {
+		$urls[] = array(
+			'href' => 'https://fonts.gstatic.com',
+			'crossorigin',
+		);
+	}
+
 	return $urls;
 }
-add_filter( 'wp_resource_hints', 'twentysixteen_resource_hints', 10, 2 );
 
 /**
  * Registers a widget area.
