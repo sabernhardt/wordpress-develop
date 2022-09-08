@@ -134,9 +134,15 @@ if ( ! function_exists( 'twentysixteen_setup' ) ) :
 
 		/*
 		 * This theme styles the visual editor to resemble the theme style,
-		 * specifically font, colors, icons, and column width.
+		 * specifically font, colors, icons, and column width. When fonts
+		 * are self-hosted, the theme directory needs to be removed first.
 		 */
-		add_editor_style( array_merge( array( 'css/editor-style.css' ), twentysixteen_fonts_urls() ) );
+		$font_stylesheets = array();
+		foreach ( twentysixteen_fonts_urls() as $font_slug => $font_url ) {
+			$font_stylesheet = str_replace( array( get_template_directory_uri() . '/', get_stylesheet_directory_uri() . '/' ), '', $font_url );
+			$font_stylesheets[] = $font_stylesheet;
+		}
+		add_editor_style( array_merge( array( 'css/editor-style.css' ), $font_stylesheets ) );
 
 		// Load regular editor styles into the new block-based editor.
 		add_theme_support( 'editor-styles' );
@@ -389,12 +395,17 @@ add_action( 'wp_head', 'twentysixteen_javascript_detection', 0 );
  */
 function twentysixteen_scripts() {
 	// Add custom fonts, used in the main stylesheet.
-	foreach ( twentysixteen_fonts_urls() as $font_slug => $font_url ) {
-		wp_enqueue_style( 'twentysixteen-font-' . $font_slug, $font_url, array(), null );
+	$dependencies = array();
+	if ( ! empty( twentysixteen_fonts_url() ) ) {
+		foreach ( twentysixteen_fonts_urls() as $font_slug => $font_url ) {
+			$font_version = ( 0 === strpos( (string) $font_url, get_template_directory_uri() . '/' ) ) ? '20221101' : null;
+			wp_register_style( 'twentysixteen-font-' . $font_slug, $font_url, array(), $font_version );
+			$dependencies[] = 'twentysixteen-font-' . $font_slug;
+		}
 	}
 
 	// Register the style 'twentysixteen-fonts' for backwards compatibility.
-	wp_register_style( 'twentysixteen-fonts', false );
+	wp_register_style( 'twentysixteen-fonts', false, $dependencies );
 	wp_enqueue_style( 'twentysixteen-fonts' );
 
 	// Add Genericons, used in the main stylesheet.
@@ -455,12 +466,15 @@ function twentysixteen_block_editor_styles() {
 	wp_enqueue_style( 'twentysixteen-block-editor-style', get_template_directory_uri() . '/css/editor-blocks.css', array(), '20201208' );
 
 	// Add custom fonts.
+	$dependencies = array();
 	foreach ( twentysixteen_fonts_urls() as $font_slug => $font_url ) {
-		wp_enqueue_style( 'twentysixteen-font-' . $font_slug, $font_url, array(), null );
+		$font_version = ( 0 === strpos( (string) $font_url, get_template_directory_uri() . '/' ) ) ? '20221101' : null;
+		wp_register_style( 'twentysixteen-font-' . $font_slug, $font_url, array(), $font_version );
+		$dependencies[] = 'twentysixteen-font-' . $font_slug;
 	}
 
 	// Register the style 'twentysixteen-fonts' for backwards compatibility.
-	wp_register_style( 'twentysixteen-fonts', false );
+	wp_register_style( 'twentysixteen-fonts', false, $dependencies );
 	wp_enqueue_style( 'twentysixteen-fonts' );
 }
 add_action( 'enqueue_block_editor_assets', 'twentysixteen_block_editor_styles' );
