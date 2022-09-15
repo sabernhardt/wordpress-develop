@@ -306,6 +306,7 @@ function twentyseventeen_fonts_url() {
  * Add preconnect for Google Fonts.
  *
  * @since Twenty Seventeen 1.0
+ * @deprecated Twenty Seventeen 3.1 Removed filter because, by default, fonts are self-hosted.
  *
  * @param array  $urls          URLs to print for resource hints.
  * @param string $relation_type The relation type the URLs are printed.
@@ -321,7 +322,6 @@ function twentyseventeen_resource_hints( $urls, $relation_type ) {
 
 	return $urls;
 }
-add_filter( 'wp_resource_hints', 'twentyseventeen_resource_hints', 10, 2 );
 
 /**
  * Register widget area.
