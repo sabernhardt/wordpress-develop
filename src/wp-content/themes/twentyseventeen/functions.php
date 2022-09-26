@@ -298,7 +298,7 @@ function twentyseventeen_fonts_url() {
 	$libre_franklin = _x( 'on', 'Libre Franklin font: on or off', 'twentyseventeen' );
 
 	if ( 'off' !== $libre_franklin ) {
-		$fonts_url = get_template_directory_uri() . '/assets/css/libre-franklin.css';
+		$fonts_url = get_template_directory_uri() . '/assets/css/font-libre-franklin.css';
 	}
 
 	return esc_url_raw( $fonts_url );
