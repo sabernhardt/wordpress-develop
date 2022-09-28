@@ -362,7 +362,7 @@ if ( ! function_exists( 'twentysixteen_fonts_urls' ) ) :
 			$font_urls['inconsolata'] = get_template_directory_uri() . '/fonts/inconsolata/font-inconsolata.css';
 		}
 
-		/**
+		/*
 		 * If the `twentysixteen_fonts_url` function does not return an empty string,
 		 * we can assume that the user has defined a custom font URL.
 		 */
