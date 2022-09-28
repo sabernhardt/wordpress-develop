@@ -368,8 +368,8 @@ if ( ! function_exists( 'twentysixteen_fonts_urls' ) ) :
 		 */
 		if ( ! empty( twentysixteen_fonts_url() ) ) {
 			// Empty the fonts urls array to prevent loading of fonts the user did not intent to load.
-			$fonts_url           = array();
-			$fonts_url['legacy'] = twentysixteen_fonts_url();
+			$font_urls           = array();
+			$font_urls['legacy'] = twentysixteen_fonts_url();
 		}
 
 		return $font_urls;
