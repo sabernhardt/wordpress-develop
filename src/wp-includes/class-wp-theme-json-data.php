@@ -10,7 +10,6 @@
 /**
  * Class to provide access to update a theme.json structure.
  */
-#[AllowDynamicProperties]
 class WP_Theme_JSON_Data {
 
 	/**

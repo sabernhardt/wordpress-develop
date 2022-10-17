@@ -88,7 +88,7 @@ class Tests_Style_Engine_wpStyleEngineCSSRulesStore extends WP_UnitTestCase {
 		$burrito_store    = WP_Style_Engine_CSS_Rules_Store::get_store( 'burrito' );
 		$quesadilla_store = WP_Style_Engine_CSS_Rules_Store::get_store( 'quesadilla' );
 
-		$this->assertSame(
+		$this->assertEquals(
 			array(
 				'burrito'    => $burrito_store,
 				'quesadilla' => $quesadilla_store,
@@ -108,7 +108,7 @@ class Tests_Style_Engine_wpStyleEngineCSSRulesStore extends WP_UnitTestCase {
 		$dolmades_store = WP_Style_Engine_CSS_Rules_Store::get_store( 'dolmades' );
 		$tzatziki_store = WP_Style_Engine_CSS_Rules_Store::get_store( 'tzatziki' );
 
-		$this->assertSame(
+		$this->assertEquals(
 			array(
 				'dolmades' => $dolmades_store,
 				'tzatziki' => $tzatziki_store,
@@ -119,7 +119,7 @@ class Tests_Style_Engine_wpStyleEngineCSSRulesStore extends WP_UnitTestCase {
 
 		WP_Style_Engine_CSS_Rules_Store::remove_all_stores();
 
-		$this->assertSame(
+		$this->assertEquals(
 			array(),
 			WP_Style_Engine_CSS_Rules_Store::get_stores(),
 			'Return value of get_stores() is not an empty array after remove_all_stores() called.'

@@ -1,6 +1,4 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/theme.json",
-	"version": 2,
 	"title": "Aubergine",
 	"settings": {
 		"color": {
@@ -117,12 +115,16 @@
 					"fontSize": "var(--wp--preset--font-size--medium)"
 				}
 			},
-			"core/post-author": {
-				"color": {
-					"text": "var(--wp--preset--color--primary)"
-				},
-				"typography": {
-					"fontStyle": "italic"
+			"core/post-author-name": {
+				"elements": {
+					"link": {
+						"color": {
+							"text": "var(--wp--preset--color--primary)"
+						},
+						"typography": {
+							"fontStyle": "italic"
+						}
+					}
 				}
 			},
 			"core/post-content": {
@@ -160,15 +162,6 @@
 				}
 			},
 			"core/post-title": {
-				"elements": {
-					"link": {
-						":active": {
-							"color": {
-								"text": "var(--wp--preset--color--contrast)"
-							}
-						}
-					}
-				},
 				"typography": {
 					"fontSize": "clamp(2.625rem, calc(2.625rem + ((1vw - 0.48rem) * 8.4135)), 3.25rem)"
 				}
@@ -188,13 +181,6 @@
 						"color": {
 							"text": "var(--wp--preset--color--primary)"
 						}
-					}
-				}
-			},
-			"core/query-pagination": {
-				"border": {
-					"top": {
-						"color": "var(--wp--preset--color--primary)"
 					}
 				}
 			},
@@ -254,23 +240,20 @@
 				},
 				":hover": {
 					"color": {
-						"background": "var(--wp--preset--color--primary)",
-						"gradient": "none",
-						"text": "var(--wp--preset--color--secondary)"
+						"gradient": "var(--wp--preset--gradient--primary-tertiary)",
+						"text": "var(--wp--preset--color--contrast)"
 					}
 				},
 				":focus": {
 					"color": {
-						"background": "var(--wp--preset--color--primary)",
-						"gradient": "none",
-						"text": "var(--wp--preset--color--secondary)"
+						"gradient": "var(--wp--preset--gradient--primary-tertiary)",
+						"text": "var(--wp--preset--color--contrast)"
 					}
 				},
 				":active": {
 					"color": {
-						"background": "var(--wp--preset--color--primary)",
-						"gradient": "none",
-						"text": "var(--wp--preset--color--secondary)"
+						"gradient": "var(--wp--preset--gradient--primary-tertiary)",
+						"text": "var(--wp--preset--color--contrast)"
 					}
 				}
 			},
@@ -282,7 +265,7 @@
 			"link": {
 				":active": {
 					"color": {
-						"text": "var(--wp--preset--color--primary)"
+						"text": "var(--wp--preset--color--tertiary)"
 					}
 				}
 			}
@@ -290,5 +273,7 @@
 		"typography": {
 			"fontFamily": "var(--wp--preset--font-family--dm-sans)"
 		}
-	}
+	},
+	"version": 2,
+	"$schema": "https://schemas.wp.org/trunk/theme.json"
 }

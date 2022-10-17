@@ -938,7 +938,7 @@ $( function() {
 			adjustment = maxtop;
 		}
 
-		if ( adjustment > 1 && $('#wp-admin-bar-menu-toggle').is(':hidden') ) {
+		if ( adjustment > 1 ) {
 			$submenu.css( 'margin-top', '-' + adjustment + 'px' );
 		} else {
 			$submenu.css( 'margin-top', '' );

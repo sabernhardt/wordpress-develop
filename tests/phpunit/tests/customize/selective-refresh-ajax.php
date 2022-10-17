@@ -188,6 +188,8 @@ class Test_WP_Customize_Selective_Refresh_Ajax extends WP_UnitTestCase {
 			)
 		);
 
+		$count_customize_render_partials_before = has_action( 'customize_render_partials_before' );
+		$count_customize_render_partials_after  = has_action( 'customize_render_partials_after' );
 		ob_start();
 		try {
 			$this->expected_partial_ids = array( 'foo' );
@@ -198,8 +200,8 @@ class Test_WP_Customize_Selective_Refresh_Ajax extends WP_UnitTestCase {
 		} catch ( WPDieException $e ) {
 			$this->assertSame( '', $e->getMessage() );
 		}
-		$this->assertTrue( has_action( 'customize_render_partials_before' ) );
-		$this->assertTrue( has_action( 'customize_render_partials_after' ) );
+		$this->assertEquals( $count_customize_render_partials_before + 1, has_action( 'customize_render_partials_before' ) );
+		$this->assertEquals( $count_customize_render_partials_after + 1, has_action( 'customize_render_partials_after' ) );
 		$output = json_decode( ob_get_clean(), true );
 		$this->assertSame( array( false ), $output['data']['contents']['foo'] );
 	}
@@ -324,6 +326,8 @@ class Test_WP_Customize_Selective_Refresh_Ajax extends WP_UnitTestCase {
 			)
 		);
 
+		$count_customize_render_partials_before = has_action( 'customize_render_partials_before' );
+		$count_customize_render_partials_after  = has_action( 'customize_render_partials_after' );
 		ob_start();
 		try {
 			$this->expected_partial_ids = array( 'test_blogname' );
@@ -334,8 +338,8 @@ class Test_WP_Customize_Selective_Refresh_Ajax extends WP_UnitTestCase {
 		} catch ( WPDieException $e ) {
 			$this->assertSame( '', $e->getMessage() );
 		}
-		$this->assertTrue( has_action( 'customize_render_partials_before' ) );
-		$this->assertTrue( has_action( 'customize_render_partials_after' ) );
+		$this->assertEquals( $count_customize_render_partials_before + 1, has_action( 'customize_render_partials_before' ) );
+		$this->assertEquals( $count_customize_render_partials_after + 1, has_action( 'customize_render_partials_after' ) );
 		$output = json_decode( ob_get_clean(), true );
 		$this->assertSame( array( get_bloginfo( 'name', 'display' ) ), $output['data']['contents']['test_blogname'] );
 		$this->assertArrayHasKey( 'setting_validities', $output['data'] );
@@ -431,6 +435,8 @@ class Test_WP_Customize_Selective_Refresh_Ajax extends WP_UnitTestCase {
 			)
 		);
 
+		$count_customize_render_partials_before = has_action( 'customize_render_partials_before' );
+		$count_customize_render_partials_after  = has_action( 'customize_render_partials_after' );
 		ob_start();
 		try {
 			$this->expected_partial_ids = array( 'test_dynamic_blogname' );
@@ -441,8 +447,8 @@ class Test_WP_Customize_Selective_Refresh_Ajax extends WP_UnitTestCase {
 		} catch ( WPDieException $e ) {
 			$this->assertSame( '', $e->getMessage() );
 		}
-		$this->assertTrue( has_action( 'customize_render_partials_before' ) );
-		$this->assertTrue( has_action( 'customize_render_partials_after' ) );
+		$this->assertEquals( $count_customize_render_partials_before + 1, has_action( 'customize_render_partials_before' ) );
+		$this->assertEquals( $count_customize_render_partials_after + 1, has_action( 'customize_render_partials_after' ) );
 		$output = json_decode( ob_get_clean(), true );
 		$this->assertSame( array( get_bloginfo( 'name', 'display' ) ), $output['data']['contents']['test_dynamic_blogname'] );
 	}
@@ -481,6 +487,8 @@ class Test_WP_Customize_Selective_Refresh_Ajax extends WP_UnitTestCase {
 			)
 		);
 
+		$count_customize_render_partials_before = has_action( 'customize_render_partials_before' );
+		$count_customize_render_partials_after  = has_action( 'customize_render_partials_after' );
 		ob_start();
 		try {
 			$this->expected_partial_ids = array( 'test_blogname', 'test_blogdescription' );
@@ -491,8 +499,8 @@ class Test_WP_Customize_Selective_Refresh_Ajax extends WP_UnitTestCase {
 		} catch ( WPDieException $e ) {
 			$this->assertSame( '', $e->getMessage() );
 		}
-		$this->assertTrue( has_action( 'customize_render_partials_before' ) );
-		$this->assertTrue( has_action( 'customize_render_partials_after' ) );
+		$this->assertEquals( $count_customize_render_partials_before + 1, has_action( 'customize_render_partials_before' ) );
+		$this->assertEquals( $count_customize_render_partials_after + 1, has_action( 'customize_render_partials_after' ) );
 		$output = json_decode( ob_get_clean(), true );
 		$this->assertSame( array( get_bloginfo( 'name', 'display' ) ), $output['data']['contents']['test_blogname'] );
 		$this->assertSame( array_fill( 0, 2, get_bloginfo( 'description', 'display' ) ), $output['data']['contents']['test_blogdescription'] );

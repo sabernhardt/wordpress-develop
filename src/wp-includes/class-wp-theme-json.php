@@ -33,10 +33,9 @@ class WP_Theme_JSON {
 	 * process it twice.
 	 *
 	 * @since 5.8.0
-	 * @since 6.1.0 Initialize as an empty array.
 	 * @var array
 	 */
-	protected static $blocks_metadata = array();
+	protected static $blocks_metadata = null;
 
 	/**
 	 * The CSS selector for the top-level styles.
@@ -50,12 +49,10 @@ class WP_Theme_JSON {
 	 * The sources of data this object can represent.
 	 *
 	 * @since 5.8.0
-	 * @since 6.1.0 Added 'blocks'.
 	 * @var string[]
 	 */
 	const VALID_ORIGINS = array(
 		'default',
-		'blocks',
 		'theme',
 		'custom',
 	);
@@ -169,6 +166,15 @@ class WP_Theme_JSON {
 		),
 		array(
 			'path'              => array( 'spacing', 'spacingSizes' ),
+			'prevent_override'  => false,
+			'use_default_names' => true,
+			'value_key'         => 'size',
+			'css_vars'          => '--wp--preset--spacing--$slug',
+			'classes'           => array(),
+			'properties'        => array( 'padding', 'margin' ),
+		),
+		array(
+			'path'              => array( 'spacing', 'spacingScale' ),
 			'prevent_override'  => false,
 			'use_default_names' => true,
 			'value_key'         => 'size',
@@ -328,7 +334,6 @@ class WP_Theme_JSON {
 			'units'             => null,
 		),
 		'typography'                    => array(
-			'fluid'          => null,
 			'customFontSize' => null,
 			'dropCap'        => null,
 			'fontFamilies'   => null,
@@ -423,7 +428,6 @@ class WP_Theme_JSON {
 		'button'  => '.wp-element-button, .wp-block-button__link',
 		// The block classes are necessary to target older content that won't use the new class names.
 		'caption' => '.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption',
-		'cite'    => 'cite',
 	);
 
 	const __EXPERIMENTAL_ELEMENT_CLASS_NAMES = array(
@@ -683,7 +687,7 @@ class WP_Theme_JSON {
 	 * @param string $selector  Original selector.
 	 * @param string $to_append Selector to append.
 	 * @param string $position  A position sub-selector should be appended. Default 'right'.
-	 * @return string The new selector.
+	 * @return string
 	 */
 	protected static function append_to_selector( $selector, $to_append, $position = 'right' ) {
 		$new_selectors = array();
@@ -725,15 +729,14 @@ class WP_Theme_JSON {
 	 * @return array Block metadata.
 	 */
 	protected static function get_blocks_metadata() {
-		$registry = WP_Block_Type_Registry::get_instance();
-		$blocks   = $registry->get_all_registered();
-
-		// Is there metadata for all currently registered blocks?
-		$blocks = array_diff_key( $blocks, static::$blocks_metadata );
-		if ( empty( $blocks ) ) {
+		if ( null !== static::$blocks_metadata ) {
 			return static::$blocks_metadata;
 		}
 
+		static::$blocks_metadata = array();
+
+		$registry = WP_Block_Type_Registry::get_instance();
+		$blocks   = $registry->get_all_registered();
 		foreach ( $blocks as $block_name => $block_type ) {
 			if (
 				isset( $block_type->supports['__experimentalSelector'] ) &&
@@ -799,7 +802,7 @@ class WP_Theme_JSON {
 	 *
 	 * @param array $tree   Input to process.
 	 * @param array $schema Schema to adhere to.
-	 * @return array The modified $tree.
+	 * @return array Returns the modified $tree.
 	 */
 	protected static function remove_keys_not_in_schema( $tree, $schema ) {
 		$tree = array_intersect_key( $tree, $schema );
@@ -865,7 +868,7 @@ class WP_Theme_JSON {
 	 *                       - `styles`: only the styles section in theme.json.
 	 *                       - `presets`: only the classes for the presets.
 	 * @param array $origins A list of origins to include. By default it includes VALID_ORIGINS.
-	 * @return string The resulting stylesheet.
+	 * @return string Stylesheet.
 	 */
 	public function get_stylesheet( $types = array( 'variables', 'styles', 'presets' ), $origins = null ) {
 		if ( null === $origins ) {
@@ -1011,11 +1014,12 @@ class WP_Theme_JSON {
 	}
 
 	/**
-	 * Gets the CSS layout rules for a particular block from theme.json layout definitions.
+	 * Get the CSS layout rules for a particular block from theme.json layout definitions.
 	 *
 	 * @since 6.1.0
 	 *
 	 * @param array $block_metadata Metadata about the block to get styles for.
+	 *
 	 * @return string Layout styles for the block.
 	 */
 	protected function get_layout_styles( $block_metadata ) {
@@ -1285,7 +1289,7 @@ class WP_Theme_JSON {
 	 *
 	 * @param string $selector     CSS selector.
 	 * @param array  $declarations List of declarations.
-	 * @return string The resulting CSS ruleset.
+	 * @return string CSS ruleset.
 	 */
 	protected static function to_ruleset( $selector, $declarations ) {
 		if ( empty( $declarations ) ) {
@@ -1303,7 +1307,7 @@ class WP_Theme_JSON {
 	}
 
 	/**
-	 * Given a settings array, returns the generated rulesets
+	 * Given a settings array, it returns the generated rulesets
 	 * for the preset classes.
 	 *
 	 * @since 5.8.0
@@ -1476,7 +1480,7 @@ class WP_Theme_JSON {
 	}
 
 	/**
-	 * Transforms a slug into a CSS Custom Property.
+	 * Transform a slug into a CSS Custom Property.
 	 *
 	 * @since 5.9.0
 	 *
@@ -1489,7 +1493,7 @@ class WP_Theme_JSON {
 	}
 
 	/**
-	 * Given the block settings, extracts the CSS Custom Properties
+	 * Given the block settings, it extracts the CSS Custom Properties
 	 * for the presets and adds them to the $declarations array
 	 * following the format:
 	 *
@@ -1503,7 +1507,7 @@ class WP_Theme_JSON {
 	 *
 	 * @param array $settings Settings to process.
 	 * @param array $origins  List of origins to process.
-	 * @return array The modified $declarations.
+	 * @return array Returns the modified $declarations.
 	 */
 	protected static function compute_preset_vars( $settings, $origins ) {
 		$declarations = array();
@@ -1521,7 +1525,7 @@ class WP_Theme_JSON {
 	}
 
 	/**
-	 * Given an array of settings, extracts the CSS Custom Properties
+	 * Given an array of settings, it extracts the CSS Custom Properties
 	 * for the custom values and adds them to the $declarations
 	 * array following the format:
 	 *
@@ -1533,7 +1537,7 @@ class WP_Theme_JSON {
 	 * @since 5.8.0
 	 *
 	 * @param array $settings Settings to process.
-	 * @return array The modified $declarations.
+	 * @return array Returns the modified $declarations.
 	 */
 	protected static function compute_theme_vars( $settings ) {
 		$declarations  = array();
@@ -1675,18 +1679,6 @@ class WP_Theme_JSON {
 				continue;
 			}
 
-			// Calculates fluid typography rules where available.
-			if ( 'font-size' === $css_property ) {
-				/*
-				 * wp_get_typography_font_size_value() will check
-				 * if fluid typography has been activated and also
-				 * whether the incoming value can be converted to a fluid value.
-				 * Values that already have a clamp() function will not pass the test,
-				 * and therefore the original $value will be returned.
-				 */
-				$value = wp_get_typography_font_size_value( array( 'size' => $value ) );
-			}
-
 			$declarations[] = array(
 				'name'  => $css_property,
 				'value' => $value,
@@ -1725,12 +1717,7 @@ class WP_Theme_JSON {
 	 * @return string|array Style property value.
 	 */
 	protected static function get_property_value( $styles, $path, $theme_json = null ) {
-		$value = _wp_array_get( $styles, $path, '' );
-
-		if ( '' === $value || null === $value ) {
-			// No need to process the value further.
-			return '';
-		}
+		$value = _wp_array_get( $styles, $path );
 
 		/*
 		 * This converts references to a path to the value at that path
@@ -1802,7 +1789,7 @@ class WP_Theme_JSON {
 	 *
 	 * @param array $theme_json The tree to extract setting nodes from.
 	 * @param array $selectors  List of selectors per block.
-	 * @return array An array of setting nodes metadata.
+	 * @return array
 	 */
 	protected static function get_setting_nodes( $theme_json, $selectors = array() ) {
 		$nodes = array();
@@ -1856,7 +1843,7 @@ class WP_Theme_JSON {
 	 *
 	 * @param array $theme_json The tree to extract style nodes from.
 	 * @param array $selectors  List of selectors per block.
-	 * @return array An array of style nodes metadata.
+	 * @return array
 	 */
 	protected static function get_style_nodes( $theme_json, $selectors = array() ) {
 		$nodes = array();
@@ -1911,7 +1898,7 @@ class WP_Theme_JSON {
 		 *
 		 * @param array $nodes Style nodes with metadata.
 		 */
-		return apply_filters( 'wp_theme_json_get_style_nodes', $nodes );
+		return apply_filters( 'theme_json_get_style_nodes', $nodes );
 	}
 
 	/**
@@ -2242,7 +2229,7 @@ class WP_Theme_JSON {
 	}
 
 	/**
-	 * Merges new incoming data.
+	 * Merge new incoming data.
 	 *
 	 * @since 5.8.0
 	 * @since 5.9.0 Duotone preset also has origins.
@@ -2361,7 +2348,7 @@ class WP_Theme_JSON {
 	}
 
 	/**
-	 * Determines whether a presets should be overridden or not.
+	 * Returns whether a presets should be overridden or not.
 	 *
 	 * @since 5.9.0
 	 * @deprecated 6.0.0 Use {@see 'get_metadata_boolean'} instead.
@@ -2436,12 +2423,12 @@ class WP_Theme_JSON {
 			}
 
 			$slugs_for_preset = array();
-			foreach ( $preset as $item ) {
-				if ( isset( $item['slug'] ) ) {
-					$slugs_for_preset[] = $item['slug'];
-				}
-			}
-
+			$slugs_for_preset = array_map(
+				static function( $value ) {
+					return isset( $value['slug'] ) ? $value['slug'] : null;
+				},
+				$preset
+			);
 			_wp_array_set( $slugs, $metadata['path'], $slugs_for_preset );
 		}
 
@@ -2449,7 +2436,7 @@ class WP_Theme_JSON {
 	}
 
 	/**
-	 * Gets a `default`'s preset name by a provided slug.
+	 * Get a `default`'s preset name by a provided slug.
 	 *
 	 * @since 5.9.0
 	 *
@@ -2857,7 +2844,7 @@ class WP_Theme_JSON {
 				}
 				$flattened_preset = array();
 				foreach ( $items as $slug => $value ) {
-					$flattened_preset[] = array_merge( array( 'slug' => (string) $slug ), $value );
+					$flattened_preset[] = array_merge( array( 'slug' => $slug ), $value );
 				}
 				_wp_array_set( $output, $path, $flattened_preset );
 			}

@@ -2324,13 +2324,12 @@ function wp_list_comments( $args = array(), $comments = null ) {
 function comment_form( $args = array(), $post = null ) {
 	$post = get_post( $post );
 
-	// Exit the function if the post is invalid or comments are closed.
-	if ( ! $post || ! comments_open( $post ) ) {
+	$post_id = $post ? $post->ID : get_the_ID();
+
+	// Exit the function when comments for the post are closed.
+	if ( ! comments_open( $post_id ) ) {
 		/**
 		 * Fires after the comment form if comments are closed.
-		 *
-		 * For backward compatibility, this action also fires if comment_form()
-		 * is called with an invalid post object or ID.
 		 *
 		 * @since 3.0.0
 		 */
@@ -2339,7 +2338,6 @@ function comment_form( $args = array(), $post = null ) {
 		return;
 	}
 
-	$post_id       = $post->ID;
 	$commenter     = wp_get_current_commenter();
 	$user          = wp_get_current_user();
 	$user_identity = $user->exists() ? $user->display_name : '';

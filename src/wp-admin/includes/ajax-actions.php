@@ -3023,7 +3023,7 @@ function wp_ajax_query_attachments() {
 
 	// Filter query clauses to include filenames.
 	if ( isset( $query['s'] ) ) {
-		add_filter( 'wp_allow_query_attachment_by_filename', '__return_true' );
+		add_filter( 'posts_clauses', '_filter_query_attachment_filenames' );
 	}
 
 	/**
@@ -3788,7 +3788,7 @@ function wp_ajax_parse_embed() {
 			$styles .= sprintf( '<link rel="stylesheet" href="%s" />', $style );
 		}
 
-		$html = do_shortcode( $parsed );
+		$html = apply_shortcodes( $parsed );
 
 		global $wp_scripts;
 
@@ -3861,7 +3861,7 @@ function wp_ajax_parse_media_shortcode() {
 		setup_postdata( $post );
 	}
 
-	$parsed = do_shortcode( $shortcode );
+	$parsed = apply_shortcodes( $shortcode );
 
 	if ( empty( $parsed ) ) {
 		wp_send_json_error(

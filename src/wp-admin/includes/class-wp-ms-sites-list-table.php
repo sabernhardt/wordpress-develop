@@ -11,6 +11,7 @@
  * Core class used to implement displaying sites in a list table for the network admin.
  *
  * @since 3.1.0
+ * @access private
  *
  * @see WP_List_Table
  */

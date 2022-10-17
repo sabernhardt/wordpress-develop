@@ -16,7 +16,6 @@
  *
  * @since 6.1.0
  */
-#[AllowDynamicProperties]
 class WP_Style_Engine_CSS_Rules_Store {
 
 	/**

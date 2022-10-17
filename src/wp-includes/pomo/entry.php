@@ -87,10 +87,10 @@ if ( ! class_exists( 'Translation_Entry', false ) ) :
 		/**
 		 * Generates a unique key for this entry.
 		 *
-		 * @return string|false The key or false if the entry is null.
+		 * @return string|false The key or false if the entry is empty.
 		 */
 		public function key() {
-			if ( null === $this->singular ) {
+			if ( null === $this->singular || '' === $this->singular ) {
 				return false;
 			}
 

@@ -240,7 +240,7 @@ class Tests_Blocks_wpBlockType extends WP_UnitTestCase {
 
 		$prepared_attributes = $block_type->prepare_attributes_for_render( $attributes );
 
-		$this->assertSameSetsWithIndex(
+		$this->assertEquals(
 			array(
 				'correct'            => 'include',
 				/* wrongType */

@@ -435,19 +435,6 @@ class Tests_L10n extends WP_UnitTestCase {
 
 		switch_to_locale( 'en_US' );
 
-		/*
-		 * The recent drafts list is only displayed on the Dashboard screen for users
-		 * with the 'edit_posts' capability.
-		 *
-		 * This means the current user needs to be set to Editor as a prerequisite
-		 * for the call to the wp_dashboard_recent_drafts() function.
-		 *
-		 * This allows the subsequent call to get_edit_post_link() to work as expected
-		 * and return a string instead of null, which would otherwise cause a PHP 8.1
-		 * "passing null to non-nullable" deprecation notice.
-		 */
-		wp_set_current_user( self::factory()->user->create( array( 'role' => 'editor' ) ) );
-
 		$args = array(
 			'post_content' => $this->long_text,
 			'post_excerpt' => '',
@@ -474,19 +461,6 @@ class Tests_L10n extends WP_UnitTestCase {
 
 		switch_to_locale( 'ja_JP' );
 
-		/*
-		 * The recent drafts list is only displayed on the Dashboard screen for users
-		 * with the 'edit_posts' capability.
-		 *
-		 * This means the current user needs to be set to Editor as a prerequisite
-		 * for the call to the wp_dashboard_recent_drafts() function.
-		 *
-		 * This allows the subsequent call to get_edit_post_link() to work as expected
-		 * and return a string instead of null, which would otherwise cause a PHP 8.1
-		 * "passing null to non-nullable" deprecation notice.
-		 */
-		wp_set_current_user( self::factory()->user->create( array( 'role' => 'editor' ) ) );
-
 		$args = array(
 			'post_content' => $this->long_text,
 			'post_excerpt' => '',
@@ -512,19 +486,6 @@ class Tests_L10n extends WP_UnitTestCase {
 		require_once ABSPATH . 'wp-admin/includes/dashboard.php';
 
 		switch_to_locale( 'ja_JP' );
-
-		/*
-		 * The recent drafts list is only displayed on the Dashboard screen for users
-		 * with the 'edit_posts' capability.
-		 *
-		 * This means the current user needs to be set to Editor as a prerequisite
-		 * for the call to the wp_dashboard_recent_drafts() function.
-		 *
-		 * This allows the subsequent call to get_edit_post_link() to work as expected
-		 * and return a string instead of null, which would otherwise cause a PHP 8.1
-		 * "passing null to non-nullable" deprecation notice.
-		 */
-		wp_set_current_user( self::factory()->user->create( array( 'role' => 'editor' ) ) );
 
 		$args = array(
 			'post_content' => str_repeat( 'あ', 200 ),
