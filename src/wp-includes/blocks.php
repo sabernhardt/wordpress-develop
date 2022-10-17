@@ -223,9 +223,7 @@ function register_block_style_handle( $metadata, $field_name, $index = 0 ) {
 	}
 
 	$style_handle   = generate_block_asset_handle( $metadata['name'], $field_name, $index );
-	$block_dir      = dirname( $metadata['file'] );
-	$style_file     = wp_normalize_path( realpath( "$block_dir/$style_path" ) );
-	$has_style_file = false !== $style_file;
+	$has_style_file = false !== $style_path_norm;
 	$version        = ! $is_core_block && isset( $metadata['version'] ) ? $metadata['version'] : false;
 	$style_uri      = $has_style_file ? $style_uri : false;
 	$result         = wp_register_style(
@@ -234,14 +232,14 @@ function register_block_style_handle( $metadata, $field_name, $index = 0 ) {
 		array(),
 		$version
 	);
-	if ( file_exists( str_replace( '.css', '-rtl.css', $style_file ) ) ) {
+	if ( file_exists( str_replace( '.css', '-rtl.css', $style_path_norm ) ) ) {
 		wp_style_add_data( $style_handle, 'rtl', 'replace' );
 	}
 	if ( $has_style_file ) {
-		wp_style_add_data( $style_handle, 'path', $style_file );
+		wp_style_add_data( $style_handle, 'path', $style_path_norm );
 	}
 
-	$rtl_file = str_replace( "$suffix.css", "-rtl$suffix.css", $style_file );
+	$rtl_file = str_replace( "$suffix.css", "-rtl$suffix.css", $style_path_norm );
 	if ( is_rtl() && file_exists( $rtl_file ) ) {
 		wp_style_add_data( $style_handle, 'path', $rtl_file );
 	}
@@ -283,15 +281,39 @@ function get_block_metadata_i18n_schema() {
  * @return WP_Block_Type|false The registered block type on success, or false on failure.
  */
 function register_block_type_from_metadata( $file_or_folder, $args = array() ) {
-	$filename      = 'block.json';
-	$metadata_file = ( substr( $file_or_folder, -strlen( $filename ) ) !== $filename ) ?
-		trailingslashit( $file_or_folder ) . $filename :
+	/*
+	 * Get an array of metadata from a PHP file.
+	 * This improves performance for core blocks as it's only necessary to read a single PHP file
+	 * instead of reading a JSON file per-block, and then decoding from JSON to PHP.
+	 * Using a static variable ensures that the metadata is only read once per request.
+	 */
+	static $core_blocks_meta;
+	if ( ! $core_blocks_meta ) {
+		$core_blocks_meta = include_once ABSPATH . WPINC . '/blocks/blocks-json.php';
+	}
+
+	$metadata_file = ( ! str_ends_with( $file_or_folder, 'block.json' ) ) ?
+		trailingslashit( $file_or_folder ) . 'block.json' :
 		$file_or_folder;
+
 	if ( ! file_exists( $metadata_file ) ) {
 		return false;
 	}
 
-	$metadata = wp_json_file_decode( $metadata_file, array( 'associative' => true ) );
+	// Try to get metadata from the static cache for core blocks.
+	$metadata = false;
+	if ( str_starts_with( $file_or_folder, ABSPATH . WPINC ) ) {
+		$core_block_name = str_replace( ABSPATH . WPINC . '/blocks/', '', $file_or_folder );
+		if ( ! empty( $core_blocks_meta[ $core_block_name ] ) ) {
+			$metadata = $core_blocks_meta[ $core_block_name ];
+		}
+	}
+
+	// If metadata is not found in the static cache, read it from the file.
+	if ( ! $metadata ) {
+		$metadata = wp_json_file_decode( $metadata_file, array( 'associative' => true ) );
+	}
+
 	if ( ! is_array( $metadata ) || empty( $metadata['name'] ) ) {
 		return false;
 	}
@@ -420,7 +442,7 @@ function register_block_type_from_metadata( $file_or_folder, $args = array() ) {
 				remove_block_asset_path_prefix( $metadata['render'] )
 			)
 		);
-		if ( file_exists( $template_path ) ) {
+		if ( $template_path ) {
 			/**
 			 * Renders the block on the server.
 			 *
