@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::utf8_uri_encode
  */
 class Tests_Formatting_Utf8UriEncode extends WP_UnitTestCase {
 

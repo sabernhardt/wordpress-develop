@@ -111,9 +111,6 @@ class WP_REST_Pattern_Directory_Controller_Test extends WP_Test_REST_Controller_
 		$this->assertGreaterThan( 0, count( $patterns ) );
 
 		array_walk( $patterns, array( $this, 'assertPatternMatchesSchema' ) );
-		$this->assertSame( array( 'blog post' ), $patterns[0]['keywords'] );
-		$this->assertSame( array( 'header', 'hero' ), $patterns[1]['keywords'] );
-		$this->assertSame( array( 'call to action', 'hero section' ), $patterns[2]['keywords'] );
 	}
 
 	/**
@@ -160,6 +157,10 @@ class WP_REST_Pattern_Directory_Controller_Test extends WP_Test_REST_Controller_
 		$this->assertGreaterThan( 0, count( $patterns ) );
 
 		array_walk( $patterns, array( $this, 'assertPatternMatchesSchema' ) );
+
+		foreach ( $patterns as $pattern ) {
+			$this->assertContains( 'core', $pattern['keywords'] );
+		}
 	}
 
 	/**
@@ -310,32 +311,20 @@ class WP_REST_Pattern_Directory_Controller_Test extends WP_Test_REST_Controller_
 		$this->assertSame( 'modified the cache', $patterns[0] );
 	}
 
-	/**
-	 * @doesNotPerformAssertions
-	 */
 	public function test_get_item() {
-		// Controller does not implement get_item().
+		$this->markTestSkipped( 'Controller does not have get_item route.' );
 	}
 
-	/**
-	 * @doesNotPerformAssertions
-	 */
 	public function test_create_item() {
-		// Controller does not implement create_item().
+		$this->markTestSkipped( 'Controller does not have create_item route.' );
 	}
 
-	/**
-	 * @doesNotPerformAssertions
-	 */
 	public function test_update_item() {
-		// Controller does not implement update_item().
+		$this->markTestSkipped( 'Controller does not have update_item route.' );
 	}
 
-	/**
-	 * @doesNotPerformAssertions
-	 */
 	public function test_delete_item() {
-		// Controller does not implement delete_item().
+		$this->markTestSkipped( 'Controller does not have delete_item route.' );
 	}
 
 	/**
@@ -414,11 +403,9 @@ class WP_REST_Pattern_Directory_Controller_Test extends WP_Test_REST_Controller_
 	 * @covers WP_REST_Pattern_Directory_Controller::get_item_schema
 	 *
 	 * @since 5.8.0
-	 *
-	 * @doesNotPerformAssertions
 	 */
 	public function test_get_item_schema() {
-		// The controller's schema is hardcoded, so tests would not be meaningful.
+		$this->markTestSkipped( "The controller's schema is hardcoded, so tests would not be meaningful." );
 	}
 
 	/**

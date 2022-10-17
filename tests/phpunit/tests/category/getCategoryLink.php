@@ -2,7 +2,6 @@
 
 /**
  * @group taxonomy
- *
  * @covers ::get_category_link
  */
 class Tests_Category_GetCategoryLink extends WP_UnitTestCase {

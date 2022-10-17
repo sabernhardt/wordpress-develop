@@ -20,6 +20,13 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 	public $manager;
 
 	/**
+	 * Symbol.
+	 *
+	 * @var stdClass
+	 */
+	public $undefined;
+
+	/**
 	 * Admin user ID.
 	 *
 	 * @var int
@@ -32,20 +39,6 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 	 * @var int
 	 */
 	protected static $subscriber_user_id;
-
-	/**
-	 * Path to test file 1.
-	 *
-	 * @var string
-	 */
-	private $test_file;
-
-	/**
-	 * Path to test file 2.
-	 *
-	 * @var string
-	 */
-	private $test_file2;
 
 	/**
 	 * Set up before class.
@@ -63,7 +56,8 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 	public function set_up() {
 		parent::set_up();
 		require_once ABSPATH . WPINC . '/class-wp-customize-manager.php';
-		$this->manager = $this->instantiate();
+		$this->manager   = $this->instantiate();
+		$this->undefined = new stdClass();
 
 		$orig_file       = DIR_TESTDATA . '/images/canola.jpg';
 		$this->test_file = get_temp_dir() . 'canola.jpg';
@@ -162,7 +156,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 	 */
 	public function test_constructor_deferred_changeset_uuid() {
 		wp_set_current_user( self::$admin_user_id );
-		$other_admin_user_id = self::factory()->user->create( array( 'role' => 'admin' ) );
+		$other_admin_user_id = $this->factory()->user->create( array( 'role' => 'admin' ) );
 
 		$data = array(
 			'blogname' => array(
@@ -171,7 +165,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 		);
 
 		$uuid1 = wp_generate_uuid4();
-		self::factory()->post->create(
+		$this->factory()->post->create(
 			array(
 				'post_type'     => 'customize_changeset',
 				'post_name'     => $uuid1,
@@ -187,7 +181,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 		 * as in non-branching mode there should only be one pending changeset at a time.
 		 */
 		$uuid2   = wp_generate_uuid4();
-		$post_id = self::factory()->post->create(
+		$post_id = $this->factory()->post->create(
 			array(
 				'post_type'     => 'customize_changeset',
 				'post_name'     => $uuid2,
@@ -424,7 +418,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 	 */
 	public function test_find_changeset_post_id() {
 		$uuid    = wp_generate_uuid4();
-		$post_id = self::factory()->post->create(
+		$post_id = $this->factory()->post->create(
 			array(
 				'post_name'    => $uuid,
 				'post_type'    => 'customize_changeset',
@@ -454,7 +448,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 
 		$uuid         = wp_generate_uuid4();
 		$wp_customize = new WP_Customize_Manager( array( 'changeset_uuid' => $uuid ) );
-		$post_id      = self::factory()->post->create(
+		$post_id      = $this->factory()->post->create(
 			array(
 				'post_name'    => $uuid,
 				'post_type'    => 'customize_changeset',
@@ -482,7 +476,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 			'blogname'        => array( 'value' => 'Hello World' ),
 			'blogdescription' => array( 'value' => 'Greet the world' ),
 		);
-		self::factory()->post->create(
+		$this->factory()->post->create(
 			array(
 				'post_name'    => $uuid,
 				'post_type'    => 'customize_changeset',
@@ -565,14 +559,14 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 				'post_name'      => 'canola',
 			)
 		);
-		$existing_published_home_page_id   = self::factory()->post->create(
+		$existing_published_home_page_id   = $this->factory()->post->create(
 			array(
 				'post_name'   => 'home',
 				'post_type'   => 'page',
 				'post_status' => 'publish',
 			)
 		);
-		$existing_auto_draft_about_page_id = self::factory()->post->create(
+		$existing_auto_draft_about_page_id = $this->factory()->post->create(
 			array(
 				'post_name'   => 'about',
 				'post_type'   => 'page',
@@ -820,7 +814,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 	public function test_import_theme_starter_content_with_nested_arrays() {
 		wp_set_current_user( self::$admin_user_id );
 
-		$existing_published_home_page_id = self::factory()->post->create(
+		$existing_published_home_page_id = $this->factory()->post->create(
 			array(
 				'post_name'   => 'home',
 				'post_type'   => 'page',
@@ -1878,7 +1872,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 		$r = $wp_customize->save_changeset_post(
 			array(
 				'autosave' => true,
-				'user_id'  => self::factory()->user->create( array( 'role' => 'administrator' ) ),
+				'user_id'  => $this->factory()->user->create( array( 'role' => 'administrator' ) ),
 			)
 		);
 		$this->assertSame( 'illegal_autosave_with_non_current_user', $r->get_error_code() );
@@ -2031,7 +2025,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 		$this->assertGreaterThan( 2, count( $new_sidebars_widgets['sidebar-1'] ) );
 		$new_sidebar_1 = array_reverse( $new_sidebars_widgets['sidebar-1'] );
 
-		$post_id = self::factory()->post->create(
+		$post_id = $this->factory()->post->create(
 			array(
 				'post_type'    => 'customize_changeset',
 				'post_status'  => 'draft',
@@ -2335,7 +2329,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 				'value' => 'Changeset Tagline',
 			),
 		);
-		self::factory()->post->create(
+		$this->factory()->post->create(
 			array(
 				'post_type'    => 'customize_changeset',
 				'post_status'  => 'auto-draft',
@@ -2830,7 +2824,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 		}
 		$this->assertFalse( $this->manager->has_published_pages() );
 
-		self::factory()->post->create(
+		$this->factory()->post->create(
 			array(
 				'post_type'   => 'page',
 				'post_status' => 'private',
@@ -2838,7 +2832,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 		);
 		$this->assertFalse( $this->manager->has_published_pages() );
 
-		self::factory()->post->create(
+		$this->factory()->post->create(
 			array(
 				'post_type'   => 'page',
 				'post_status' => 'publish',
@@ -2864,7 +2858,7 @@ class Tests_WP_Customize_Manager extends WP_UnitTestCase {
 		$setting_id = 'nav_menus_created_posts';
 		$setting    = $this->manager->get_setting( $setting_id );
 		$this->assertInstanceOf( 'WP_Customize_Filter_Setting', $setting );
-		$auto_draft_page = self::factory()->post->create(
+		$auto_draft_page = $this->factory()->post->create(
 			array(
 				'post_type'   => 'page',
 				'post_status' => 'auto-draft',

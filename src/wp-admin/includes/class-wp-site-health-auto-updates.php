@@ -7,7 +7,6 @@
  * @since 5.2.0
  */
 
-#[AllowDynamicProperties]
 class WP_Site_Health_Auto_Updates {
 	/**
 	 * WP_Site_Health_Auto_Updates constructor.

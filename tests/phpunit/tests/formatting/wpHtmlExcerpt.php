@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::wp_html_excerpt
  */
 class Tests_Formatting_wpHtmlExcerpt extends WP_UnitTestCase {
 	public function test_simple() {

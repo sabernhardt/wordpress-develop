@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::get_url_in_content
  */
 class Tests_Formatting_GetUrlInContent extends WP_UnitTestCase {
 

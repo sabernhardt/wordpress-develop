@@ -73,7 +73,7 @@ class Tests_Query_NoFoundRows extends WP_UnitTestCase {
 	 * @ticket 29552
 	 */
 	public function test_no_found_rows_default_with_nopaging_true() {
-		$p = self::factory()->post->create();
+		$p = $this->factory->post->create();
 
 		$q = new WP_Query(
 			array(
@@ -90,7 +90,7 @@ class Tests_Query_NoFoundRows extends WP_UnitTestCase {
 	 * @ticket 29552
 	 */
 	public function test_no_found_rows_default_with_postsperpage_minus1() {
-		$p = self::factory()->post->create();
+		$p = $this->factory->post->create();
 
 		$q = new WP_Query(
 			array(

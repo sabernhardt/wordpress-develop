@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::like_escape
  */
 class Tests_Formatting_LikeEscape extends WP_UnitTestCase {
 	/**

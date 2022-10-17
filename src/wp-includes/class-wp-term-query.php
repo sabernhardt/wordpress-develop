@@ -15,7 +15,6 @@
  *
  * @see WP_Term_Query::__construct() for accepted arguments.
  */
-#[AllowDynamicProperties]
 class WP_Term_Query {
 
 	/**

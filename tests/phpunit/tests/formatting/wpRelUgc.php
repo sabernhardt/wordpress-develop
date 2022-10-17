@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::wp_rel_ugc
  */
 class Tests_Formatting_wpRelUgc extends WP_UnitTestCase {
 

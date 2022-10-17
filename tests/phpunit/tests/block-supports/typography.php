@@ -1,8 +1,6 @@
 <?php
 /**
  * @group block-supports
- *
- * @covers ::wp_apply_typography_support
  */
 class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	/**
@@ -23,6 +21,8 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 
 	/**
 	 * @ticket 54337
+	 *
+	 * @covers ::wp_apply_typography_support
 	 */
 	function test_font_size_slug_with_numbers_is_kebab_cased_properly() {
 		$this->test_block_name = 'test/font-size-slug-with-numbers';
@@ -54,6 +54,8 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	}
 	/**
 	 * @ticket 54337
+	 *
+	 * @covers ::wp_apply_typography_support
 	 */
 	function test_font_family_with_legacy_inline_styles_using_a_value() {
 		$this->test_block_name = 'test/font-family-with-inline-styles-using-value';
@@ -85,6 +87,8 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 
 	/**
 	 * @ticket 55505
+	 *
+	 * @covers ::wp_apply_typography_support
 	 */
 	function test_typography_with_skipped_serialization_block_supports() {
 		$this->test_block_name = 'test/typography-with-skipped-serialization-block-supports';
@@ -129,6 +133,8 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 
 	/**
 	 * @ticket 55505
+	 *
+	 * @covers ::wp_apply_typography_support
 	 */
 	function test_letter_spacing_with_individual_skipped_serialization_block_supports() {
 		$this->test_block_name = 'test/letter-spacing-with-individua-skipped-serialization-block-supports';
@@ -162,6 +168,8 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	}
 	/**
 	 * @ticket 54337
+	 *
+	 * @covers ::wp_apply_typography_support
 	 */
 	function test_font_family_with_legacy_inline_styles_using_a_css_var() {
 		$this->test_block_name = 'test/font-family-with-inline-styles-using-css-var';
@@ -192,6 +200,8 @@ class Tests_Block_Supports_Typography extends WP_UnitTestCase {
 	}
 	/**
 	 * @ticket 54337
+	 *
+	 * @covers ::wp_apply_typography_support
 	 */
 	function test_font_family_with_class() {
 		$this->test_block_name = 'test/font-family-with-class';

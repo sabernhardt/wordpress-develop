@@ -614,55 +614,43 @@ class REST_Block_Renderer_Controller_Test extends WP_Test_REST_Controller_Testca
 
 	/**
 	 * The update_item() method does not exist for block rendering.
-	 *
-	 * @doesNotPerformAssertions
 	 */
 	public function test_update_item() {
-		// Controller does not implement update_item().
+		$this->markTestSkipped( 'Controller does not implement update_item().' );
 	}
 
 	/**
 	 * The create_item() method does not exist for block rendering.
-	 *
-	 * @doesNotPerformAssertions
 	 */
 	public function test_create_item() {
-		// Controller does not implement create_item().
+		$this->markTestSkipped( 'Controller does not implement create_item().' );
 	}
 
 	/**
 	 * The delete_item() method does not exist for block rendering.
-	 *
-	 * @doesNotPerformAssertions
 	 */
 	public function test_delete_item() {
-		// Controller does not implement delete_item().
+		$this->markTestSkipped( 'Controller does not implement delete_item().' );
 	}
 
 	/**
 	 * The get_items() method does not exist for block rendering.
-	 *
-	 * @doesNotPerformAssertions
 	 */
 	public function test_get_items() {
-		// Controller does not implement get_items().
+		$this->markTestSkipped( 'Controller does not implement get_items().' );
 	}
 
 	/**
-	 * The get_context_param() method is not used for block rendering.
-	 *
-	 * @doesNotPerformAssertions
+	 * The context_param() method does not exist for block rendering.
 	 */
 	public function test_context_param() {
-		// Controller does not use get_context_param().
+		$this->markTestSkipped( 'Controller does not implement context_param().' );
 	}
 
 	/**
 	 * The prepare_item() method does not exist for block rendering.
-	 *
-	 * @doesNotPerformAssertions
 	 */
 	public function test_prepare_item() {
-		// Controller does not implement prepare_item().
+		$this->markTestSkipped( 'Controller does not implement prepare_item().' );
 	}
 }

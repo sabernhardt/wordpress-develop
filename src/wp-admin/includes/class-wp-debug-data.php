@@ -7,7 +7,6 @@
  * @since 5.2.0
  */
 
-#[AllowDynamicProperties]
 class WP_Debug_Data {
 	/**
 	 * Calls all core functions to check for updates.
@@ -1395,7 +1394,7 @@ class WP_Debug_Data {
 		}
 
 		/**
-		 * Filters the debug information shown on the Tools -> Site Health -> Info screen.
+		 * Add to or modify the debug information shown on the Tools -> Site Health -> Info screen.
 		 *
 		 * Plugin or themes may wish to introduce their own debug information without creating
 		 * additional admin pages. They can utilize this filter to introduce their own sections
@@ -1485,7 +1484,7 @@ class WP_Debug_Data {
 	}
 
 	/**
-	 * Formats the information gathered for debugging, in a manner suitable for copying to a forum or support ticket.
+	 * Format the information gathered for debugging, in a manner suitable for copying to a forum or support ticket.
 	 *
 	 * @since 5.2.0
 	 *
@@ -1554,7 +1553,7 @@ class WP_Debug_Data {
 	}
 
 	/**
-	 * Fetches the total size of all the database tables for the active database user.
+	 * Fetch the total size of all the database tables for the active database user.
 	 *
 	 * @since 5.2.0
 	 *
@@ -1575,7 +1574,7 @@ class WP_Debug_Data {
 	}
 
 	/**
-	 * Fetches the sizes of the WordPress directories: `wordpress` (ABSPATH), `plugins`, `themes`, and `uploads`.
+	 * Fetch the sizes of the WordPress directories: `wordpress` (ABSPATH), `plugins`, `themes`, and `uploads`.
 	 * Intended to supplement the array returned by `WP_Debug_Data::debug_data()`.
 	 *
 	 * @since 5.2.0
@@ -1598,7 +1597,7 @@ class WP_Debug_Data {
 		// The max_execution_time defaults to 0 when PHP runs from cli.
 		// We still want to limit it below.
 		if ( empty( $max_execution_time ) ) {
-			$max_execution_time = 30; // 30 seconds.
+			$max_execution_time = 30;
 		}
 
 		if ( $max_execution_time > 20 ) {

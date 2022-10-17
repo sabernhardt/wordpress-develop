@@ -119,6 +119,9 @@ function wp_schedule_single_event( $timestamp, $hook, $args = array(), $wp_error
 	 * are considered duplicates.
 	 */
 	$crons = _get_cron_array();
+	if ( ! is_array( $crons ) ) {
+		$crons = array();
+	}
 
 	$key       = md5( serialize( $event->args ) );
 	$duplicate = false;
@@ -303,6 +306,9 @@ function wp_schedule_event( $timestamp, $recurrence, $hook, $args = array(), $wp
 	$key = md5( serialize( $event->args ) );
 
 	$crons = _get_cron_array();
+	if ( ! is_array( $crons ) ) {
+		$crons = array();
+	}
 
 	$crons[ $event->timestamp ][ $event->hook ][ $key ] = array(
 		'schedule' => $event->schedule,
@@ -1122,20 +1128,26 @@ function wp_get_ready_cron_jobs() {
 	 *                          to continue using results from _get_cron_array().
 	 */
 	$pre = apply_filters( 'pre_get_ready_cron_jobs', null );
-
 	if ( null !== $pre ) {
 		return $pre;
 	}
 
 	$crons = _get_cron_array();
-	$gmt_time = microtime( true );
-	$results = array();
+	if ( ! is_array( $crons ) ) {
+		return array();
+	}
 
+	$gmt_time = microtime( true );
+	$keys     = array_keys( $crons );
+	if ( isset( $keys[0] ) && $keys[0] > $gmt_time ) {
+		return array();
+	}
+
+	$results = array();
 	foreach ( $crons as $timestamp => $cronhooks ) {
 		if ( $timestamp > $gmt_time ) {
 			break;
 		}
-
 		$results[ $timestamp ] = $cronhooks;
 	}
 
@@ -1150,15 +1162,14 @@ function wp_get_ready_cron_jobs() {
  * Retrieve cron info array option.
  *
  * @since 2.1.0
- * @since 6.1.0 Return type modified to consistenty return an array.
  * @access private
  *
- * @return array[] Array of cron events.
+ * @return array[]|false Array of cron info arrays on success, false on failure.
  */
 function _get_cron_array() {
 	$cron = get_option( 'cron' );
 	if ( ! is_array( $cron ) ) {
-		return array();
+		return false;
 	}
 
 	if ( ! isset( $cron['version'] ) ) {
@@ -1202,15 +1213,15 @@ function _set_cron_array( $cron, $wp_error = false ) {
 }
 
 /**
- * Upgrade a cron info array.
+ * Upgrade a Cron info array.
  *
- * This function upgrades the cron info array to version 2.
+ * This function upgrades the Cron info array to version 2.
  *
  * @since 2.1.0
  * @access private
  *
  * @param array $cron Cron info array from _get_cron_array().
- * @return array An upgraded cron info array.
+ * @return array An upgraded Cron info array.
  */
 function _upgrade_cron_array( $cron ) {
 	if ( isset( $cron['version'] ) && 2 == $cron['version'] ) {

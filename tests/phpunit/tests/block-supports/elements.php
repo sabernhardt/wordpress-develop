@@ -1,8 +1,6 @@
 <?php
 /**
  * @group block-supports
- *
- * @covers ::wp_render_elements_support
  */
 class Tests_Block_Supports_Elements extends WP_UnitTestCase {
 	/**
@@ -19,6 +17,8 @@ class Tests_Block_Supports_Elements extends WP_UnitTestCase {
 	/**
 	 * Test wp_render_elements_support() with a simple paragraph and link color preset.
 	 * @ticket 54337
+	 *
+	 * @covers ::wp_render_elements_support
 	 */
 	public function test_simple_paragraph_link_color() {
 		$result = self::make_unique_id_one(
@@ -49,6 +49,8 @@ class Tests_Block_Supports_Elements extends WP_UnitTestCase {
 	/**
 	 * Test wp_render_elements_support() with a paragraph containing a class.
 	 * @ticket 54337
+	 *
+	 * @covers ::wp_render_elements_support
 	 */
 	public function test_class_paragraph_link_color() {
 		$result = self::make_unique_id_one(
@@ -80,6 +82,8 @@ class Tests_Block_Supports_Elements extends WP_UnitTestCase {
 	/**
 	 * Test wp_render_elements_support() with a paragraph containing a anchor.
 	 * @ticket 54337
+	 *
+	 * @covers ::wp_render_elements_support
 	 */
 	public function test_anchor_paragraph_link_color() {
 		$result = self::make_unique_id_one(

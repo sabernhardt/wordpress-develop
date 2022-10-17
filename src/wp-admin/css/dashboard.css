@@ -1186,8 +1186,7 @@ a.rsswidget {
 	padding-right: 6px;
 }
 
-#dashboard_php_nag.php-no-security-updates .dashicons-warning,
-#dashboard_php_nag.php-version-lower-than-future-minimum .dashicons-warning {
+#dashboard_php_nag.php-insecure .dashicons-warning {
 	color: #d63638;
 }
 
@@ -1199,13 +1198,12 @@ a.rsswidget {
 	margin: 12px 0;
 }
 
-#dashboard_php_nag .button .dashicons-external {
-	line-height: 25px;
+#dashboard_php_nag h3 {
+	font-weight: 600;
 }
 
-.bigger-bolder-text {
-	font-weight: 600;
-	font-size: 14px;
+#dashboard_php_nag .button .dashicons-external {
+	line-height: 25px;
 }
 
 /* =Media Queries

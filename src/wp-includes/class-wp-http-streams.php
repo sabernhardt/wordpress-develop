@@ -13,7 +13,6 @@
  * @since 2.7.0
  * @since 3.7.0 Combined with the fsockopen transport and switched to `stream_socket_client()`.
  */
-#[AllowDynamicProperties]
 class WP_Http_Streams {
 	/**
 	 * Send a HTTP request to a URI using PHP Streams.

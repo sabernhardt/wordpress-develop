@@ -21,7 +21,6 @@ $wp_file_descriptions = array(
 	'searchform.php'        => __( 'Search Form' ),
 	'404.php'               => __( '404 Template' ),
 	'link.php'              => __( 'Links Template' ),
-	'theme.json'            => __( 'Theme Styles & Block Settings' ),
 	// Archives.
 	'index.php'             => __( 'Main Index Template' ),
 	'archive.php'           => __( 'Archives' ),
@@ -540,10 +539,10 @@ function wp_edit_theme_plugin_file( $args ) {
 		}
 
 		// Make sure PHP process doesn't die before loopback requests complete.
-		set_time_limit( 5 * MINUTE_IN_SECONDS );
+		set_time_limit( 300 );
 
 		// Time to wait for loopback requests to finish.
-		$timeout = 100; // 100 seconds.
+		$timeout = 100;
 
 		$needle_start = "###### wp_scraping_result_start:$scrape_key ######";
 		$needle_end   = "###### wp_scraping_result_end:$scrape_key ######";
@@ -2008,10 +2007,10 @@ function WP_Filesystem( $args = false, $context = false, $allow_relaxed_file_own
 	 * to allow for per-transport overriding of the default.
 	 */
 	if ( ! defined( 'FS_CONNECT_TIMEOUT' ) ) {
-		define( 'FS_CONNECT_TIMEOUT', 30 ); // 30 seconds.
+		define( 'FS_CONNECT_TIMEOUT', 30 );
 	}
 	if ( ! defined( 'FS_TIMEOUT' ) ) {
-		define( 'FS_TIMEOUT', 30 ); // 30 seconds.
+		define( 'FS_TIMEOUT', 30 );
 	}
 
 	if ( is_wp_error( $wp_filesystem->errors ) && $wp_filesystem->errors->has_errors() ) {

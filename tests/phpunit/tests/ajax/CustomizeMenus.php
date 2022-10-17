@@ -77,8 +77,6 @@ class Tests_Ajax_CustomizeMenus extends WP_Ajax_UnitTestCase {
 	 *
 	 * @dataProvider data_ajax_load_available_items_cap_check
 	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_load_available_items
-	 *
 	 * @param string $role              The role we're checking caps against.
 	 * @param array  $expected_results  Expected results.
 	 */
@@ -156,8 +154,6 @@ class Tests_Ajax_CustomizeMenus extends WP_Ajax_UnitTestCase {
 	 * Testing the error messaging for ajax_load_available_items
 	 *
 	 * @dataProvider data_ajax_load_available_items_error_messages
-	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_load_available_items
 	 *
 	 * @param array $post_args POST args.
 	 * @param mixed $expected_results Expected results.
@@ -269,8 +265,6 @@ class Tests_Ajax_CustomizeMenus extends WP_Ajax_UnitTestCase {
 	 *
 	 * @dataProvider data_ajax_load_available_items_success_status
 	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_load_available_items
-	 *
 	 * @param array $post_args       POST args.
 	 * @param array $success_status  Success status.
 	 */
@@ -361,8 +355,6 @@ class Tests_Ajax_CustomizeMenus extends WP_Ajax_UnitTestCase {
 	 * Testing the array structure for a single item
 	 *
 	 * @dataProvider data_ajax_load_available_items_structure
-	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_load_available_items
 	 *
 	 * @param array $post_args POST args.
 	 */
@@ -472,9 +464,6 @@ class Tests_Ajax_CustomizeMenus extends WP_Ajax_UnitTestCase {
 	 *
 	 * @dataProvider data_ajax_search_available_items_caps_check
 	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_search_available_items
-	 * @covers WP_Customize_Nav_Menus::search_available_items_query
-	 *
 	 * @param string $role             Role.
 	 * @param array  $expected_results Expected results.
 	 */
@@ -553,9 +542,6 @@ class Tests_Ajax_CustomizeMenus extends WP_Ajax_UnitTestCase {
 	 * Testing the results of various searches
 	 *
 	 * @dataProvider data_ajax_search_available_items_results
-	 *
-	 * @covers WP_Customize_Nav_Menus::ajax_search_available_items
-	 * @covers WP_Customize_Nav_Menus::search_available_items_query
 	 *
 	 * @param array $post_args        POST args.
 	 * @param array $expected_results Expected results.
@@ -652,7 +638,6 @@ class Tests_Ajax_CustomizeMenus extends WP_Ajax_UnitTestCase {
 	 * Testing successful ajax_insert_auto_draft_post() call.
 	 *
 	 * @covers WP_Customize_Nav_Menus::ajax_insert_auto_draft_post
-	 * @covers WP_Customize_Nav_Menus::insert_auto_draft_post
 	 */
 	public function test_ajax_insert_auto_draft_post_success() {
 		$_POST                = wp_slash(
@@ -706,7 +691,7 @@ class Tests_Ajax_CustomizeMenus extends WP_Ajax_UnitTestCase {
 		$this->assertSame( 'bad_nonce', $response['data'] );
 
 		// Bad nonce.
-		wp_set_current_user( self::factory()->user->create( array( 'role' => 'subscriber' ) ) );
+		wp_set_current_user( $this->factory()->user->create( array( 'role' => 'subscriber' ) ) );
 		$_POST                = wp_slash(
 			array(
 				'customize-menus-nonce' => wp_create_nonce( 'customize-menus' ),
@@ -719,7 +704,7 @@ class Tests_Ajax_CustomizeMenus extends WP_Ajax_UnitTestCase {
 		$this->assertSame( 'customize_not_allowed', $response['data'] );
 
 		// Missing params.
-		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+		wp_set_current_user( $this->factory()->user->create( array( 'role' => 'administrator' ) ) );
 		$_POST                = wp_slash(
 			array(
 				'customize-menus-nonce' => wp_create_nonce( 'customize-menus' ),

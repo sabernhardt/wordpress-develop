@@ -2,17 +2,8 @@
 
 /**
  * @group comment
- *
- * @covers ::wp_list_comments
  */
 class Tests_Comment_Walker extends WP_UnitTestCase {
-
-	/**
-	 * Comment post ID.
-	 *
-	 * @var int
-	 */
-	private $post_id;
 
 	public function set_up() {
 		parent::set_up();
@@ -35,7 +26,7 @@ class Tests_Comment_Walker extends WP_UnitTestCase {
 		$comment_child  = get_comment( $comment_child );
 
 		$comment_walker   = new Walker_Comment();
-		$comment_callback = new Comment_Callback_Test_Helper( $this, $comment_walker );
+		$comment_callback = new Comment_Callback_Test( $this, $comment_walker );
 
 		wp_list_comments(
 			array(
@@ -56,10 +47,7 @@ class Tests_Comment_Walker extends WP_UnitTestCase {
 	}
 }
 
-class Comment_Callback_Test_Helper {
-	private $test_walker;
-	private $walker;
-
+class Comment_Callback_Test {
 	public function __construct( Tests_Comment_Walker $test_walker, Walker_Comment $walker ) {
 		$this->test_walker = $test_walker;
 		$this->walker      = $walker;

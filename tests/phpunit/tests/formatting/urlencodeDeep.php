@@ -3,8 +3,6 @@
 /**
  * @group formatting
  * @ticket 22300
- *
- * @covers ::urlencode_deep
  */
 class Tests_Formatting_UrlencodeDeep extends WP_UnitTestCase {
 

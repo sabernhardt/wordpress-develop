@@ -410,10 +410,7 @@ function wp_resolve_numeric_slug_conflicts( $query_vars = array() ) {
 	}
 
 	// This is the potentially clashing slug.
-	$value = '';
-	if ( $compare && array_key_exists( $compare, $query_vars ) ) {
-		$value = $query_vars[ $compare ];
-	}
+	$value = $query_vars[ $compare ];
 
 	$post = get_page_by_path( $value, OBJECT, 'post' );
 	if ( ! ( $post instanceof WP_Post ) ) {

@@ -13,29 +13,22 @@
  * @since 4.0.0
  */
 class Basic_Object {
-
-	private $arbitrary_props = array(
-		'foo' => 'bar',
-	);
+	private $foo = 'bar';
 
 	public function __get( $name ) {
-		if ( array_key_exists( $name, $this->arbitrary_props ) ) {
-			return $this->arbitrary_props[ $name ];
-		}
-
-		return null;
+		return $this->$name;
 	}
 
 	public function __set( $name, $value ) {
-		$this->arbitrary_props[ $name ] = $value;
+		return $this->$name = $value;
 	}
 
 	public function __isset( $name ) {
-		return isset( $this->arbitrary_props[ $name ] );
+		return isset( $this->$name );
 	}
 
 	public function __unset( $name ) {
-		unset( $this->arbitrary_props[ $name ] );
+		unset( $this->$name );
 	}
 
 	public function __call( $name, $arguments ) {

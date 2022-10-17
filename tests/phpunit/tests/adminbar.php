@@ -656,7 +656,7 @@ class Tests_AdminBar extends WP_UnitTestCase {
 		$this->go_to( home_url( "/?customize_changeset_uuid=$uuid" ) );
 		wp_set_current_user( self::$admin_id );
 
-		self::factory()->post->create(
+		$this->factory()->post->create(
 			array(
 				'post_type'   => 'customize_changeset',
 				'post_status' => 'auto-draft',

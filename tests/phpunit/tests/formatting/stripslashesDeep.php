@@ -3,8 +3,6 @@
 /**
  * @group formatting
  * @group slashes
- *
- * @covers ::stripslashes_deep
  */
 class Tests_Formatting_StripslashesDeep extends WP_UnitTestCase {
 	/**

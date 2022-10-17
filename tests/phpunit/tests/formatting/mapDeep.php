@@ -3,8 +3,6 @@
 /**
  * @group formatting
  * @ticket 22300
- *
- * @covers ::map_deep
  */
 class Tests_Formatting_MapDeep extends WP_UnitTestCase {
 

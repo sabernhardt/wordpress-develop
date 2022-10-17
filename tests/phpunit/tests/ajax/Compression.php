@@ -17,8 +17,6 @@ class Tests_Ajax_CompressionTest extends WP_Ajax_UnitTestCase {
 
 	/**
 	 * Test as a logged out user
-	 *
-	 * @covers ::wp_ajax_wp_compression_test
 	 */
 	public function test_logged_out() {
 		$this->logout();
@@ -34,8 +32,6 @@ class Tests_Ajax_CompressionTest extends WP_Ajax_UnitTestCase {
 
 	/**
 	 * Fetch the test text
-	 *
-	 * @covers ::wp_ajax_wp_compression_test
 	 */
 	public function test_text() {
 
@@ -60,8 +56,6 @@ class Tests_Ajax_CompressionTest extends WP_Ajax_UnitTestCase {
 	 * Fetch the test text (gzdeflate)
 	 *
 	 * @requires function gzdeflate
-	 *
-	 * @covers ::wp_ajax_wp_compression_test
 	 */
 	public function test_gzdeflate() {
 
@@ -87,8 +81,6 @@ class Tests_Ajax_CompressionTest extends WP_Ajax_UnitTestCase {
 	 * Fetch the test text (gzencode)
 	 *
 	 * @requires function gzencode
-	 *
-	 * @covers ::wp_ajax_wp_compression_test
 	 */
 	public function test_gzencode() {
 
@@ -112,8 +104,6 @@ class Tests_Ajax_CompressionTest extends WP_Ajax_UnitTestCase {
 
 	/**
 	 * Fetch the test text (unknown encoding)
-	 *
-	 * @covers ::wp_ajax_wp_compression_test
 	 */
 	public function test_unknown_encoding() {
 
@@ -132,8 +122,6 @@ class Tests_Ajax_CompressionTest extends WP_Ajax_UnitTestCase {
 
 	/**
 	 * Set the 'can_compress_scripts' site option to true
-	 *
-	 * @covers ::wp_ajax_wp_compression_test
 	 */
 	public function test_set_yes() {
 
@@ -154,7 +142,7 @@ class Tests_Ajax_CompressionTest extends WP_Ajax_UnitTestCase {
 		}
 
 		// Check the site option is not changed due to lack of nonce.
-		$this->assertSame( 0, (int) get_site_option( 'can_compress_scripts' ) );
+		$this->assertSame( 0, get_site_option( 'can_compress_scripts' ) );
 
 		// Add a nonce.
 		$_GET['_ajax_nonce'] = wp_create_nonce( 'update_can_compress_scripts' );
@@ -167,13 +155,11 @@ class Tests_Ajax_CompressionTest extends WP_Ajax_UnitTestCase {
 		}
 
 		// Check the site option is changed.
-		$this->assertSame( 1, (int) get_site_option( 'can_compress_scripts' ) );
+		$this->assertSame( 1, get_site_option( 'can_compress_scripts' ) );
 	}
 
 	/**
 	 * Set the 'can_compress_scripts' site option to false
-	 *
-	 * @covers ::wp_ajax_wp_compression_test
 	 */
 	public function test_set_no() {
 
@@ -194,7 +180,7 @@ class Tests_Ajax_CompressionTest extends WP_Ajax_UnitTestCase {
 		}
 
 		// Check the site option is not changed due to lack of nonce.
-		$this->assertSame( 1, (int) get_site_option( 'can_compress_scripts' ) );
+		$this->assertSame( 1, get_site_option( 'can_compress_scripts' ) );
 
 		// Add a nonce.
 		$_GET['_ajax_nonce'] = wp_create_nonce( 'update_can_compress_scripts' );
@@ -207,7 +193,7 @@ class Tests_Ajax_CompressionTest extends WP_Ajax_UnitTestCase {
 		}
 
 		// Check the site option is changed.
-		$this->assertSame( 0, (int) get_site_option( 'can_compress_scripts' ) );
+		$this->assertSame( 0, get_site_option( 'can_compress_scripts' ) );
 	}
 
 	/**

@@ -2,7 +2,6 @@
 
 /**
  * @group formatting
- *
  * @covers ::wp_trim_excerpt
  */
 class Tests_Formatting_wpTrimExcerpt extends WP_UnitTestCase {

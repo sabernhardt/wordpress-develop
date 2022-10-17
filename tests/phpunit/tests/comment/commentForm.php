@@ -2,7 +2,6 @@
 
 /**
  * @group  comment
- *
  * @covers ::comment_form
  */
 class Tests_Comment_CommentForm extends WP_UnitTestCase {

@@ -2,8 +2,6 @@
 
 /**
  * @group comment
- *
- * @covers WP_Comment::get_instance
  */
 class Tests_Term_WpComment extends WP_UnitTestCase {
 	protected static $comment_id;

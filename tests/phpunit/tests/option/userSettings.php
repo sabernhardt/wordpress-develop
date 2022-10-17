@@ -24,11 +24,6 @@ class Tests_Option_UserSettings extends WP_UnitTestCase {
 		parent::tear_down();
 	}
 
-	/**
-	 * @covers ::get_user_setting
-	 * @covers ::get_all_user_settings
-	 * @covers ::wp_set_all_user_settings
-	 */
 	public function test_set_user_setting() {
 		$foo = get_user_setting( 'foo' );
 
@@ -39,11 +34,6 @@ class Tests_Option_UserSettings extends WP_UnitTestCase {
 		$this->assertSame( 'bar', get_user_setting( 'foo' ) );
 	}
 
-	/**
-	 * @covers ::get_user_setting
-	 * @covers ::get_all_user_settings
-	 * @covers ::wp_set_all_user_settings
-	 */
 	public function test_set_user_setting_dashes() {
 		$foo = get_user_setting( 'foo' );
 
@@ -54,11 +44,6 @@ class Tests_Option_UserSettings extends WP_UnitTestCase {
 		$this->assertSame( 'foo-bar-baz', get_user_setting( 'foo' ) );
 	}
 
-	/**
-	 * @covers ::get_user_setting
-	 * @covers ::get_all_user_settings
-	 * @covers ::wp_set_all_user_settings
-	 */
 	public function test_set_user_setting_strip_asterisks() {
 		$foo = get_user_setting( 'foo' );
 

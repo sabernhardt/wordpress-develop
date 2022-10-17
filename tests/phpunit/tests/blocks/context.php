@@ -36,7 +36,7 @@ class Tests_Blocks_Context extends WP_UnitTestCase {
 			'post_excerpt' => '',
 		);
 
-		$post = self::factory()->post->create_and_get( $args );
+		$post = $this->factory()->post->create_and_get( $args );
 		setup_postdata( $post );
 	}
 

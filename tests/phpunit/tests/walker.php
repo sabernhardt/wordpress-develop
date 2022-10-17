@@ -8,11 +8,6 @@
  */
 class Tests_Walker extends WP_UnitTestCase {
 
-	/**
-	 * @var Walker
-	 */
-	private $walker;
-
 	public function set_up() {
 		parent::set_up();
 

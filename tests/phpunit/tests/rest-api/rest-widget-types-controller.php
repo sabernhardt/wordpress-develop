@@ -531,29 +531,17 @@ class WP_Test_REST_Widget_Types_Controller extends WP_Test_REST_Controller_Testc
 	}
 
 	/**
-	 * The create_item() method does not exist for widget types.
-	 *
-	 * @doesNotPerformAssertions
+	 * The test_create_item() method does not exist for widget types.
 	 */
-	public function test_create_item() {
-		// Controller does not implement create_item().
-	}
+	public function test_create_item() {}
 
 	/**
-	 * The update_item() method does not exist for widget types.
-	 *
-	 * @doesNotPerformAssertions
+	 * The test_update_item() method does not exist for widget types.
 	 */
-	public function test_update_item() {
-		// Controller does not implement update_item().
-	}
+	public function test_update_item() {}
 
 	/**
-	 * The delete_item() method does not exist for widget types.
-	 *
-	 * @doesNotPerformAssertions
+	 * The test_delete_item() method does not exist for widget types.
 	 */
-	public function test_delete_item() {
-		// Controller does not implement delete_item().
-	}
+	public function test_delete_item() {}
 }

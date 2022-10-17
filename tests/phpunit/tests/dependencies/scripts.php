@@ -1428,8 +1428,17 @@ JS;
 	 *
 	 * @param mixed  $l10n_data Localization data passed to wp_localize_script().
 	 * @param string $expected  Expected transformation of localization data.
+	 * @param string $warning   Optional. Whether a PHP native warning/error is expected. Default false.
 	 */
-	public function test_wp_localize_script_data_formats( $l10n_data, $expected ) {
+	public function test_wp_localize_script_data_formats( $l10n_data, $expected, $warning = false ) {
+		if ( $warning ) {
+			if ( PHP_VERSION_ID < 80000 ) {
+				$this->expectWarning();
+			} else {
+				$this->expectError();
+			}
+		}
+
 		if ( ! is_array( $l10n_data ) ) {
 			$this->setExpectedIncorrectUsage( 'WP_Scripts::localize' );
 		}
@@ -1451,6 +1460,7 @@ JS;
 	 *
 	 *     @type mixed  $l10n_data Localization data passed to wp_localize_script().
 	 *     @type string $expected  Expected transformation of localization data.
+	 *     @type string $warning   Optional. Whether a PHP native warning/error is expected.
 	 * }
 	 */
 	public function data_wp_localize_script_data_formats() {
@@ -1461,16 +1471,14 @@ JS;
 			array( array( 'foo' => array( 'bar' => 'foobar' ) ), '{"foo":{"bar":"foobar"}}' ),
 			array( array( 'foo' => 6.6 ), '{"foo":"6.6"}' ),
 			array( array( 'foo' => 6 ), '{"foo":"6"}' ),
-			array( array(), '[]' ),
 
 			// Unofficially supported format.
 			array( 'string', '"string"' ),
 
 			// Unsupported formats.
-			array( 1.5, '1.5' ),
-			array( 1, '1' ),
+			array( 1.5, '1.5', true ),
+			array( 1, '1', true ),
 			array( false, '[""]' ),
-			array( null, 'null' ),
 		);
 	}
 

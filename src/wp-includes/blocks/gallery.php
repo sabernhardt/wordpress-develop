@@ -86,8 +86,7 @@ function block_core_gallery_render( $attributes, $content ) {
 		'wp_footer',
 		function () use ( $style ) {
 			echo '<style> ' . $style . '</style>';
-		},
-		11
+		}
 	);
 	return $content;
 }

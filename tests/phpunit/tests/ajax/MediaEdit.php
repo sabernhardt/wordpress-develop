@@ -27,10 +27,6 @@ class Tests_Ajax_MediaEdit extends WP_Ajax_UnitTestCase {
 
 	/**
 	 * @ticket 22985
-	 * @requires function imagejpeg
-	 *
-	 * @covers ::wp_insert_attachment
-	 * @covers ::wp_save_image
 	 */
 	public function testCropImageThumbnail() {
 		require_once ABSPATH . 'wp-admin/includes/image-edit.php';
@@ -60,10 +56,6 @@ class Tests_Ajax_MediaEdit extends WP_Ajax_UnitTestCase {
 
 	/**
 	 * @ticket 32171
-	 * @requires function imagejpeg
-	 *
-	 * @covers ::wp_insert_attachment
-	 * @covers ::wp_save_image
 	 */
 	public function testImageEditOverwriteConstant() {
 		define( 'IMAGE_EDIT_OVERWRITE', true );
@@ -97,24 +89,14 @@ class Tests_Ajax_MediaEdit extends WP_Ajax_UnitTestCase {
 
 		$file_path = dirname( get_attached_file( $id ) );
 
-		$files_that_should_not_exist = array();
-
 		foreach ( $sizes1 as $key => $size ) {
 			if ( $sizes2[ $key ]['file'] !== $size['file'] ) {
-				$files_that_should_not_exist[] = $file_path . '/' . $size['file'];
+				$files_that_shouldnt_exist[] = $file_path . '/' . $size['file'];
 			}
 		}
 
-		if ( ! empty( $files_that_should_not_exist ) ) {
-			foreach ( $files_that_should_not_exist as $file ) {
-				$this->assertFileDoesNotExist( $file, 'IMAGE_EDIT_OVERWRITE is leaving garbage image files behind.' );
-			}
-		} else {
-			/*
-			 * This assertion will always pass due to the "if" condition, but prevents this test
-			 * from being marked as "risky" due to the test not performing any assertions.
-			 */
-			$this->assertSame( array(), $files_that_should_not_exist );
+		foreach ( $files_that_shouldnt_exist as $file ) {
+			$this->assertFileDoesNotExist( $file, 'IMAGE_EDIT_OVERWRITE is leaving garbage image files behind.' );
 		}
 	}
 }

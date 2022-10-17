@@ -5,9 +5,6 @@
  * @group revision
  */
 class Tests_Post_Revisions extends WP_UnitTestCase {
-
-	const POST_TYPE = 'test-revision';
-
 	protected static $admin_user_id;
 	protected static $editor_user_id;
 	protected static $author_user_id;
@@ -16,6 +13,11 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 		self::$admin_user_id  = $factory->user->create( array( 'role' => 'administrator' ) );
 		self::$editor_user_id = $factory->user->create( array( 'role' => 'editor' ) );
 		self::$author_user_id = $factory->user->create( array( 'role' => 'author' ) );
+	}
+
+	public function set_up() {
+		parent::set_up();
+		$this->post_type = 'test-revision';
 	}
 
 	/**
@@ -316,7 +318,7 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	 */
 	public function test_revision_view_caps_cpt() {
 		register_post_type(
-			self::POST_TYPE,
+			$this->post_type,
 			array(
 				'capability_type' => 'event',
 				'map_meta_cap'    => true,
@@ -326,7 +328,7 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 
 		$post_id = self::factory()->post->create(
 			array(
-				'post_type'   => self::POST_TYPE,
+				'post_type'   => $this->post_type,
 				'post_author' => self::$editor_user_id,
 			)
 		);
@@ -358,7 +360,7 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	 */
 	public function test_revision_restore_caps_cpt() {
 		register_post_type(
-			self::POST_TYPE,
+			$this->post_type,
 			array(
 				'capability_type' => 'event',
 				'map_meta_cap'    => true,
@@ -373,7 +375,7 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 		// Create a post as Editor.
 		$post_id = self::factory()->post->create(
 			array(
-				'post_type'   => self::POST_TYPE,
+				'post_type'   => $this->post_type,
 				'post_author' => self::$editor_user_id,
 			)
 		);
@@ -404,7 +406,7 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	 */
 	public function test_revision_restore_caps_before_publish() {
 		register_post_type(
-			self::POST_TYPE,
+			$this->post_type,
 			array(
 				'capability_type' => 'post',
 				'capabilities'    => array(
@@ -422,7 +424,7 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 
 		$post_id = self::factory()->post->create(
 			array(
-				'post_type'   => self::POST_TYPE,
+				'post_type'   => $this->post_type,
 				'post_status' => 'draft',
 			)
 		);
@@ -464,7 +466,7 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 	 */
 	public function test_revision_diff_caps_cpt() {
 		register_post_type(
-			self::POST_TYPE,
+			$this->post_type,
 			array(
 				'capability_type' => 'event',
 				'map_meta_cap'    => true,
@@ -474,7 +476,7 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 
 		$post_id = self::factory()->post->create(
 			array(
-				'post_type'   => self::POST_TYPE,
+				'post_type'   => $this->post_type,
 				'post_author' => self::$editor_user_id,
 			)
 		);
@@ -651,61 +653,6 @@ class Tests_Post_Revisions extends WP_UnitTestCase {
 		$revision = _wp_put_post_revision( $post );
 
 		$this->assertWPError( $revision );
-	}
-
-	/**
-	 * Tests that wp_get_latest_revision_id_and_total_count() returns the latest revision ID and total count.
-	 *
-	 * @covers ::wp_get_latest_revision_id_and_total_count
-	 * @ticket 55857
-	 * @dataProvider data_wp_get_post_revisions_url
-	 */
-	public function test_wp_get_latest_revision_id_and_total_count( $revisions ) {
-		$post_id = self::factory()->post->create();
-		for ( $i = 0; $i < $revisions; ++$i ) {
-			wp_update_post(
-				array(
-					'ID'         => $post_id,
-					'post_title' => 'Some Post',
-				)
-			);
-		}
-
-		$post_revisions       = wp_get_post_revisions( $post_id );
-		$latest_post_revision = current( $post_revisions );
-		$revisions            = wp_get_latest_revision_id_and_total_count( $post_id );
-
-		$this->assertSame(
-			$latest_post_revision->ID,
-			$revisions['latest_id'],
-			'The latest revision ID does not match.'
-		);
-
-		$this->assertSame(
-			count( $post_revisions ),
-			$revisions['count'],
-			'The total count of revisions does not match.'
-		);
-	}
-
-	/**
-	 * Tests that wp_get_latest_revision_id_and_total_count() returns a WP_Error when no revisions exist.
-	 *
-	 * @covers ::wp_get_latest_revision_id_and_total_count
-	 * @ticket 55857
-	 */
-	public function test_wp_get_latest_revision_id_and_total_count_no_revisions() {
-		$revision = wp_get_latest_revision_id_and_total_count( null );
-
-		$this->assertWPError( $revision, 'Invalid post, no revisions should exist.' );
-		$this->assertSame( $revision->get_error_code(), 'invalid_post' );
-
-		add_filter( 'wp_revisions_to_keep', '__return_zero' );
-		$post_id  = self::factory()->post->create();
-		$revision = wp_get_latest_revision_id_and_total_count( $post_id );
-
-		$this->assertWPError( $revision, 'Revisions should not be enabled.' );
-		$this->assertSame( $revision->get_error_code(), 'revisions_not_enabled' );
 	}
 
 	/**

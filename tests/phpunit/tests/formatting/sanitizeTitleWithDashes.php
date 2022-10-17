@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::sanitize_title_with_dashes
  */
 class Tests_Formatting_SanitizeTitleWithDashes extends WP_UnitTestCase {
 	public function test_strips_html() {

@@ -45,7 +45,7 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 		$current_network_user_count = get_user_count();
 
 		// Add another user to fake the network user count to be different.
-		wpmu_create_user( 'user', 'pass', 'user@example.com' );
+		wpmu_create_user( 'user', 'pass', 'email' );
 
 		wp_update_network_user_counts( $different_network_id );
 
@@ -68,7 +68,7 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 		wp_update_network_counts();
 		$start_count = get_user_count();
 
-		wpmu_create_user( 'user', 'pass', 'user@example.com' );
+		wpmu_create_user( 'user', 'pass', 'email' );
 
 		// No change, cache not refreshed.
 		$count = get_user_count();
@@ -132,7 +132,7 @@ class Tests_User_GetUserCount extends WP_UnitTestCase {
 		wp_update_user_counts();
 		$current_network_user_count = get_user_count();
 
-		$u1 = wpmu_create_user( 'user', 'pass', 'user@example.com' );
+		$u1 = wpmu_create_user( 'user', 'pass', 'email' );
 
 		$user_count = get_user_count();
 

@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::esc_textarea
  */
 class Tests_Formatting_EscTextarea extends WP_UnitTestCase {
 

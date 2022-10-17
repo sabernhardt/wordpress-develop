@@ -3374,19 +3374,12 @@ p > video {
 	}
 
 	.entry-content h5,
-	.entry-summary h5,
-	.page-content h5,
-	.comment-content h5 {
-		font-size: 18px;
-		font-size: 1.8rem;
-		line-height: 1.3333;
-		margin-top: 2.6667em;
-		margin-bottom: 1.3333em;
-	}
-
 	.entry-content h6,
+	.entry-summary h5,
 	.entry-summary h6,
+	.page-content h5,
 	.page-content h6,
+	.comment-content h5,
 	.comment-content h6 {
 		font-size: 17px;
 		font-size: 1.7rem;
@@ -3955,19 +3948,12 @@ p > video {
 	}
 
 	.entry-content h5,
-	.entry-summary h5,
-	.page-content h5,
-	.comment-content h5 {
-		font-size: 20px;
-		font-size: 2rem;
-		line-height: 1.4;
-		margin-top: 2.8em;
-		margin-bottom: 1.4em;
-	}
-
 	.entry-content h6,
+	.entry-summary h5,
 	.entry-summary h6,
+	.page-content h5,
 	.page-content h6,
+	.comment-content h5,
 	.comment-content h6 {
 		font-size: 19px;
 		font-size: 1.9rem;
@@ -4635,19 +4621,12 @@ p > video {
 	}
 
 	.entry-content h5,
-	.entry-summary h5,
-	.page-content h5,
-	.comment-content h5 {
-		font-size: 16px;
-		font-size: 1.6rem;
-		line-height: 1.25;
-		margin-top: 3.25em;
-		margin-bottom: 1.625em;
-	}
-
 	.entry-content h6,
+	.entry-summary h5,
 	.entry-summary h6,
+	.page-content h5,
 	.page-content h6,
+	.comment-content h5,
 	.comment-content h6 {
 		font-size: 15px;
 		font-size: 1.5rem;
@@ -5225,19 +5204,12 @@ p > video {
 	}
 
 	.entry-content h5,
-	.entry-summary h5,
-	.page-content h5,
-	.comment-content h5 {
-		font-size: 18px;
-		font-size: 1.8rem;
-		line-height: 1.3333;
-		margin-top: 2.6667em;
-		margin-bottom: 1.3333em;
-	}
-
 	.entry-content h6,
+	.entry-summary h5,
 	.entry-summary h6,
+	.page-content h5,
 	.page-content h6,
+	.comment-content h5,
 	.comment-content h6 {
 		font-size: 17px;
 		font-size: 1.7rem;
@@ -5787,19 +5759,12 @@ p > video {
 	}
 
 	.entry-content h5,
-	.entry-summary h5,
-	.page-content h5,
-	.comment-content h5 {
-		font-size: 20px;
-		font-size: 2rem;
-		line-height: 1.4;
-		margin-top: 2.8em;
-		margin-bottom: 1.4em;
-	}
-
 	.entry-content h6,
+	.entry-summary h5,
 	.entry-summary h6,
+	.page-content h5,
 	.page-content h6,
+	.comment-content h5,
 	.comment-content h6 {
 		font-size: 19px;
 		font-size: 1.9rem;

@@ -2,8 +2,6 @@
 
 /**
  * @group comment
- *
- * @covers ::get_comment_class
  */
 class Tests_Comment_GetCommentClass extends WP_UnitTestCase {
 	public function test_should_accept_comment_id() {

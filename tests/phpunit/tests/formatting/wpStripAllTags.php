@@ -3,8 +3,6 @@
  * Test wp_strip_all_tags()
  *
  * @group formatting
- *
- * @covers ::wp_strip_all_tags
  */
 class Tests_Formatting_wpStripAllTags extends WP_UnitTestCase {
 

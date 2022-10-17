@@ -2,8 +2,6 @@
 
 /**
  * @group comment
- *
- * @covers ::wp_allow_comment
  */
 class Tests_Comment_WpAllowComment extends WP_UnitTestCase {
 	protected static $post_id;

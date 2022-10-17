@@ -2,8 +2,6 @@
 /**
  * @group taxonomy
  * @group walker
- *
- * @covers Walker_Category::start_el
  */
 class Tests_Category_Walker_Category extends WP_UnitTestCase {
 
@@ -30,7 +28,7 @@ class Tests_Category_Walker_Category extends WP_UnitTestCase {
 	 */
 	public function test_start_el_with_empty_attributes( $value, $expected ) {
 		$output   = '';
-		$category = self::factory()->category->create_and_get();
+		$category = $this->factory->category->create_and_get();
 		$link     = get_term_link( $category );
 
 		$args = array(

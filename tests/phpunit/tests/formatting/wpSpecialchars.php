@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::_wp_specialchars
  */
 class Tests_Formatting_wpSpecialchars extends WP_UnitTestCase {
 	public function test_wp_specialchars_basics() {

@@ -414,19 +414,19 @@ class WP_Terms_List_Table extends WP_List_Table {
 			);
 		}
 
-		$output = sprintf(
+		$out = sprintf(
 			'<strong>%s</strong><br />',
 			$name
 		);
 
-		$output .= '<div class="hidden" id="inline_' . $qe_data->term_id . '">';
-		$output .= '<div class="name">' . $qe_data->name . '</div>';
+		$out .= '<div class="hidden" id="inline_' . $qe_data->term_id . '">';
+		$out .= '<div class="name">' . $qe_data->name . '</div>';
 
 		/** This filter is documented in wp-admin/edit-tag-form.php */
-		$output .= '<div class="slug">' . apply_filters( 'editable_slug', $qe_data->slug, $qe_data ) . '</div>';
-		$output .= '<div class="parent">' . $qe_data->parent . '</div></div>';
+		$out .= '<div class="slug">' . apply_filters( 'editable_slug', $qe_data->slug, $qe_data ) . '</div>';
+		$out .= '<div class="parent">' . $qe_data->parent . '</div></div>';
 
-		return $output;
+		return $out;
 	}
 
 	/**
@@ -460,6 +460,7 @@ class WP_Terms_List_Table extends WP_List_Table {
 		// Restores the more descriptive, specific name for use within this method.
 		$tag      = $item;
 		$taxonomy = $this->screen->taxonomy;
+		$tax      = get_taxonomy( $taxonomy );
 		$uri      = wp_doing_ajax() ? wp_get_referer() : $_SERVER['REQUEST_URI'];
 
 		$edit_link = add_query_arg(
@@ -496,7 +497,7 @@ class WP_Terms_List_Table extends WP_List_Table {
 			);
 		}
 
-		if ( is_term_publicly_viewable( $tag ) ) {
+		if ( is_taxonomy_viewable( $tax ) ) {
 			$actions['view'] = sprintf(
 				'<a href="%s" aria-label="%s">%s</a>',
 				get_term_link( $tag ),

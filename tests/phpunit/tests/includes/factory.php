@@ -1,12 +1,6 @@
 <?php
 
 class TestFactoryFor extends WP_UnitTestCase {
-
-	/**
-	 * @var WP_UnitTest_Factory_For_Term
-	 */
-	private $category_factory;
-
 	public function set_up() {
 		parent::set_up();
 		$this->category_factory = new WP_UnitTest_Factory_For_Term( null, 'category' );

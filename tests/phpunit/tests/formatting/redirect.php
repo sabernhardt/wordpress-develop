@@ -20,8 +20,6 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 	 *
 	 * @dataProvider get_bad_status_codes
 	 *
-	 * @covers ::wp_redirect
-	 *
 	 * @param string $location The path or URL to redirect to.
 	 * @param int    $status   HTTP response status code to use.
 	 */
@@ -43,9 +41,6 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 		);
 	}
 
-	/**
-	 * @covers ::wp_sanitize_redirect
-	 */
 	public function test_wp_sanitize_redirect() {
 		$this->assertSame( 'http://example.com/watchthelinefeedgo', wp_sanitize_redirect( 'http://example.com/watchthelinefeed%0Ago' ) );
 		$this->assertSame( 'http://example.com/watchthelinefeedgo', wp_sanitize_redirect( 'http://example.com/watchthelinefeed%0ago' ) );
@@ -64,8 +59,6 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 
 	/**
 	 * @ticket 36998
-	 *
-	 * @covers ::wp_sanitize_redirect
 	 */
 	public function test_wp_sanitize_redirect_should_encode_spaces() {
 		$this->assertSame( 'http://example.com/test%20spaces', wp_sanitize_redirect( 'http://example.com/test%20spaces' ) );
@@ -74,8 +67,6 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 
 	/**
 	 * @dataProvider valid_url_provider
-	 *
-	 * @covers ::wp_validate_redirect
 	 */
 	public function test_wp_validate_redirect_valid_url( $url, $expected ) {
 		$this->assertSame( $expected, wp_validate_redirect( $url ) );
@@ -83,8 +74,6 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 
 	/**
 	 * @dataProvider invalid_url_provider
-	 *
-	 * @covers ::wp_validate_redirect
 	 */
 	public function test_wp_validate_redirect_invalid_url( $url ) {
 		$this->assertEquals( false, wp_validate_redirect( $url, false ) );
@@ -177,8 +166,6 @@ class Tests_Formatting_Redirect extends WP_UnitTestCase {
 	/**
 	 * @ticket 47980
 	 * @dataProvider relative_url_provider
-	 *
-	 * @covers ::wp_validate_redirect
 	 */
 	public function test_wp_validate_redirect_relative_url( $current_uri, $url, $expected ) {
 		// Backup the global.

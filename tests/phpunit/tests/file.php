@@ -5,14 +5,12 @@
  */
 class Tests_File extends WP_UnitTestCase {
 
-	const BADCHARS = '"\'[]*&?$';
-
-	private $dir;
-
 	public function set_up() {
 		parent::set_up();
 
 		$this->dir = untrailingslashit( get_temp_dir() );
+
+		$this->badchars = '"\'[]*&?$';
 	}
 
 	/**
@@ -139,7 +137,7 @@ class Tests_File extends WP_UnitTestCase {
 
 	public function test_unique_filename_is_sanitized() {
 		$name     = __FUNCTION__;
-		$filename = wp_unique_filename( $this->dir, $name . self::BADCHARS . '.txt' );
+		$filename = wp_unique_filename( $this->dir, $name . $this->badchars . '.txt' );
 
 		// Make sure the bad characters were all stripped out.
 		$this->assertSame( $name . '.txt', $filename );

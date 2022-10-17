@@ -140,40 +140,24 @@ class Tests_REST_WpRestMenuLocationsController extends WP_Test_REST_Controller_T
 	}
 
 	/**
-	 * The create_item() method does not exist for menu locations.
-	 *
-	 * @doesNotPerformAssertions
+	 * The test_create_item() method does not exist for menu locations.
 	 */
-	public function test_create_item() {
-		// Controller does not implement create_item().
-	}
+	public function test_create_item() {}
 
 	/**
-	 * The update_item() method does not exist for menu locations.
-	 *
-	 * @doesNotPerformAssertions
+	 * The test_update_item() method does not exist for menu locations.
 	 */
-	public function test_update_item() {
-		// Controller does not implement update_item().
-	}
+	public function test_update_item() {}
 
 	/**
-	 * The delete_item() method does not exist for menu locations.
-	 *
-	 * @doesNotPerformAssertions
+	 * The test_delete_item() method does not exist for menu locations.
 	 */
-	public function test_delete_item() {
-		// Controller does not implement delete_item().
-	}
+	public function test_delete_item() {}
 
 	/**
-	 * The prepare_item() method does not exist for menu locations.
-	 *
-	 * @doesNotPerformAssertions
+	 * The test_prepare_item() method does not exist for menu locations.
 	 */
-	public function test_prepare_item() {
-		// Controller does not implement prepare_item().
-	}
+	public function test_prepare_item() {}
 
 	/**
 	 * @ticket 40878

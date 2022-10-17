@@ -14,7 +14,6 @@
  *
  * @since 4.8.0
  */
-#[AllowDynamicProperties]
 class WP_Community_Events {
 	/**
 	 * ID for a WordPress user account.

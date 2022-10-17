@@ -31,15 +31,6 @@ class WP_Test_Stream {
 	public $data_ref;
 
 	/**
-	 * The current context.
-	 *
-	 * @link https://www.php.net/manual/en/class.streamwrapper.php
-	 *
-	 * @var resource|null
-	 */
-	public $context;
-
-	/**
 	 * Initializes internal state for reading the given URL.
 	 *
 	 * @param string $url A URL of the form "protocol://bucket/path".

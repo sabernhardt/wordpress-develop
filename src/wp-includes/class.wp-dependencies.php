@@ -15,7 +15,6 @@
  *
  * @see _WP_Dependency
  */
-#[AllowDynamicProperties]
 class WP_Dependencies {
 	/**
 	 * An array of all registered dependencies keyed by handle.

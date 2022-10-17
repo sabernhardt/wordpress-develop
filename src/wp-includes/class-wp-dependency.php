@@ -16,7 +16,6 @@
  * @access private
  * @since 2.6.0
  */
-#[AllowDynamicProperties]
 class _WP_Dependency {
 	/**
 	 * The handle name.

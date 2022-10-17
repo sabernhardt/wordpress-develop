@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::esc_attr
  */
 class Tests_Formatting_EscAttr extends WP_UnitTestCase {
 	public function test_esc_attr_quotes() {

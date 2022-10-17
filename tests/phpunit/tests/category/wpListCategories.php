@@ -2,8 +2,6 @@
 
 /**
  * @group taxonomy
- *
- * @covers ::wp_list_categories
  */
 class Tests_Category_WpListCategories extends WP_UnitTestCase {
 	public function test_class() {

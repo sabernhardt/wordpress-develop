@@ -311,10 +311,9 @@ switch ( $step ) {
 			wp_die( $wpdb->error->get_error_message() . $tryagain_link );
 		}
 
-		$errors = $wpdb->suppress_errors();
+		$errors = $wpdb->hide_errors();
 		$wpdb->query( "SELECT $prefix" );
-		$wpdb->suppress_errors( $errors );
-
+		$wpdb->show_errors( $errors );
 		if ( ! $wpdb->last_error ) {
 			// MySQL was able to parse the prefix as a value, which we don't want. Bail.
 			wp_die( __( '<strong>Error:</strong> "Table Prefix" is invalid.' ) );
@@ -394,13 +393,13 @@ switch ( $step ) {
 		if ( ! is_writable( ABSPATH ) ) :
 			setup_config_display_header();
 			?>
-<p>
+	<p>
 			<?php
 			/* translators: %s: wp-config.php */
 			printf( __( 'Unable to write to %s file.' ), '<code>wp-config.php</code>' );
 			?>
 </p>
-<p id="wp-config-description">
+<p>
 			<?php
 			/* translators: %s: wp-config.php */
 			printf( __( 'You can create the %s file manually and paste the following text into it.' ), '<code>wp-config.php</code>' );
@@ -412,13 +411,7 @@ switch ( $step ) {
 			}
 			?>
 </p>
-<p class="configuration-rules-label"><label for="wp-config">
-			<?php
-			/* translators: %s: wp-config.php */
-			printf( __( 'Configuration rules for %s:' ), '<code>wp-config.php</code>' );
-			?>
-	</label></p>
-<textarea id="wp-config" cols="98" rows="15" class="code" readonly="readonly" aria-describedby="wp-config-description"><?php echo $config_text; ?></textarea>
+<textarea id="wp-config" cols="98" rows="15" class="code" readonly="readonly"><?php echo $config_text; ?></textarea>
 <p><?php _e( 'After you&#8217;ve done that, click &#8220;Run the installation&#8221;.' ); ?></p>
 <p class="step"><a href="<?php echo $install; ?>" class="button button-large"><?php _e( 'Run the installation' ); ?></a></p>
 <script>

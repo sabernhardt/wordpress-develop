@@ -23,7 +23,6 @@
  *
  * @since 2.0.0
  */
-#[AllowDynamicProperties]
 class WP_Roles {
 	/**
 	 * List of roles and capabilities.

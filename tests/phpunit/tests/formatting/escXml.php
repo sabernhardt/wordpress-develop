@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::esc_xml
  */
 class Tests_Formatting_EscXml extends WP_UnitTestCase {
 	/**

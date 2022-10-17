@@ -4,10 +4,6 @@
  * @group option
  */
 class Tests_Option_Registration extends WP_UnitTestCase {
-
-	/**
-	 * @covers ::register_setting
-	 */
 	public function test_register() {
 		register_setting( 'test_group', 'test_option' );
 
@@ -23,10 +19,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 		$this->assertSame( '', $args['description'] );
 	}
 
-	/**
-	 * @covers ::register_setting
-	 * @covers ::apply_filters
-	 */
 	public function test_register_with_callback() {
 		register_setting( 'test_group', 'test_option', array( $this, 'filter_registered_setting' ) );
 
@@ -34,11 +26,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 		$this->assertSame( 'S-M-R-T', $filtered );
 	}
 
-	/**
-	 * @covers ::register_setting
-	 * @covers WP_REST_Settings_Controller
-	 * @covers ::apply_filters
-	 */
 	public function test_register_with_array() {
 		register_setting(
 			'test_group',
@@ -58,8 +45,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 
 	/**
 	 * @ticket 38176
-	 *
-	 * @covers ::register_setting
 	 */
 	public function test_register_with_default() {
 		register_setting(
@@ -75,8 +60,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 
 	/**
 	 * @ticket 38176
-	 *
-	 * @covers ::register_setting
 	 */
 	public function test_register_with_default_override() {
 		register_setting(
@@ -94,10 +77,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 
 	/**
 	 * @ticket 38930
-	 *
-	 * @covers ::register_setting
-	 * @covers ::add_option
-	 * @covers ::get_option
 	 */
 	public function test_add_option_with_no_options_cache() {
 		register_setting(
@@ -114,8 +93,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 
 	/**
 	 * @expectedDeprecated register_setting
-	 *
-	 * @covers ::register_setting
 	 */
 	public function test_register_deprecated_group_misc() {
 		register_setting( 'misc', 'test_option' );
@@ -123,8 +100,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 
 	/**
 	 * @expectedDeprecated register_setting
-	 *
-	 * @covers ::register_setting
 	 */
 	public function test_register_deprecated_group_privacy() {
 		register_setting( 'privacy', 'test_option' );
@@ -132,9 +107,6 @@ class Tests_Option_Registration extends WP_UnitTestCase {
 
 	/**
 	 * @ticket 43207
-	 *
-	 * @covers ::register_setting
-	 * @covers ::unregister_setting
 	 */
 	public function test_unregister_setting_removes_default() {
 		register_setting(

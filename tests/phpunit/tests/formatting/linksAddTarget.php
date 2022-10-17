@@ -1,8 +1,6 @@
 <?php
 /**
  * @group formatting
- *
- * @covers ::links_add_target
  */
 class Tests_Formatting_LinksAddTarget extends WP_UnitTestCase {
 	/**

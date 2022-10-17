@@ -2,7 +2,6 @@
 
 /**
  * @group comment
- *
  * @covers ::_wp_batch_update_comment_type
  */
 class Tests_Batch_Update_Comment_Type extends WP_UnitTestCase {

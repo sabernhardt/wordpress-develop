@@ -253,7 +253,7 @@ class WP_Test_REST_Post_Meta_Fields extends WP_Test_REST_TestCase {
 
 	protected function grant_write_permission() {
 		// Ensure we have write permission.
-		$user = self::factory()->user->create(
+		$user = $this->factory->user->create(
 			array(
 				'role' => 'editor',
 			)

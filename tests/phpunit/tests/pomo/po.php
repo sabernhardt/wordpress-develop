@@ -5,12 +5,17 @@
  */
 class Tests_POMO_PO extends WP_UnitTestCase {
 
-	/**
-	 * Mail content.
-	 *
-	 * @var string
-	 */
-	const MAIL_TEXT = 'Your new WordPress blog has been successfully set up at:
+	public static function set_up_before_class() {
+		parent::set_up_before_class();
+
+		require_once ABSPATH . '/wp-includes/pomo/po.php';
+	}
+
+	public function set_up() {
+		parent::set_up();
+
+		// Not so random wordpress.pot string -- multiple lines.
+		$this->mail    = 'Your new WordPress blog has been successfully set up at:
 
 %1$s
 
@@ -24,13 +29,8 @@ We hope you enjoy your new blog. Thanks!
 --The WordPress Team
 http://wordpress.org/
 ';
-
-	/**
-	 * Mail content for translation readiness.
-	 *
-	 * @var string
-	 */
-	const PO_MAIL = '""
+		$this->mail    = str_replace( "\r\n", "\n", $this->mail );
+		$this->po_mail = '""
 "Your new WordPress blog has been successfully set up at:\n"
 "\n"
 "%1$s\n"
@@ -44,11 +44,8 @@ http://wordpress.org/
 "\n"
 "--The WordPress Team\n"
 "http://wordpress.org/\n"';
-
-	public static function set_up_before_class() {
-		parent::set_up_before_class();
-
-		require_once ABSPATH . '/wp-includes/pomo/po.php';
+		$this->a90     = str_repeat( 'a', 90 );
+		$this->po_a90  = "\"$this->a90\"";
 	}
 
 	public function test_prepend_each_line() {
@@ -63,9 +60,7 @@ http://wordpress.org/
 		// Simple.
 		$this->assertSame( '"baba"', $po->poify( 'baba' ) );
 		// Long word.
-		$long_word    = str_repeat( 'a', 90 );
-		$po_long_word = "\"$long_word\"";
-		$this->assertSame( $po_long_word, $po->poify( $long_word ) );
+		$this->assertSame( $this->po_a90, $po->poify( $this->a90 ) );
 		// Tab.
 		$this->assertSame( '"ba\tba"', $po->poify( "ba\tba" ) );
 		// Do not add leading empty string of one-line string ending on a newline.
@@ -76,24 +71,18 @@ http://wordpress.org/
 		$src = 'Categories can be selectively converted to tags using the <a href="%s">category to tag converter</a>.';
 		$this->assertSame( '"Categories can be selectively converted to tags using the <a href=\\"%s\\">category to tag converter</a>."', $po->poify( $src ) );
 
-		$mail = str_replace( "\r\n", "\n", self::MAIL_TEXT );
-		$this->assertSameIgnoreEOL( self::PO_MAIL, $po->poify( $mail ) );
+		$this->assertSameIgnoreEOL( $this->po_mail, $po->poify( $this->mail ) );
 	}
 
 	public function test_unpoify() {
 		$po = new PO();
 		$this->assertSame( 'baba', $po->unpoify( '"baba"' ) );
 		$this->assertSame( "baba\ngugu", $po->unpoify( '"baba\n"' . "\t\t\t\n" . '"gugu"' ) );
-
-		$long_word    = str_repeat( 'a', 90 );
-		$po_long_word = "\"$long_word\"";
-		$this->assertSame( $long_word, $po->unpoify( $po_long_word ) );
+		$this->assertSame( $this->a90, $po->unpoify( $this->po_a90 ) );
 		$this->assertSame( '\\t\\n', $po->unpoify( '"\\\\t\\\\n"' ) );
 		// Wordwrapped.
 		$this->assertSame( 'babadyado', $po->unpoify( "\"\"\n\"baba\"\n\"dyado\"" ) );
-
-		$mail = str_replace( "\r\n", "\n", self::MAIL_TEXT );
-		$this->assertSameIgnoreEOL( $mail, $po->unpoify( self::PO_MAIL ) );
+		$this->assertSameIgnoreEOL( $this->mail, $po->unpoify( $this->po_mail ) );
 	}
 
 	public function test_export_entry() {

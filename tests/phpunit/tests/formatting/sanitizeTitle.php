@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::sanitize_title
  */
 class Tests_Formatting_SanitizeTitle extends WP_UnitTestCase {
 	public function test_strips_html() {

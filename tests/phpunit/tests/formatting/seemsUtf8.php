@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::seems_utf8
  */
 class Tests_Formatting_SeemsUtf8 extends WP_UnitTestCase {
 

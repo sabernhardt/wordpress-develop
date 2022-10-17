@@ -11,7 +11,6 @@
  *
  * @since 2.1.0
  */
-#[AllowDynamicProperties]
 class Custom_Image_Header {
 
 	/**
@@ -522,7 +521,7 @@ class Custom_Image_Header {
 	<p>
 			<?php
 			/* translators: %s: Home URL. */
-			printf( __( 'Header updated. <a href="%s">Visit your site</a> to see how it looks.' ), esc_url( home_url( '/' ) ) );
+			printf( __( 'Header updated. <a href="%s">Visit your site</a> to see how it looks.' ), home_url( '/' ) );
 			?>
 	</p>
 </div>

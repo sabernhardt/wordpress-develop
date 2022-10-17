@@ -3,8 +3,6 @@
  * Validate the logic of get_comments_pages_count
  *
  * @group comment
- *
- * @covers ::get_comment_pages_count
  */
 class Tests_Comment_GetCommentsPagesCount extends WP_UnitTestCase {
 	protected $option_page_comments;

@@ -3,8 +3,6 @@
 /**
  * @group comment
  * @ticket 38027
- *
- * @covers ::get_lastcommentmodified
  */
 class Tests_Comment_Last_Modified extends WP_UnitTestCase {
 	public function test_no_comments() {

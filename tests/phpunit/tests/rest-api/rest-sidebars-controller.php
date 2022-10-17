@@ -573,12 +573,9 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 	}
 
 	/**
-	 * The create_item() method does not exist for sidebar.
-	 *
-	 * @doesNotPerformAssertions
+	 * The test_create_item() method does not exist for sidebar.
 	 */
 	public function test_create_item() {
-		// Controller does not implement create_item().
 	}
 
 	/**
@@ -893,21 +890,15 @@ class WP_Test_REST_Sidebars_Controller extends WP_Test_REST_Controller_Testcase 
 	}
 
 	/**
-	 * The delete_item() method does not exist for sidebar.
-	 *
-	 * @doesNotPerformAssertions
+	 * The test_delete_item() method does not exist for sidebar.
 	 */
 	public function test_delete_item() {
-		// Controller does not implement delete_item().
 	}
 
 	/**
-	 * The prepare_item() method does not exist for sidebar.
-	 *
-	 * @doesNotPerformAssertions
+	 * The test_prepare_item() method does not exist for sidebar.
 	 */
 	public function test_prepare_item() {
-		// Controller does not implement prepare_item().
 	}
 
 	/**

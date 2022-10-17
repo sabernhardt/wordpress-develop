@@ -172,7 +172,7 @@ class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 		);
 
 		wp_set_current_user(
-			self::factory()->user->create(
+			$this->factory()->user->create(
 				array(
 					'role' => 'administrator',
 				)
@@ -241,7 +241,7 @@ class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 	 * @covers WP_Widget_Custom_HTML::enqueue_admin_scripts
 	 */
 	public function test_enqueue_admin_scripts_when_logged_in_and_syntax_highlighting_on() {
-		$user = self::factory()->user->create();
+		$user = $this->factory()->user->create();
 		wp_set_current_user( $user );
 		wp_get_current_user()->syntax_highlighting = 'true';
 		set_current_screen( 'widgets.php' );
@@ -262,7 +262,7 @@ class Tests_Widgets_wpWidgetCustomHtml extends WP_UnitTestCase {
 	 * @covers WP_Widget_Custom_HTML::enqueue_admin_scripts
 	 */
 	public function test_enqueue_admin_scripts_when_logged_in_and_syntax_highlighting_off() {
-		$user = self::factory()->user->create();
+		$user = $this->factory()->user->create();
 		wp_set_current_user( $user );
 		update_user_meta( $user, 'syntax_highlighting', 'false' );
 		set_current_screen( 'widgets.php' );

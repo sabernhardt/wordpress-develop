@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::zeroise
  */
 class Tests_Formatting_Zeroise extends WP_UnitTestCase {
 	public function test_pads_with_leading_zeroes() {

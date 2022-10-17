@@ -2,8 +2,6 @@
 
 /**
  * @group formatting
- *
- * @covers ::wp_replace_in_html_tags
  */
 class Tests_Formatting_wpReplaceInHtmlTags extends WP_UnitTestCase {
 	/**
