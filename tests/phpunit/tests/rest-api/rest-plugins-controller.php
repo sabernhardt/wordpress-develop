@@ -84,21 +84,10 @@ class WP_REST_Plugins_Controller_Test extends WP_Test_REST_Controller_Testcase {
 
 	public function tear_down() {
 		if ( file_exists( WP_PLUGIN_DIR . '/test-plugin/test-plugin.php' ) ) {
-			// Remove plugin files.
 			$this->rmdir( WP_PLUGIN_DIR . '/test-plugin' );
-			// Delete empty directory.
-			rmdir( WP_PLUGIN_DIR . '/test-plugin' );
 		}
-
 		if ( file_exists( DIR_TESTDATA . '/link-manager.zip' ) ) {
 			unlink( DIR_TESTDATA . '/link-manager.zip' );
-		}
-
-		if ( file_exists( WP_PLUGIN_DIR . '/link-manager/link-manager.php' ) ) {
-			// Remove plugin files.
-			$this->rmdir( WP_PLUGIN_DIR . '/link-manager' );
-			// Delete empty directory.
-			rmdir( WP_PLUGIN_DIR . '/link-manager' );
 		}
 
 		parent::tear_down();
@@ -380,6 +369,10 @@ class WP_REST_Plugins_Controller_Test extends WP_Test_REST_Controller_Testcase {
 	 * @ticket 50321
 	 */
 	public function test_create_item() {
+		if ( isset( get_plugins()['link-manager/link-manager.php'] ) ) {
+			delete_plugins( array( 'link-manager/link-manager.php' ) );
+		}
+
 		wp_set_current_user( self::$super_admin );
 		$this->setup_plugin_download();
 
@@ -396,6 +389,10 @@ class WP_REST_Plugins_Controller_Test extends WP_Test_REST_Controller_Testcase {
 	 * @ticket 50321
 	 */
 	public function test_create_item_and_activate() {
+		if ( isset( get_plugins()['link-manager/link-manager.php'] ) ) {
+			delete_plugins( array( 'link-manager/link-manager.php' ) );
+		}
+
 		wp_set_current_user( self::$super_admin );
 		$this->setup_plugin_download();
 
@@ -418,6 +415,10 @@ class WP_REST_Plugins_Controller_Test extends WP_Test_REST_Controller_Testcase {
 	 * @ticket 50321
 	 */
 	public function test_create_item_and_activate_errors_if_no_permission_to_activate_plugin() {
+		if ( isset( get_plugins()['link-manager/link-manager.php'] ) ) {
+			delete_plugins( array( 'link-manager/link-manager.php' ) );
+		}
+
 		wp_set_current_user( self::$super_admin );
 		$this->setup_plugin_download();
 		$this->disable_activate_permission( 'link-manager/link-manager.php' );
@@ -440,6 +441,10 @@ class WP_REST_Plugins_Controller_Test extends WP_Test_REST_Controller_Testcase {
 	 * @ticket 50321
 	 */
 	public function test_create_item_and_network_activate_rejected_if_not_multisite() {
+		if ( isset( get_plugins()['link-manager/link-manager.php'] ) ) {
+			delete_plugins( array( 'link-manager/link-manager.php' ) );
+		}
+
 		wp_set_current_user( self::$super_admin );
 		$this->setup_plugin_download();
 
@@ -460,6 +465,10 @@ class WP_REST_Plugins_Controller_Test extends WP_Test_REST_Controller_Testcase {
 	 * @ticket 50321
 	 */
 	public function test_create_item_and_network_activate() {
+		if ( isset( get_plugins()['link-manager/link-manager.php'] ) ) {
+			delete_plugins( array( 'link-manager/link-manager.php' ) );
+		}
+
 		wp_set_current_user( self::$super_admin );
 		$this->setup_plugin_download();
 

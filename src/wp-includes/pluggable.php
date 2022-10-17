@@ -2245,22 +2245,18 @@ if ( ! function_exists( 'wp_nonce_tick' ) ) :
 	 * updated, e.g. by autosave.
 	 *
 	 * @since 2.5.0
-	 * @since 6.1.0 Added `$action` argument.
 	 *
-	 * @param string|int $action Optional. The nonce action. Default -1.
 	 * @return float Float value rounded up to the next highest integer.
 	 */
-	function wp_nonce_tick( $action = -1 ) {
+	function wp_nonce_tick() {
 		/**
 		 * Filters the lifespan of nonces in seconds.
 		 *
 		 * @since 2.5.0
-		 * @since 6.1.0 Added `$action` argument to allow for more targeted filters.
 		 *
-		 * @param int        $lifespan Lifespan of nonces in seconds. Default 86,400 seconds, or one day.
-		 * @param string|int $action   The nonce action, or -1 if none was provided.
+		 * @param int $lifespan Lifespan of nonces in seconds. Default 86,400 seconds, or one day.
 		 */
-		$nonce_life = apply_filters( 'nonce_life', DAY_IN_SECONDS, $action );
+		$nonce_life = apply_filters( 'nonce_life', DAY_IN_SECONDS );
 
 		return ceil( time() / ( $nonce_life / 2 ) );
 	}
@@ -2290,8 +2286,8 @@ if ( ! function_exists( 'wp_verify_nonce' ) ) :
 			 *
 			 * @since 3.5.0
 			 *
-			 * @param int        $uid    ID of the nonce-owning user.
-			 * @param string|int $action The nonce action, or -1 if none was provided.
+			 * @param int    $uid    ID of the nonce-owning user.
+			 * @param string $action The nonce action.
 			 */
 			$uid = apply_filters( 'nonce_user_logged_out', $uid, $action );
 		}
@@ -2301,7 +2297,7 @@ if ( ! function_exists( 'wp_verify_nonce' ) ) :
 		}
 
 		$token = wp_get_session_token();
-		$i     = wp_nonce_tick( $action );
+		$i     = wp_nonce_tick();
 
 		// Nonce generated 0-12 hours ago.
 		$expected = substr( wp_hash( $i . '|' . $action . '|' . $uid . '|' . $token, 'nonce' ), -12, 10 );
@@ -2351,8 +2347,8 @@ if ( ! function_exists( 'wp_create_nonce' ) ) :
 			$uid = apply_filters( 'nonce_user_logged_out', $uid, $action );
 		}
 
-		$token = wp_get_session_token( $action );
-		$i     = wp_nonce_tick( $action );
+		$token = wp_get_session_token();
+		$i     = wp_nonce_tick();
 
 		return substr( wp_hash( $i . '|' . $action . '|' . $uid . '|' . $token, 'nonce' ), -12, 10 );
 	}
@@ -2408,15 +2404,7 @@ if ( ! function_exists( 'wp_salt' ) ) :
 
 		static $duplicated_keys;
 		if ( null === $duplicated_keys ) {
-			$duplicated_keys = array(
-				'put your unique phrase here'       => true,
-				/*
-				 * translators: This string should only be translated if wp-config-sample.php is localized.
-				 * You can check the localized release package or
-				 * https://i18n.svn.wordpress.org/<locale code>/branches/<wp version>/dist/wp-config-sample.php
-				 */
-				__( 'put your unique phrase here' ) => true,
-			);
+			$duplicated_keys = array( 'put your unique phrase here' => true );
 			foreach ( array( 'AUTH', 'SECURE_AUTH', 'LOGGED_IN', 'NONCE', 'SECRET' ) as $first ) {
 				foreach ( array( 'KEY', 'SALT' ) as $second ) {
 					if ( ! defined( "{$first}_{$second}" ) ) {
@@ -2624,7 +2612,7 @@ endif;
 
 if ( ! function_exists( 'wp_rand' ) ) :
 	/**
-	 * Generates a random non-negative number.
+	 * Generates a random number.
 	 *
 	 * @since 2.6.2
 	 * @since 4.4.0 Uses PHP7 random_int() or the random_compat library if available.
@@ -2636,7 +2624,7 @@ if ( ! function_exists( 'wp_rand' ) ) :
 	 *                 Accepts positive integers or zero. Defaults to 0.
 	 * @param int $max Optional. Upper limit for the generated number.
 	 *                 Accepts positive integers. Defaults to 4294967295.
-	 * @return int A random non-negative number between min and max.
+	 * @return int A random number between min and max.
 	 */
 	function wp_rand( $min = null, $max = null ) {
 		global $rnd_value;

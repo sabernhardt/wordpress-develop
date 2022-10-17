@@ -408,8 +408,7 @@ class WP {
 	 * If showing a feed, it will also send Last-Modified, ETag, and 304 status if needed.
 	 *
 	 * @since 2.0.0
-	 * @since 4.4.0 `X-Pingback` header is added conditionally for single posts that allow pings.
-	 * @since 6.1.0 Runs after posts have been queried.
+	 * @since 4.4.0 `X-Pingback` header is added conditionally after posts have been queried in handle_404().
 	 */
 	public function send_headers() {
 		$headers       = array();
@@ -502,15 +501,6 @@ class WP {
 					( ( $client_modified_timestamp >= $wp_modified_timestamp ) || ( $client_etag == $wp_etag ) ) ) {
 				$status        = 304;
 				$exit_required = true;
-			}
-		}
-
-		if ( is_singular() ) {
-			$post = isset( $wp_query->post ) ? $wp_query->post : null;
-
-			// Only set X-Pingback for single posts that allow pings.
-			if ( $post && pings_open( $post ) ) {
-				$headers['X-Pingback'] = get_bloginfo( 'pingback_url', 'display' );
 			}
 		}
 
@@ -711,9 +701,14 @@ class WP {
 
 			if ( is_singular() ) {
 				$post = isset( $wp_query->post ) ? $wp_query->post : null;
-				$next = '<!--nextpage-->';
+
+				// Only set X-Pingback for single posts that allow pings.
+				if ( $post && pings_open( $post ) && ! headers_sent() ) {
+					header( 'X-Pingback: ' . get_bloginfo( 'pingback_url', 'display' ) );
+				}
 
 				// Check for paged content that exceeds the max number of pages.
+				$next = '<!--nextpage-->';
 				if ( $post && ! empty( $this->query_vars['page'] ) ) {
 					// Check if content is actually intended to be paged.
 					if ( false !== strpos( $post->post_content, $next ) ) {
@@ -775,13 +770,13 @@ class WP {
 
 		$parsed = $this->parse_request( $query_args );
 
+		$this->send_headers();
+
 		if ( $parsed ) {
 			$this->query_posts();
 			$this->handle_404();
 			$this->register_globals();
 		}
-
-		$this->send_headers();
 
 		/**
 		 * Fires once the WordPress environment has been set up.

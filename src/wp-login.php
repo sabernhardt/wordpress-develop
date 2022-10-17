@@ -1103,16 +1103,8 @@ switch ( $action ) {
 
 		<p id="nav">
 			<a href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a>
-			<?php
-
-			echo esc_html( $login_link_separator );
-
-			$html_link = sprintf( '<a href="%s">%s</a>', esc_url( wp_lostpassword_url() ), __( 'Lost your password?' ) );
-
-			/** This filter is documented in wp-login.php */
-			echo apply_filters( 'lost_password_html_link', $html_link );
-
-			?>
+				<?php echo esc_html( $login_link_separator ); ?>
+			<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?' ); ?></a>
 		</p>
 		<?php
 
@@ -1479,18 +1471,8 @@ switch ( $action ) {
 					echo esc_html( $login_link_separator );
 				}
 
-				$html_link = sprintf( '<a href="%s">%s</a>', esc_url( wp_lostpassword_url() ), __( 'Lost your password?' ) );
-
-				/**
-				 * Filters the link that allows the user to reset the lost password.
-				 *
-				 * @since 6.1.0
-				 *
-				 * @param string $html_link HTML link to the lost password form.
-				 */
-				echo apply_filters( 'lost_password_html_link', $html_link );
-
 				?>
+				<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php _e( 'Lost your password?' ); ?></a>
 			</p>
 			<?php
 		}

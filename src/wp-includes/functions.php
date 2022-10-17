@@ -1496,7 +1496,12 @@ function wp_get_nocache_headers() {
 		 *
 		 * @see wp_get_nocache_headers()
 		 *
-		 * @param array $headers Header names and field values.
+		 * @param array $headers {
+		 *     Header names and field values.
+		 *
+		 *     @type string $Expires       Expires header.
+		 *     @type string $Cache-Control Cache-Control header.
+		 * }
 		 */
 		$headers = (array) apply_filters( 'nocache_headers', $headers );
 	}
@@ -2685,7 +2690,7 @@ function wp_unique_filename( $dir, $filename, $unique_filename_callback = null )
 		 */
 		if ( $is_image ) {
 			/** This filter is documented in wp-includes/class-wp-image-editor.php */
-			$output_formats = apply_filters( 'image_editor_output_format', array(), $_dir . $filename, $mime_type );
+			$output_formats = apply_filters( 'image_editor_output_format', array(), $_dir . $filename, $mime_type, '' );
 			$alt_types      = array();
 
 			if ( ! empty( $output_formats[ $mime_type ] ) ) {
@@ -4528,8 +4533,7 @@ function wp_check_jsonp_callback( $callback ) {
 function wp_json_file_decode( $filename, $options = array() ) {
 	$result   = null;
 	$filename = wp_normalize_path( realpath( $filename ) );
-
-	if ( ! $filename ) {
+	if ( ! file_exists( $filename ) ) {
 		trigger_error(
 			sprintf(
 				/* translators: %s: Path to the JSON file. */
@@ -5333,7 +5337,7 @@ function absint( $maybeint ) {
 /**
  * Marks a function as deprecated and inform when it has been used.
  *
- * There is a hook {@see 'deprecated_function_run'} that will be called that can be used
+ * There is a {@see 'hook deprecated_function_run'} that will be called that can be used
  * to get the backtrace up to what file and function called the deprecated
  * function.
  *
@@ -5889,24 +5893,15 @@ function apache_mod_loaded( $mod, $default = false ) {
 		return false;
 	}
 
-	$loaded_mods = array();
-
 	if ( function_exists( 'apache_get_modules' ) ) {
-		$loaded_mods = apache_get_modules();
-
-		if ( in_array( $mod, $loaded_mods, true ) ) {
+		$mods = apache_get_modules();
+		if ( in_array( $mod, $mods, true ) ) {
 			return true;
 		}
-	}
-
-	if ( empty( $loaded_mods )
-		&& function_exists( 'phpinfo' )
-		&& false === strpos( ini_get( 'disable_functions' ), 'phpinfo' )
-	) {
-		ob_start();
-		phpinfo( INFO_MODULES );
-		$phpinfo = ob_get_clean();
-
+	} elseif ( function_exists( 'phpinfo' ) && false === strpos( ini_get( 'disable_functions' ), 'phpinfo' ) ) {
+			ob_start();
+			phpinfo( 8 );
+			$phpinfo = ob_get_clean();
 		if ( false !== strpos( $phpinfo, $mod ) ) {
 			return true;
 		}
@@ -6225,6 +6220,41 @@ function get_main_network_id() {
 }
 
 /**
+ * Determines whether global terms are enabled.
+ *
+ * @since 3.0.0
+ *
+ * @return bool True if multisite and global terms enabled.
+ */
+function global_terms_enabled() {
+	if ( ! is_multisite() ) {
+		return false;
+	}
+
+	static $global_terms = null;
+	if ( is_null( $global_terms ) ) {
+
+		/**
+		 * Filters whether global terms are enabled.
+		 *
+		 * Returning a non-null value from the filter will effectively short-circuit the function
+		 * and return the value of the 'global_terms_enabled' site option instead.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param null $enabled Whether global terms are enabled.
+		 */
+		$filter = apply_filters( 'global_terms_enabled', null );
+		if ( ! is_null( $filter ) ) {
+			$global_terms = (bool) $filter;
+		} else {
+			$global_terms = (bool) get_site_option( 'global_terms_enabled', false );
+		}
+	}
+	return $global_terms;
+}
+
+/**
  * Determines whether site meta is enabled.
  *
  * This function checks whether the 'blogmeta' database table exists. The result is saved as
@@ -6351,10 +6381,8 @@ function wp_timezone_choice( $selected_zone, $locale = null ) {
 		$mo_loaded = true;
 	}
 
-	$tz_identifiers = timezone_identifiers_list();
-	$zonen          = array();
-
-	foreach ( $tz_identifiers as $zone ) {
+	$zonen = array();
+	foreach ( timezone_identifiers_list() as $zone ) {
 		$zone = explode( '/', $zone );
 		if ( ! in_array( $zone[0], $continents, true ) ) {
 			continue;
@@ -6387,13 +6415,6 @@ function wp_timezone_choice( $selected_zone, $locale = null ) {
 
 	if ( empty( $selected_zone ) ) {
 		$structure[] = '<option selected="selected" value="">' . __( 'Select a city' ) . '</option>';
-	}
-
-	// If this is a deprecated, but valid, timezone string, display it at the top of the list as-is.
-	if ( in_array( $selected_zone, $tz_identifiers, true ) === false
-		&& in_array( $selected_zone, timezone_identifiers_list( DateTimeZone::ALL_WITH_BC ), true )
-	) {
-		$structure[] = '<option selected="selected" value="' . esc_attr( $selected_zone ) . '">' . esc_html( $selected_zone ) . '</option>';
 	}
 
 	foreach ( $zonen as $key => $zone ) {

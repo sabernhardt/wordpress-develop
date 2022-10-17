@@ -444,15 +444,16 @@ class WP_MS_Themes_List_Table extends WP_List_Table {
 			}
 
 			if ( 'search' !== $type ) {
-				$status_links[ $type ] = array(
-					'url'     => esc_url( add_query_arg( 'theme_status', $type, $url ) ),
-					'label'   => sprintf( $text, number_format_i18n( $count ) ),
-					'current' => $type === $status,
+				$status_links[ $type ] = sprintf(
+					"<a href='%s'%s>%s</a>",
+					esc_url( add_query_arg( 'theme_status', $type, $url ) ),
+					( $type === $status ) ? ' class="current" aria-current="page"' : '',
+					sprintf( $text, number_format_i18n( $count ) )
 				);
 			}
 		}
 
-		return $this->get_views_links( $status_links );
+		return $status_links;
 	}
 
 	/**

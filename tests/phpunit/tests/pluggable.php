@@ -82,6 +82,7 @@ class Tests_Pluggable extends WP_UnitTestCase {
 			'wp_install_defaults',
 			'wp_new_blog_notification',
 			'wp_upgrade',
+			'install_global_terms',
 		);
 		$test_files     = array(
 			'wp-includes/pluggable.php',
@@ -200,7 +201,7 @@ class Tests_Pluggable extends WP_UnitTestCase {
 				'deprecated' => null,
 				'notify'     => '',
 			),
-			'wp_nonce_tick'                   => array( 'action' => -1 ),
+			'wp_nonce_tick'                   => array(),
 			'wp_verify_nonce'                 => array(
 				'nonce',
 				'action' => -1,
@@ -256,6 +257,7 @@ class Tests_Pluggable extends WP_UnitTestCase {
 			'wp_install_defaults'             => array( 'user_id' ),
 			'wp_new_blog_notification'        => array( 'blog_title', 'blog_url', 'user_id', 'password' ),
 			'wp_upgrade'                      => array(),
+			'install_global_terms'            => array(),
 		);
 
 		// Pluggable function signatures are not tested when an external object cache is in use. See #31491.
