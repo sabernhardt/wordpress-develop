@@ -1209,7 +1209,7 @@ function populate_network_meta( $network_id, array $meta = array() ) {
 		$site_admins = get_site_option( 'site_admins' );
 	}
 
-	/* translators: Do not translate USERNAME, SITE_NAME, BLOG_URL, PASSWORD: those are placeholders. */
+	/* translators: Do not translate USERNAME, SITE_NAME, BLOG_URL, PASSWORD, LOGIN_URL: those are placeholders. */
 	$welcome_email = __(
 		'Howdy USERNAME,
 
@@ -1220,7 +1220,7 @@ You can log in to the administrator account with the following information:
 
 Username: USERNAME
 Password: PASSWORD
-Log in here: BLOG_URLwp-login.php
+Log in here: LOGIN_URL
 
 We hope you enjoy your new site. Thanks!
 
