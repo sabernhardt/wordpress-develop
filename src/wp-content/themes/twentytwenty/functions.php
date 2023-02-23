@@ -196,7 +196,10 @@ function twentytwenty_register_styles() {
 	wp_style_add_data( 'twentytwenty-style', 'rtl', 'replace' );
 
 	// Add output of Customizer settings as inline style.
-	wp_add_inline_style( 'twentytwenty-style', twentytwenty_get_customizer_css( 'front-end' ) );
+	$front_end_styles = twentytwenty_get_customizer_css( 'front-end' );
+	if ( $front_end_styles ) {
+		wp_add_inline_style( 'twentytwenty-style', $front_end_styles );
+	}
 
 	// Add print CSS.
 	wp_enqueue_style( 'twentytwenty-print-style', get_template_directory_uri() . '/print.css', null, $theme_version, 'print' );
@@ -424,10 +427,16 @@ function twentytwenty_block_editor_styles() {
 	wp_style_add_data( 'twentytwenty-block-editor-styles', 'rtl', 'replace' );
 
 	// Add inline style from the Customizer.
-	wp_add_inline_style( 'twentytwenty-block-editor-styles', twentytwenty_get_customizer_css( 'block-editor' ) );
+	$block_editor_styles = twentytwenty_get_customizer_css( 'block-editor' );
+	if ( $block_editor_styles ) {
+		wp_add_inline_style( 'twentytwenty-block-editor-styles', $block_editor_styles );
+	}
 
 	// Add inline style for non-latin fonts.
-	wp_add_inline_style( 'twentytwenty-block-editor-styles', TwentyTwenty_Non_Latin_Languages::get_non_latin_css( 'block-editor' ) );
+	$non_latin_fonts = TwentyTwenty_Non_Latin_Languages::get_non_latin_css( 'block-editor' );
+	if ( $non_latin_fonts ) {
+		wp_add_inline_style( 'twentytwenty-block-editor-styles', $non_latin_fonts );
+	}
 
 	// Enqueue the editor script.
 	wp_enqueue_script( 'twentytwenty-block-editor-script', get_theme_file_uri( '/assets/js/editor-script-block.js' ), array( 'wp-blocks', 'wp-dom' ), wp_get_theme()->get( 'Version' ), true );
