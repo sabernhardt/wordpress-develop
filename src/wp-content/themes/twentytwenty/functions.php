@@ -474,6 +474,11 @@ function twentytwenty_add_classic_editor_customizer_styles( $mce_init ) {
 
 	$styles = twentytwenty_get_customizer_css( 'classic-editor' );
 
+	// Return if there are no styles to add.
+	if ( ! $styles ) {
+		return $mce_init;
+	}
+
 	if ( ! isset( $mce_init['content_style'] ) ) {
 		$mce_init['content_style'] = $styles . ' ';
 	} else {
