@@ -165,6 +165,35 @@ if ( ! function_exists( 'twentytwelve_get_font_url' ) ) :
 endif;
 
 /**
+ * Define special character sets for Open Sans font.
+ *
+ * @since Twenty Twelve 3.9
+ *
+ * @return array Font subsets for language support.
+ */
+function twentytwelve_font_subsets() {
+	$subsets = array( 'latin', 'latin-ext' );
+
+	/*
+	 * translators: To add an additional Open Sans character subset specific to your language,
+	 * translate this to 'greek', 'cyrillic' or 'vietnamese'. Do not translate into your own language.
+	 */
+	$subset = _x( 'no-subset', 'Open Sans font: add new subset (greek, cyrillic, vietnamese)', 'twentytwelve' );
+
+	if ( 'cyrillic' === $subset ) {
+		$subsets[] = 'cyrillic';
+		$subsets[] = 'cyrillic-ext';
+	} elseif ( 'greek' === $subset ) {
+		$subsets[] = 'greek';
+		$subsets[] = 'greek-ext';
+	} elseif ( 'vietnamese' === $subset ) {
+		$subsets[] = 'vietnamese';
+	}
+
+	return $subsets;
+}
+
+/**
  * Enqueue scripts and styles for front end.
  *
  * @since Twenty Twelve 1.0
