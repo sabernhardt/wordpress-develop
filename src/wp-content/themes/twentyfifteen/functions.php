@@ -397,6 +397,37 @@ if ( ! function_exists( 'twentyfifteen_fonts_url' ) ) :
 endif;
 
 /**
+ * Define special character sets for fonts.
+ *
+ * @since Twenty Fifteen 3.4.
+ *
+ * @return array Font subsets for language support.
+ */
+function twentyfifteen_font_subsets() {
+	$subsets = array( 'latin', 'latin-ext' );
+
+	/*
+	 * translators: To add an additional character subset specific to your language,
+	 * translate this to 'greek', 'cyrillic', 'devanagari' or 'vietnamese'. Do not translate into your own language.
+	 */
+	$subset = _x( 'no-subset', 'Add new subset (greek, cyrillic, devanagari, vietnamese)', 'twentyfifteen' );
+
+	if ( 'cyrillic' === $subset ) {
+		$subsets[] = 'cyrillic';
+		$subsets[] = 'cyrillic-ext';
+	} elseif ( 'greek' === $subset ) {
+		$subsets[] = 'greek';
+		$subsets[] = 'greek-ext';
+	} elseif ( 'devanagari' === $subset ) {
+		$subsets[] = 'devanagari';
+	} elseif ( 'vietnamese' === $subset ) {
+		$subsets[] = 'vietnamese';
+	}
+
+	return $subsets;
+}
+
+/**
  * JavaScript Detection.
  *
  * Adds a `js` class to the root `<html>` element when JavaScript is detected.
