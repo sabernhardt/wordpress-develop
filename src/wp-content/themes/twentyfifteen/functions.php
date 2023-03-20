@@ -435,7 +435,15 @@ function twentyfifteen_scripts() {
 	wp_enqueue_style( 'twentyfifteen-ie7', get_template_directory_uri() . '/css/ie7.css', array( 'twentyfifteen-style' ), '20141210' );
 	wp_style_add_data( 'twentyfifteen-ie7', 'conditional', 'lt IE 8' );
 
-	wp_enqueue_script( 'twentyfifteen-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20141028', true );
+	/*
+	 * Skip link fix no longer enqueued by default. If enqueued, this minified
+	 * inline script from Twenty Nineteen targets only Internet Explorer.
+	 */
+	wp_register_script( 'twentyfifteen-skip-link-focus-fix', false, array(), false, true );
+	wp_add_inline_script(
+		'twentyfifteen-skip-link-focus-fix',
+		'/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);'
+	);
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
