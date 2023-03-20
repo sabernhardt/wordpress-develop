@@ -372,6 +372,18 @@ function twentyfourteen_scripts() {
 	}
 
 	wp_enqueue_script( 'twentyfourteen-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20210122', true );
+
+	/*
+	 * Skip link fix no longer included in the 'twentyfourteen-script' file.
+	 * If enqueued, the minified inline script targets only Internet Explorer.
+	 * Most of the script comes from Twenty Nineteen, but this repositions the
+	 * window on jump-to-anchor to account for header height.
+	 */
+	wp_register_script( 'twentyfourteen-skip-link-focus-fix', false, array(), false, true );
+	wp_add_inline_script(
+		'twentyfourteen-skip-link-focus-fix',
+		'/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())&&window.scrollBy(0,-80)},!1);'
+	);
 }
 add_action( 'wp_enqueue_scripts', 'twentyfourteen_scripts' );
 
