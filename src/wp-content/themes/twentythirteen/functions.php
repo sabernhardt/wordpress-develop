@@ -316,6 +316,17 @@ function twentythirteen_scripts_styles() {
 	// Loads JavaScript file with functionality specific to Twenty Thirteen.
 	wp_enqueue_script( 'twentythirteen-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20210122', true );
 
+	/*
+	 * Skip link fix no longer included in the 'twentythirteen-script' file.
+	 * If enqueued, this minified inline script from Twenty Nineteen targets
+	 * only Internet Explorer.
+	 */
+	wp_register_script( 'twentythirteen-skip-link-focus-fix', false, array(), false, true );
+	wp_add_inline_script(
+		'twentythirteen-skip-link-focus-fix',
+		'/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);'
+	);
+
 	// Add Source Sans Pro and Bitter fonts, used in the main stylesheet.
 	$font_version = ( 0 === strpos( (string) twentythirteen_fonts_url(), get_template_directory_uri() . '/' ) ) ? '20230328' : null;
 	wp_enqueue_style( 'twentythirteen-fonts', twentythirteen_fonts_url(), array(), $font_version );
