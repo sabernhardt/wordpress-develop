@@ -374,7 +374,7 @@ function twentyfourteen_scripts() {
 	wp_enqueue_script( 'twentyfourteen-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20210122', true );
 
 	/*
-	 * Skip link fix no longer included in the 'twentyfourteen-script' file.
+	 * Skip-link fix no longer included in the 'twentyfourteen-script' file.
 	 * If enqueued, the minified inline script targets only Internet Explorer.
 	 * Most of the script comes from Twenty Nineteen, but this repositions the
 	 * window on jump-to-anchor to account for header height.

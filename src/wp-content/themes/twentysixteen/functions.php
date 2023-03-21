@@ -406,7 +406,7 @@ function twentysixteen_scripts() {
 	wp_script_add_data( 'twentysixteen-html5', 'conditional', 'lt IE 9' );
 
 	/*
-	 * Skip link fix no longer enqueued by default. If enqueued, this minified
+	 * Skip-link fix no longer enqueued by default. If enqueued, this minified
 	 * inline script from Twenty Nineteen targets only Internet Explorer.
 	 */
 	wp_register_script( 'twentysixteen-skip-link-focus-fix', false, array(), false, true );

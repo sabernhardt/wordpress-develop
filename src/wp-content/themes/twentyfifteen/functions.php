@@ -436,7 +436,7 @@ function twentyfifteen_scripts() {
 	wp_style_add_data( 'twentyfifteen-ie7', 'conditional', 'lt IE 8' );
 
 	/*
-	 * Skip link fix no longer enqueued by default. If enqueued, this minified
+	 * Skip-link fix no longer enqueued by default. If enqueued, this minified
 	 * inline script from Twenty Nineteen targets only Internet Explorer.
 	 */
 	wp_register_script( 'twentyfifteen-skip-link-focus-fix', false, array(), false, true );
