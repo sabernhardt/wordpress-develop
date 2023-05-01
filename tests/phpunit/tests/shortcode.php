@@ -404,19 +404,7 @@ EOF;
 		$this->assertSame( $test_string, shortcode_unautop( wpautop( $test_string ) ) );
 	}
 
-	/**
-	 * @ticket 10326
-	 *
-	 * @dataProvider data_strip_shortcodes
-	 *
-	 * @param string $expected  Expected output.
-	 * @param string $content   Content to run strip_shortcodes() on.
-	 */
-	public function test_strip_shortcodes( $expected, $content ) {
-		$this->assertSame( $expected, strip_shortcodes( $content ) );
-	}
-
-	public function data_strip_shortcodes() {
+	public function data_test_strip_shortcodes() {
 		return array(
 			array( 'before', 'before[gallery]' ),
 			array( 'after', '[gallery]after' ),
@@ -429,6 +417,18 @@ EOF;
 			array( 'before  after', 'before [footag]content[/footag] after' ),
 			array( 'before  after', 'before [footag foo="123"]content[/footag] after' ),
 		);
+	}
+
+	/**
+	 * @ticket 10326
+	 *
+	 * @dataProvider data_test_strip_shortcodes
+	 *
+	 * @param string $expected  Expected output.
+	 * @param string $content   Content to run strip_shortcodes() on.
+	 */
+	public function test_strip_shortcodes( $expected, $content ) {
+		$this->assertSame( $expected, strip_shortcodes( $content ) );
 	}
 
 	/**

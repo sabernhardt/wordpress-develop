@@ -145,6 +145,7 @@ function resolve_block_template( $template_type, $template_hierarchy, $fallback_
 
 	// Find all potential templates 'wp_template' post matching the hierarchy.
 	$query     = array(
+		'theme'    => get_stylesheet(),
 		'slug__in' => $slugs,
 	);
 	$templates = get_block_templates( $query );

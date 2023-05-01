@@ -20,7 +20,7 @@ final class WP_Privacy_Policy_Content {
 	private function __construct() {}
 
 	/**
-	 * Adds content to the postbox shown when editing the privacy policy.
+	 * Add content to the postbox shown when editing the privacy policy.
 	 *
 	 * Plugins and themes should suggest text for inclusion in the site's privacy policy.
 	 * The suggested text should contain information about any functionality that affects user privacy,
@@ -49,7 +49,7 @@ final class WP_Privacy_Policy_Content {
 	}
 
 	/**
-	 * Performs a quick check to determine whether any privacy info has changed.
+	 * Quick check if any privacy info has changed.
 	 *
 	 * @since 4.9.6
 	 */
@@ -123,7 +123,7 @@ final class WP_Privacy_Policy_Content {
 	}
 
 	/**
-	 * Outputs a warning when some privacy info has changed.
+	 * Output a warning when some privacy info has changed.
 	 *
 	 * @since 4.9.6
 	 *
@@ -154,7 +154,7 @@ final class WP_Privacy_Policy_Content {
 	}
 
 	/**
-	 * Updates the cached policy info when the policy page is updated.
+	 * Update the cached policy info when the policy page is updated.
 	 *
 	 * @since 4.9.6
 	 * @access private
@@ -203,7 +203,7 @@ final class WP_Privacy_Policy_Content {
 	}
 
 	/**
-	 * Checks for updated, added or removed privacy policy information from plugins.
+	 * Check for updated, added or removed privacy policy information from plugins.
 	 *
 	 * Caches the current info in post_meta of the policy page.
 	 *
@@ -301,7 +301,7 @@ final class WP_Privacy_Policy_Content {
 	}
 
 	/**
-	 * Adds a notice with a link to the guide when editing the privacy policy page.
+	 * Add a notice with a link to the guide when editing the privacy policy page.
 	 *
 	 * @since 4.9.6
 	 * @since 5.0.0 The `$post` parameter was made optional.
@@ -372,7 +372,7 @@ final class WP_Privacy_Policy_Content {
 	}
 
 	/**
-	 * Outputs the privacy policy guide together with content from the theme and plugins.
+	 * Output the privacy policy guide together with content from the theme and plugins.
 	 *
 	 * @since 4.9.6
 	 */
@@ -441,7 +441,7 @@ final class WP_Privacy_Policy_Content {
 	}
 
 	/**
-	 * Returns the default suggested privacy policy content.
+	 * Return the default suggested privacy policy content.
 	 *
 	 * @since 4.9.6
 	 * @since 5.0.0 Added the `$blocks` parameter.
@@ -690,7 +690,7 @@ final class WP_Privacy_Policy_Content {
 	}
 
 	/**
-	 * Adds the suggested privacy policy text to the policy postbox.
+	 * Add the suggested privacy policy text to the policy postbox.
 	 *
 	 * @since 4.9.6
 	 */

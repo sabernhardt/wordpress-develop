@@ -130,16 +130,11 @@ function wpmu_delete_blog( $blog_id, $drop = false ) {
 }
 
 /**
- * Deletes a user and all of their posts from the network.
- *
- * This function:
- *
- * - Deletes all posts (of all post types) authored by the user on all sites on the network
- * - Deletes all links owned by the user on all sites on the network
- * - Removes the user from all sites on the network
- * - Deletes the user from the database
+ * Deletes a user from the network and remove from all sites.
  *
  * @since 3.0.0
+ *
+ * @todo Merge with wp_delete_user()?
  *
  * @global wpdb $wpdb WordPress database abstraction object.
  *

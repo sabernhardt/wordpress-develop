@@ -24,7 +24,7 @@ class Tests_Formatting_wpParseStr extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Data provider.
+	 * Data Provider.
 	 *
 	 * @return array
 	 */

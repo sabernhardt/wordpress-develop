@@ -1144,7 +1144,7 @@ class WP_Test_REST_Comments_Controller extends WP_Test_REST_Controller_Testcase 
 		$this->assertSame( self::$post_id, $data['post'] );
 	}
 
-	public function data_comment_dates() {
+	public function comment_dates_provider() {
 		return array(
 			'set date without timezone'     => array(
 				'params'  => array(
@@ -1190,7 +1190,7 @@ class WP_Test_REST_Comments_Controller extends WP_Test_REST_Controller_Testcase 
 	}
 
 	/**
-	 * @dataProvider data_comment_dates
+	 * @dataProvider comment_dates_provider
 	 */
 	public function test_create_comment_date( $params, $results ) {
 		wp_set_current_user( self::$admin_id );
@@ -2338,7 +2338,7 @@ class WP_Test_REST_Comments_Controller extends WP_Test_REST_Controller_Testcase 
 	}
 
 	/**
-	 * @dataProvider data_comment_dates
+	 * @dataProvider comment_dates_provider
 	 */
 	public function test_update_comment_date( $params, $results ) {
 		wp_set_current_user( self::$editor_id );

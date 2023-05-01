@@ -19,14 +19,21 @@ class WP_Admin_Bar {
 	public $user;
 
 	/**
-	 * Deprecated menu property.
+	 * @since 3.3.0
 	 *
-	 * @since 3.1.0
-	 * @deprecated 3.3.0 Modify admin bar nodes with WP_Admin_Bar::get_node(),
-	 *                   WP_Admin_Bar::add_node(), and WP_Admin_Bar::remove_node().
-	 * @var array
+	 * @param string $name
+	 * @return string|array|void
 	 */
-	public $menu = array();
+	public function __get( $name ) {
+		switch ( $name ) {
+			case 'proto':
+				return is_ssl() ? 'https://' : 'http://';
+
+			case 'menu':
+				_deprecated_argument( 'WP_Admin_Bar', '3.3.0', 'Modify admin bar nodes with WP_Admin_Bar::get_node(), WP_Admin_Bar::add_node(), and WP_Admin_Bar::remove_node(), not the <code>menu</code> property.' );
+				return array(); // Sorry, folks.
+		}
+	}
 
 	/**
 	 * Initializes the admin bar.

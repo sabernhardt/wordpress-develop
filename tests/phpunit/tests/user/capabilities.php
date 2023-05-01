@@ -1314,9 +1314,13 @@ class Tests_User_Capabilities extends WP_UnitTestCase {
 		}
 	}
 
+	public function authorless_post_statuses() {
+		return array( array( 'draft' ), array( 'private' ), array( 'publish' ) );
+	}
+
 	/**
 	 * @ticket 27020
-	 * @dataProvider data_authorless_post
+	 * @dataProvider authorless_post_statuses
 	 */
 	public function test_authorless_post( $status ) {
 		// Make a post without an author.
@@ -1343,10 +1347,6 @@ class Tests_User_Capabilities extends WP_UnitTestCase {
 		$this->assertFalse( $contributor->has_cap( 'edit_post', $post ) );
 		$this->assertFalse( $contributor->has_cap( 'delete_post', $post ) );
 		$this->assertSame( 'publish' === $status, $contributor->has_cap( 'read_post', $post ) );
-	}
-
-	public function data_authorless_post() {
-		return array( array( 'draft' ), array( 'private' ), array( 'publish' ) );
 	}
 
 	/**

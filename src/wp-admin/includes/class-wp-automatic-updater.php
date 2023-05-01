@@ -27,8 +27,6 @@ class WP_Automatic_Updater {
 	 * Determines whether the entire automatic updater is disabled.
 	 *
 	 * @since 3.7.0
-	 *
-	 * @return bool True if the automatic updater is disabled, false otherwise.
 	 */
 	public function is_disabled() {
 		// Background updates are disabled if you don't want file changes.

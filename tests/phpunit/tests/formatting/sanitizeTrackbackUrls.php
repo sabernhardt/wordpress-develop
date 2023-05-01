@@ -8,7 +8,7 @@
 class Tests_Formatting_SanitizeTrackbackUrls extends WP_UnitTestCase {
 	/**
 	 * @ticket 21624
-	 * @dataProvider data_sanitize_trackback_urls_with_multiple_urls
+	 * @dataProvider separators
 	 */
 	public function test_sanitize_trackback_urls_with_multiple_urls( $separator ) {
 		$this->assertSame(
@@ -17,7 +17,7 @@ class Tests_Formatting_SanitizeTrackbackUrls extends WP_UnitTestCase {
 		);
 	}
 
-	public function data_sanitize_trackback_urls_with_multiple_urls() {
+	public function separators() {
 		return array(
 			array( "\r\n\t " ),
 			array( "\r" ),
