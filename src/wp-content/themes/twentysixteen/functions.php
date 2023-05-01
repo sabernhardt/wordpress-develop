@@ -412,7 +412,7 @@ function twentysixteen_scripts() {
 	wp_register_script( 'twentysixteen-skip-link-focus-fix', false, array(), false, true );
 	wp_add_inline_script(
 		'twentysixteen-skip-link-focus-fix',
-		'/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);'
+		'/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus(),window.scrollBy(0,-53))},!1);'
 	);
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
