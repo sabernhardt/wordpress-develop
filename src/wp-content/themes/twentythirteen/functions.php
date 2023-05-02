@@ -314,7 +314,7 @@ function twentythirteen_scripts_styles() {
 	}
 
 	// Loads JavaScript file with functionality specific to Twenty Thirteen.
-	wp_enqueue_script( 'twentythirteen-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20210122', true );
+	wp_enqueue_script( 'twentythirteen-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '2023xxxx', true );
 
 	/*
 	 * Skip-link fix no longer included in the 'twentythirteen-script' file.
