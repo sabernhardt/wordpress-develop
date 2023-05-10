@@ -317,7 +317,7 @@ function twentythirteen_scripts_styles() {
 	wp_enqueue_script( 'twentythirteen-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '2023xxxx', true );
 
 	/*
-	 * Skip-link fix no longer included in the 'twentythirteen-script' file.
+	 * Skip-link fix is no longer included in the 'twentythirteen-script' file.
 	 * If enqueued, this minified inline script from Twenty Nineteen targets
 	 * only Internet Explorer.
 	 */

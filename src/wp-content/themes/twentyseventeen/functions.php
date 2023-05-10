@@ -483,7 +483,7 @@ function twentyseventeen_scripts() {
 	wp_enqueue_script( 'html5', get_theme_file_uri( '/assets/js/html5.js' ), array(), '20161020' );
 	wp_script_add_data( 'html5', 'conditional', 'lt IE 9' );
 
-	// Skip-link fix no longer enqueued by default.
+	// Skip-link fix is no longer enqueued by default.
 	wp_register_script( 'twentyseventeen-skip-link-focus-fix', get_theme_file_uri( '/assets/js/skip-link-focus-fix.js' ), array(), '20161114', true );
 
 	wp_enqueue_script( 'twentyseventeen-global', get_theme_file_uri( '/assets/js/global.js' ), array( 'jquery' ), '20211130', true );
