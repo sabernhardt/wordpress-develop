@@ -69,7 +69,7 @@ add_filter( 'body_class', 'twentyseventeen_body_classes' );
 /**
  * Count our number of active panels.
  *
- * Primarily used to see if we have any panels active, duh.
+ * Primarily used to see if we have any panels active.
  */
 function twentyseventeen_panel_count() {
 
@@ -96,7 +96,14 @@ function twentyseventeen_panel_count() {
 
 /**
  * Checks to see if we're on the front page or not.
+ *
+ * This function is an alias for twentyseventeen_is_static_front_page().
+ *
+ * @since Twenty Seventeen 1.0
+ * @since Twenty Seventeen 3.3 Converted function to an alias.
+ *
+ * @return bool Whether the current page is the front page and static.
  */
 function twentyseventeen_is_frontpage() {
-	return ( is_front_page() && ! is_home() );
+	return twentyseventeen_is_static_front_page();
 }

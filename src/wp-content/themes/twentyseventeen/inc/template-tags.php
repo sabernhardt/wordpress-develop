@@ -70,7 +70,7 @@ if ( ! function_exists( 'twentyseventeen_entry_footer' ) ) :
 		// Get Tags for posts.
 		$tags_list = get_the_tag_list( '', $separate_meta );
 
-		// We don't want to output .entry-footer if it will be empty, so make sure its not.
+		// We don't want to output .entry-footer if it will be empty, so make sure it is not.
 		if ( ( ( twentyseventeen_categorized_blog() && $categories_list ) || $tags_list ) || get_edit_post_link() ) {
 
 			echo '<footer class="entry-footer">';
