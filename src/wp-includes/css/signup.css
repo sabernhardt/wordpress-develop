@@ -1,0 +1,125 @@
+/* wp-signup.php */
+
+.mu_register {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.mu_register form {
+	margin-top: 2em;
+}
+
+.mu_register fieldset,
+.mu_register legend {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+.mu_register .error {
+	font-weight: 600;
+	padding: 10px;
+	color: #333;
+	background: #ffebe8;
+	border: 1px solid #c00;
+}
+
+.mu_register input[type="submit"],
+.mu_register #blog_title,
+.mu_register #user_email,
+.mu_register #blogname,
+.mu_register #user_name {
+	width: 100%;
+	font-size: 24px;
+	margin: 5px 0;
+	box-sizing: border-box;
+}
+
+.mu_register #site-language {
+	display: block;
+}
+
+.mu_register .prefix_address,
+.mu_register .suffix_address {
+	font-size: 18px;
+	display: inline-block;
+	direction: ltr;
+}
+
+.mu_register label,
+.mu_register legend,
+.mu_register .label-heading {
+	font-weight: 600;
+	font-size: 15px;
+	display: block;
+	margin: 10px 0;
+}
+
+.mu_register legend + p,
+.mu_register input + p {
+	margin-top: 0;
+}
+
+.mu_register label.checkbox {
+	display: inline;
+}
+
+.mu_register .mu_alert {
+	font-weight: 600;
+	padding: 10px;
+	color: #333;
+	background: #ffffe0;
+	border: 1px solid #e6db55;
+}
+
+.mu_register .mu_alert a {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.mu_register .signup-options .wp-signup-radio-button {
+	display: block;
+}
+
+.mu_register .privacy-intro .wp-signup-radio-button {
+	margin-right: 0.5em;
+}
+
+.rtl .mu_register .wp-signup-blogname {
+	direction: ltr;
+	text-align: right;
+}
+
+
+/* wp-activate.php */
+
+.wp-activate-container {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.wp-activate-container form {
+	margin-top: 2em;
+}
+
+#submit,
+#key {
+	width: 100%;
+	font-size: 24px;
+	box-sizing: border-box;
+}
+
+#language {
+	margin-top: 0.5em;
+}
+
+.wp-activate-container .error {
+	background: #f66;
+	color: #333;
+}
+
+span.h3 {
+	padding: 0 8px;
+	font-size: 1.3em;
+	font-weight: 600;
+}
