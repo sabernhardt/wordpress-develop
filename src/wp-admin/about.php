@@ -92,7 +92,16 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 			</div>
 			<div class="column is-vertically-aligned-center">
 				<h3><?php _e( 'Work faster with the Command Palette' ); ?></h3>
-				<p><?php _e( 'Switch to a specific template or open your editor preferences with a new tool that helps you quickly navigate expanded functionality. With simple keyboard shortcuts (⌘+k on Mac or Ctrl+k on Windows), clicking the sidebar search icon in Site View, or clicking the Title Bar, get where you need to go and do what you need to do in seconds.' ); ?></p>
+				<p>
+					<?php
+					printf(
+						/* translators: 1: ⌘ + K, 2: Ctrl + K */
+						'Switch to a specific template or open your editor preferences with a new tool that helps you quickly navigate expanded functionality. With simple keyboard shortcuts (%1$s on Mac or %2$s on Windows), clicking the sidebar search icon in Site View, or clicking the Title Bar, get where you need to go and do what you need to do in seconds.',
+						'<kbd>⌘ + K</kbd>',
+						'<kbd>Ctrl + K</kbd>'
+					);
+					?>
+				</p>
 			</div>
 		</div>
 
