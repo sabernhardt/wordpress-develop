@@ -476,6 +476,11 @@
 	margin-top: 1.5em;
 }
 
+.about__container kbd {
+	font-size: inherit;
+	display: inline-block;
+}
+
 .about__container hr {
 	margin: calc(var(--gap) / 2) var(--gap);
 	height: 0;
