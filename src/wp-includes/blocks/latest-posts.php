@@ -145,11 +145,10 @@ function render_block_core_latest_posts( $attributes ) {
 
 			if ( str_ends_with( $trimmed_excerpt, ' [&hellip;]' ) ) {
 				$trimmed_excerpt .= sprintf(
-					' <a class="wp-block-latest-posts__post-read-more" href="%1$s" rel="noopener noreferrer" aria-label="%2$s">%3$s</a>',
+					' <a class="wp-block-latest-posts__post-read-more" href="%1$s" rel="noopener noreferrer">%2$s</a>',
 					esc_url( $post_link ),
-					/* translators: %s: Post title. */
-					sprintf( __( 'Read more of &#8220;%s&#8221;' ), esc_html( $title ) ),
-					__( 'Read more' )
+					/* translators: %s: Post title. Only visible to screen readers. */
+					sprintf( __( 'Read more<span class="screen-reader-text"> of &#8220;%s&#8221;</span>' ), esc_html( $title ) )
 				);
 			}
 
