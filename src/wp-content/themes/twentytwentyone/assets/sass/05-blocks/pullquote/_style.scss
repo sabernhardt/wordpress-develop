@@ -7,11 +7,11 @@
 	color: currentColor;
 	border-color: currentColor;
 	position: relative;
+	font-size: var(--pullquote--font-size);
 	font-weight: 700;
 	font-style: var(--pullquote--font-style);
 	font-family: var(--pullquote--font-family);
 	letter-spacing: var(--pullquote--letter-spacing);
-	line-height: var(--pullquote--line-height);
 
 	blockquote::before {
 		color: currentColor;
@@ -32,6 +32,10 @@
 		letter-spacing: inherit;
 		line-height: inherit;
 		margin: 0;
+	}
+
+	&:where(:not([style*="line-height"])) p {
+		line-height: var(--pullquote--line-height);
 	}
 
 	a {
