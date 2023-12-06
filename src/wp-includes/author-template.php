@@ -238,10 +238,8 @@ function get_the_author_link() {
 		$author_display_name = get_the_author();
 
 		$link = sprintf(
-			'<a href="%1$s" title="%2$s" rel="author external">%3$s</a>',
+			'<a href="%1$s" rel="author external">%2$s</a>',
 			esc_url( $author_url ),
-			/* translators: %s: Author's display name. */
-			esc_attr( sprintf( __( 'Visit %s&#8217;s website' ), $author_display_name ) ),
 			$author_display_name
 		);
 
@@ -318,10 +316,8 @@ function get_the_author_posts_link() {
 	}
 
 	$link = sprintf(
-		'<a href="%1$s" title="%2$s" rel="author">%3$s</a>',
+		'<a href="%1$s" rel="author">%2$s</a>',
 		esc_url( get_author_posts_url( $authordata->ID, $authordata->user_nicename ) ),
-		/* translators: %s: Author's display name. */
-		esc_attr( sprintf( __( 'Posts by %s' ), get_the_author() ) ),
 		get_the_author()
 	);
 
@@ -531,10 +527,8 @@ function wp_list_authors( $args = '' ) {
 		}
 
 		$link = sprintf(
-			'<a href="%1$s" title="%2$s">%3$s</a>',
+			'<a href="%1$s">%2$s</a>',
 			esc_url( get_author_posts_url( $author->ID, $author->user_nicename ) ),
-			/* translators: %s: Author's display name. */
-			esc_attr( sprintf( __( 'Posts by %s' ), $author->display_name ) ),
 			$name
 		);
 
