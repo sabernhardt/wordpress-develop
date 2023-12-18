@@ -1722,19 +1722,21 @@ function comments_popup_link( $zero = false, $one = false, $more = false, $css_c
  * @param array          $args {
  *     Optional. Override default arguments.
  *
- *     @type string $add_below  The first part of the selector used to identify the comment to respond below.
- *                              The resulting value is passed as the first parameter to addComment.moveForm(),
- *                              concatenated as $add_below-$comment->comment_ID. Default 'comment'.
- *     @type string $respond_id The selector identifying the responding comment. Passed as the third parameter
- *                              to addComment.moveForm(), and appended to the link URL as a hash value.
- *                              Default 'respond'.
- *     @type string $reply_text The text of the Reply link. Default 'Reply'.
- *     @type string $login_text The text of the link to reply if logged out. Default 'Log in to Reply'.
- *     @type int    $max_depth  The max depth of the comment tree. Default 0.
- *     @type int    $depth      The depth of the new comment. Must be greater than 0 and less than the value
- *                              of the 'thread_comments_depth' option set in Settings > Discussion. Default 0.
- *     @type string $before     The text or HTML to add before the reply link. Default empty.
- *     @type string $after      The text or HTML to add after the reply link. Default empty.
+ *     @type string $add_below     The first part of the selector used to identify the comment to respond below.
+ *                                 The resulting value is passed as the first parameter to addComment.moveForm(),
+ *                                 concatenated as $add_below-$comment->comment_ID. Default 'comment'.
+ *     @type string $respond_id    The selector identifying the responding comment. Passed as the third parameter
+ *                                 to addComment.moveForm(), and appended to the link URL as a hash value.
+ *                                 Default 'respond'.
+ *     @type string $reply_text    The text of the Reply link. Default 'Reply'.
+ *     @type string $reply_to_text The text used as an ARIA label for the Reply link and as a heading for the
+ *                                 comment reply form. Default 'Reply to (comment author name)'.
+ *     @type string $login_text    The text of the link to reply if logged out. Default 'Log in to Reply'.
+ *     @type int    $max_depth     The max depth of the comment tree. Default 0.
+ *     @type int    $depth         The depth of the new comment. Must be greater than 0 and less than the value
+ *                                 of the 'thread_comments_depth' option set in Settings > Discussion. Default 0.
+ *     @type string $before        The text or HTML to add before the reply link. Default empty.
+ *     @type string $after         The text or HTML to add after the reply link. Default empty.
  * }
  * @param int|WP_Comment $comment Optional. Comment being replied to. Default current comment.
  * @param int|WP_Post    $post    Optional. Post ID or WP_Post object the comment is going to be displayed on.
@@ -1807,19 +1809,31 @@ function get_comment_reply_link( $args = array(), $comment = null, $post = null 
 			'postid'         => $post->ID,
 			'belowelement'   => $args['add_below'] . '-' . $comment->comment_ID,
 			'respondelement' => $args['respond_id'],
-			'replyto'        => sprintf( $args['reply_to_text'], get_comment_author( $comment ) ),
+			'replyto'        => sprintf( $args['reply_to_text'], get_comment_author( $comment ) ), // If empty, the heading simply does not change for me, though checking the reply_to_text value before this could be better.
 		);
 
 		$data_attribute_string = '';
 
 		foreach ( $data_attributes as $name => $value ) {
-			$data_attribute_string .= " data-{$name}=\"" . esc_attr( $value ) . '"';
+			$data_attribute_string .= " data-{$name}='" . esc_attr( $value ) . "'"; // I usually prefer double quotes, but single may be preferable in this case.
 		}
 
 		$data_attribute_string = trim( $data_attribute_string );
 
+		if ( ! empty( $args['reply_text'] )
+			&& ! empty( $args['reply_to_text'] )
+			&& $args['reply_text'] !== $args['reply_to_text'] ) {
+			// Add an aria-label with reply_to_text if it does not match reply_text.
+			$aria_label = " aria-label='" . esc_attr( sprintf( $args['reply_to_text'], get_comment_author( $comment ) ) ) . "'";
+			$link_text  = $args['reply_text'];
+		} else {
+			// If either reply_text or reply_to_text is empty, use the other as visible link text.
+			$aria_label = '';
+			$link_text  = ( ! empty( $args['reply_text'] ) ) ? $args['reply_text'] : $args['reply_to_text'];
+		}
+
 		$link = sprintf(
-			"<a rel='nofollow' class='comment-reply-link' href='%s' %s aria-label='%s'>%s</a>",
+			"<a rel='nofollow' class='comment-reply-link' href='%s' %s%s>%s</a>",
 			esc_url(
 				add_query_arg(
 					array(
@@ -1831,8 +1845,8 @@ function get_comment_reply_link( $args = array(), $comment = null, $post = null 
 				)
 			) . '#' . $args['respond_id'],
 			$data_attribute_string,
-			esc_attr( sprintf( $args['reply_to_text'], get_comment_author( $comment ) ) ),
-			$args['reply_text']
+			$aria_label,
+			$link_text
 		);
 	}
 
