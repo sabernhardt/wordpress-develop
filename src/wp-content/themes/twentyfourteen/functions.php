@@ -78,12 +78,16 @@ if ( ! function_exists( 'twentyfourteen_setup' ) ) :
 		 * This theme styles the visual editor to resemble the theme style.
 		 * When fonts are self-hosted, the theme directory needs to be removed first.
 		 */
-		$font_stylesheet = str_replace(
-			array( get_template_directory_uri() . '/', get_stylesheet_directory_uri() . '/' ),
-			'',
-			(string) twentyfourteen_font_url()
-		);
-		add_editor_style( array( 'css/editor-style.css', $font_stylesheet, 'genericons/genericons.css' ) );
+		$editor_styles = array( 'css/editor-style.css', 'genericons/genericons.css' );
+		$fonts_url     = (string) twentyfourteen_font_url();
+		if ( $fonts_url ) {
+			$editor_styles[] = str_replace(
+				array( get_template_directory_uri() . '/', get_stylesheet_directory_uri() . '/' ),
+				'',
+				$fonts_url
+			);
+		}
+		add_editor_style( $editor_styles );
 
 		// Load regular editor styles into the new block-based editor.
 		add_theme_support( 'editor-styles' );

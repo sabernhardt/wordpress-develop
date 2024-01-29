@@ -117,12 +117,16 @@ function twentyseventeen_setup() {
 	 * specifically font, colors, and column width. When fonts are
 	 * self-hosted, the theme directory needs to be removed first.
 	 */
-	$font_stylesheet = str_replace(
-		array( get_template_directory_uri() . '/', get_stylesheet_directory_uri() . '/' ),
-		'',
-		(string) twentyseventeen_fonts_url()
-	);
-	add_editor_style( array( 'assets/css/editor-style.css', $font_stylesheet ) );
+	$editor_styles = array( 'css/editor-style.css' );
+	$fonts_url     = (string) twentyseventeen_fonts_url();
+	if ( $fonts_url ) {
+		$editor_styles[] = str_replace(
+			array( get_template_directory_uri() . '/', get_stylesheet_directory_uri() . '/' ),
+			'',
+			$fonts_url
+		);
+	}
+	add_editor_style( $editor_styles );
 
 	// Load regular editor styles into the new block-based editor.
 	add_theme_support( 'editor-styles' );
