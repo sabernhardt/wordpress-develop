@@ -117,7 +117,7 @@ function twentyseventeen_setup() {
 	 * specifically font, colors, and column width. When fonts are
 	 * self-hosted, the theme directory needs to be removed first.
 	 */
-	$editor_styles = array( 'css/editor-style.css' );
+	$editor_styles = array( 'assets/css/editor-style.css' );
 	$fonts_url     = (string) twentyseventeen_fonts_url();
 	if ( $fonts_url ) {
 		$editor_styles[] = str_replace(
