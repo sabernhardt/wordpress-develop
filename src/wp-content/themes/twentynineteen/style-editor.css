@@ -758,6 +758,10 @@ a {
   color: #0073aa;
 }
 
+.wp-block-post-content a {
+  text-decoration: underline;
+}
+
 a:hover, a:active {
   color: #005177;
   outline: 0;

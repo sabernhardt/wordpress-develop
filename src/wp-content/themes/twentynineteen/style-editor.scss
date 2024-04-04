@@ -155,6 +155,10 @@ a {
 	@include link-transition;
 	color: $color__link;
 
+	.wp-block-post-content & {
+		text-decoration: underline;
+	}
+
 	&:hover,
 	&:active {
 		color: $color__link-hover;
