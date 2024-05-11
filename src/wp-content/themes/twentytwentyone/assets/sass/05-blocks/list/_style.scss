@@ -26,7 +26,10 @@ ul {
 }
 
 ol {
-	list-style-type: decimal;
+
+	&:where(:not([type])) {
+		list-style-type: decimal;
+	}
 
 	ul {
 		list-style-type: circle;
