@@ -1222,6 +1222,14 @@ ol.alignright {
 	text-align: right;
 }
 
+ol:where(:not([type])) {
+	list-style-type: decimal;
+}
+
+ol ul {
+	list-style-type: circle;
+}
+
 li > ul,
 li > ol {
 	margin: 0;
