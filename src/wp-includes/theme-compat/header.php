@@ -35,6 +35,7 @@ _deprecated_file(
 </head>
 
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 <div id="page">
 
 <?php if ( ! empty( get_bloginfo( 'name' ) ) ) : ?>
