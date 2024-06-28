@@ -18,44 +18,32 @@ _deprecated_file(
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-<link rel="profile" href="https://gmpg.org/xfn/11" />
-<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
-
-<title><?php echo wp_get_document_title(); ?></title>
-
-<link rel="stylesheet" href="<?php bloginfo( 'stylesheet_url' ); ?>" type="text/css" media="screen" />
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-
-<?php if ( file_exists( get_stylesheet_directory() . '/images/kubrickbgwide.jpg' ) ) { ?>
-<style type="text/css" media="screen">
-
+	<meta charset="<?php bloginfo( 'charset' ); ?>" />
+	<title><?php echo wp_get_document_title(); ?></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="profile" href="https://gmpg.org/xfn/11" />
+	<link rel="stylesheet" href="<?php echo esc_url( get_stylesheet_uri() ); ?>" type="text/css" media="all" />
 	<?php
-	// Checks to see whether it needs a sidebar.
-	if ( empty( $withcomments ) && ! is_single() ) {
-		?>
-	#page { background: url("<?php bloginfo( 'stylesheet_directory' ); ?>/images/kubrickbg-<?php bloginfo( 'text_direction' ); ?>.jpg") repeat-y top; border: none; }
-<?php } else { // No sidebar. ?>
-	#page { background: url("<?php bloginfo( 'stylesheet_directory' ); ?>/images/kubrickbgwide.jpg") repeat-y top; border: none; }
-<?php } ?>
-
-</style>
-<?php } ?>
-
-<?php
-if ( is_singular() ) {
-	wp_enqueue_script( 'comment-reply' );
-}
-?>
-
-<?php wp_head(); ?>
+	if ( is_singular() && pings_open() ) {
+		echo '<link rel="pingback" href="', esc_url( get_bloginfo( 'pingback_url' ) ), '" />', "\n";
+	}
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+	?>
+	<?php wp_head(); ?>
 </head>
+
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 <div id="page">
 
-<div id="header" role="banner">
-	<div id="headerimg">
-		<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
-		<div class="description"><?php bloginfo( 'description' ); ?></div>
+<?php if ( ! empty( get_bloginfo( 'name' ) ) ) : ?>
+	<div id="header" role="banner">
+		<div id="headerimg">
+			<h1><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+			<div class="description"><?php bloginfo( 'description' ); ?></div>
+		</div>
 	</div>
-</div>
-<hr />
+	<hr aria-hidden="true" />
+<?php endif; ?>
