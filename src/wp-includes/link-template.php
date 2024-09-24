@@ -2932,7 +2932,7 @@ function the_posts_navigation( $args = array() ) {
  *
  *     @type string $screen_reader_text Screen reader text for navigation element.
  *                                      Default 'Posts navigation'.
- *     @type string $aria_label         ARIA label text for the nav element. Default 'Posts'.
+ *     @type string $aria_label         ARIA label text for the nav element. Default 'Posts pagination'.
  *     @type string $class              Custom class for the nav element. Default 'pagination'.
  * }
  * @return string Markup for pagination links.
@@ -2956,7 +2956,7 @@ function get_the_posts_pagination( $args = array() ) {
 				'prev_text'          => _x( 'Previous', 'previous set of posts' ),
 				'next_text'          => _x( 'Next', 'next set of posts' ),
 				'screen_reader_text' => __( 'Posts navigation' ),
-				'aria_label'         => __( 'Posts' ),
+				'aria_label'         => __( 'Posts pagination' ),
 				'class'              => 'pagination',
 			)
 		);
@@ -2971,7 +2971,7 @@ function get_the_posts_pagination( $args = array() ) {
 		 *
 		 *     @type string $screen_reader_text Screen reader text for navigation element.
 		 *                                      Default 'Posts navigation'.
-		 *     @type string $aria_label         ARIA label text for the nav element. Default 'Posts'.
+		 *     @type string $aria_label         ARIA label text for the nav element. Default 'Posts pagination'.
 		 *     @type string $class              Custom class for the nav element. Default 'pagination'.
 		 * }
 		 */
@@ -3368,7 +3368,7 @@ function the_comments_navigation( $args = array() ) {
  *     Optional. Default pagination arguments.
  *
  *     @type string $screen_reader_text Screen reader text for the nav element. Default 'Comments navigation'.
- *     @type string $aria_label         ARIA label text for the nav element. Default 'Comments'.
+ *     @type string $aria_label         ARIA label text for the nav element. Default 'Comments pagination'.
  *     @type string $class              Custom class for the nav element. Default 'comments-pagination'.
  * }
  * @return string Markup for pagination links.
@@ -3385,7 +3385,7 @@ function get_the_comments_pagination( $args = array() ) {
 		$args,
 		array(
 			'screen_reader_text' => __( 'Comments navigation' ),
-			'aria_label'         => __( 'Comments' ),
+			'aria_label'         => __( 'Comments pagination' ),
 			'class'              => 'comments-pagination',
 		)
 	);
