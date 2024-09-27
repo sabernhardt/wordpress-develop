@@ -82,9 +82,9 @@ Base64 encoding comes with a 25% filesize overhead compared to just loading the 
 ```
 @font-face {
 	font-family: 'Genericons';
-		src: url('Genericons.woff') format('woff'),
-		url('Genericons.ttf') format('truetype'),
-		url('Genericons.svg#genericonsregular') format('svg');
+		src: url('./font/genericons-regular-webfont.woff') format('woff'),
+		url('./font/genericons-regular-webfont.ttf') format('truetype'),
+		url('./font/genericons-regular-webfont.svg#genericonsregular') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
