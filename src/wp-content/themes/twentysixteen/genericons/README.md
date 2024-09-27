@@ -67,7 +67,7 @@ If you keep intact the `-webkit-font-smoothing: antialiased;` and `-moz-osx-font
 
 **optimizeLegibility**
 
-Note: On Android browsers with version 4.2, 4.3, and probably later, Genericons will simply not show up if you're using the CSS property "text-rendering" set to "optimizeLegibility.
+Note: On Android browsers with version 4.2, 4.3, and probably later, Genericons will simply not show up if you're using the CSS property "text-rendering" set to "optimizeLegibility".
 
 **Updates**
 
@@ -84,7 +84,7 @@ Base64 encoding comes with a 25% filesize overhead compared to just loading the 
 	font-family: 'Genericons';
 		src: url('Genericons.woff') format('woff'),
 		url('Genericons.ttf') format('truetype'),
-		url('Genericons.svg#genericonsregular') format('svg');
+		url('Genericons.svg#Genericons') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
