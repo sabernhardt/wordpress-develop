@@ -2580,7 +2580,7 @@ p.comment-form-comment {
 	/* Make sure the post-post navigation doesn't collide with anything */
 	#nav-single {
 		display: block;
-		position: static;
+		top: 0;
 	}
 	.singular .hentry {
 		padding: 1.625em 0 0;
