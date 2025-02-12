@@ -503,7 +503,7 @@ class WP_Media_List_Table extends WP_List_Table {
 	 * Handles the author column output.
 	 *
 	 * @since 4.3.0
-	 * @since 6.8.0 Added check for empty author and fallback display
+	 * @since 6.8.0 Added fallback text for when attachment lacks an author.
 	 *
 	 * @param WP_Post $post The current WP_Post object.
 	 */
@@ -517,7 +517,7 @@ class WP_Media_List_Table extends WP_List_Table {
 				esc_html( $author )
 			);
 		} else {
-			echo '<span aria-hidden="true">&#8212;</span><span class="screen-reader-text">' . esc_html__( '(no author)', 'default' ) . '</span>';
+			echo '<span aria-hidden="true">&#8212;</span><span class="screen-reader-text">' . __( '(no author)' ) . '</span>';
 		}
 	}
 
