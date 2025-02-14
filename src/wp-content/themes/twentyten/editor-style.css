@@ -34,7 +34,7 @@ code, code var {
 }
 body, input, textarea {
 	font-size: 12px;
-	line-height: 18px;
+	line-height: 1.5;
 }
 hr {
 	background-color: #e7e7e7;
@@ -118,7 +118,7 @@ blockquote i {
 pre {
 	background: #f7f7f7;
 	color: #222;
-	line-height: 18px;
+	line-height: 1.5;
 	margin-bottom: 18px;
 	padding: 1.5em;
 }
@@ -173,7 +173,7 @@ kbd,
 tt,
 var {
 	font-size: 15px;
-	line-height: 21px;
+	line-height: 1.4;
 }
 code {
 	font-size: 13px;
@@ -192,7 +192,7 @@ h5,
 h6 {
 	color: #000;
 	font-weight: normal;
-	line-height: 1.5em;
+	line-height: 1.5;
 	margin: 0 0 20px 0;
 }
 h1 {
@@ -227,7 +227,7 @@ thead th {
 	color: #888;
 	font-size: 12px;
 	font-weight: bold;
-	line-height: 18px;
+	line-height: 1.5;
 	padding: 9px 24px;
 }
 tr td {
@@ -280,7 +280,7 @@ img.aligncenter {
 	border-radius: 0;
 	color: #888;
 	font-size: 12px;
-	line-height: 18px;
+	line-height: 1.5;
 	margin-bottom: 20px;
 	max-width: 632px !important; /* prevent too-wide images from breaking layout */
 	padding: 4px;
