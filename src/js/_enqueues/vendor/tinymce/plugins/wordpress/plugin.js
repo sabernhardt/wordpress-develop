@@ -143,9 +143,9 @@ tinymce.PluginManager.add( 'wordpress', function( editor ) {
 						'src="' + tinymce.Env.transparentSrc + '" ' +
 						'data-wp-preserve="' + encodeURIComponent( match ) + '" ' +
 						'data-mce-resize="false" ' +
-						'data-mce-placeholder="1" '+
-						'class="mce-object" ' +
-						'width="20" height="20" '+
+						'data-mce-placeholder="1" ' +
+						'class="mce-object mce-object-' + tag + '" ' +
+						'width="70" height="20" style="height: 20px;" ' +
 						'alt="&lt;' + tag + '&gt;" ' +
 					'/>';
 				} );
