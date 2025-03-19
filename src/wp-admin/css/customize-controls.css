@@ -2136,9 +2136,6 @@ p.customize-section-description {
 	padding: 6px 25px;
 	box-sizing: border-box;
 	border-bottom: 1px solid #dcdcde;
-}
-.customize-preview-header.themes-filter-bar,
-.customize-preview-header.themes-filter-bar .search-form {
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -2232,9 +2229,7 @@ p.customize-section-description {
 		min-width: 200px;
 	}
 
-	.customize-preview-header.themes-filter-bar,
-	.customize-preview-header.themes-filter-bar .search-form
-	.themes-filter-bar .themes-filter-container {
+	.customize-preview-header.themes-filter-bar {
 		display: grid;
 		gap: 4px;
 	}
