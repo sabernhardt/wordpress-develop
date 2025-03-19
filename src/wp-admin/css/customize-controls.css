@@ -2220,12 +2220,6 @@ p.customize-section-description {
 }
 
 @media screen and (max-width: 960px) {
-	.customize-preview-header.themes-filter-bar {
-		height: 96px;
-	}
-}
-
-@media screen and (max-width: 900px) {
 	.themes-filter-bar .wp-filter-search {
 		width: 100%;
 		margin: 0;
@@ -2235,6 +2229,7 @@ p.customize-section-description {
 	.customize-preview-header.themes-filter-bar {
 		display: grid;
 		gap: 4px;
+		height: 96px;
 	}
 
 	.customize-preview-header.themes-filter-bar .search-form-input {
@@ -2244,10 +2239,6 @@ p.customize-section-description {
 
 	.filter-drawer {
 		top: 86px;
-	}
-
-	.control-panel-themes .filter-themes-count {
-		float: left;
 	}
 }
 
