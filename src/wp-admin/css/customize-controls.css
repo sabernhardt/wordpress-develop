@@ -2187,7 +2187,7 @@ p.customize-section-description {
 
 /* Unstick the filter bar on short windows/screens. This breakpoint is based on the
    current length of .org feature filters assuming translations do not wrap lines. */
-@media screen and (max-height: 540px), screen and (max-width: 1018px) {
+@media screen and (max-height: 540px), screen and (max-width: 1040px) {
 	.customize-preview-header.themes-filter-bar {
 		position: relative;
 		left: 0;
@@ -2213,7 +2213,7 @@ p.customize-section-description {
 	}
 }
 
-@media screen and (max-width: 1018px) {
+@media screen and (max-width: 1040px) {
 	.filter-drawer .filter-group {
 		width: calc( (100% - 50px) / 2);
 	}
