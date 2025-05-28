@@ -77,7 +77,7 @@ while ( have_posts() ) {
 
 			// Retrieve attachment metadata.
 			$metadata = wp_get_attachment_metadata();
-			if ( $metadata ) {
+			if ( $metadata && isset( $metadata['width'], $metadata['height'] ) ) {
 				printf(
 					'<span class="full-size-link"><span class="screen-reader-text">%1$s</span><a href="%2$s">%3$s &times; %4$s</a></span>',
 					/* translators: Hidden accessibility text. */
