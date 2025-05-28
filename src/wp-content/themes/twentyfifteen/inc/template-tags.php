@@ -130,14 +130,16 @@ if ( ! function_exists( 'twentyfifteen_entry_meta' ) ) :
 			// Retrieve attachment metadata.
 			$metadata = wp_get_attachment_metadata();
 
-			printf(
-				'<span class="full-size-link"><span class="screen-reader-text">%1$s </span><a href="%2$s">%3$s &times; %4$s</a></span>',
-				/* translators: Hidden accessibility text. */
-				_x( 'Full size', 'Used before full size attachment link.', 'twentyfifteen' ),
-				esc_url( wp_get_attachment_url() ),
-				$metadata['width'],
-				$metadata['height']
-			);
+			if ( $metadata && isset( $metadata['width'], $metadata['height'] ) ) {
+				printf(
+					'<span class="full-size-link"><span class="screen-reader-text">%1$s </span><a href="%2$s">%3$s &times; %4$s</a></span>',
+					/* translators: Hidden accessibility text. */
+					_x( 'Full size', 'Used before full size attachment link.', 'twentyfifteen' ),
+					esc_url( wp_get_attachment_url() ),
+					absint( $metadata['width'] ),
+					absint( $metadata['height'] )
+				);
+			}
 		}
 
 		if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
