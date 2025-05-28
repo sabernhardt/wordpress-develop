@@ -47,4 +47,5 @@ _deprecated_file(
 		</div>
 	</div>
 	<hr aria-hidden="true" />
-<?php endif; ?>
+	<?php
+endif;
