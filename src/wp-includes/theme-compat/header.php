@@ -38,7 +38,7 @@ _deprecated_file(
 <?php wp_body_open(); ?>
 <div id="page">
 
-<?php if ( ! empty( get_bloginfo( 'name' ) ) ) : ?>
+<?php if ( get_bloginfo( 'name' ) ) : ?>
 	<div id="header" role="banner">
 		<div id="headerimg">
 			<h1><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
