@@ -22,7 +22,7 @@ if ( have_posts() ) {
 		?>
 
 				<?php
-				if ( ! empty( $post->post_parent ) ) :
+				if ( ! empty( $post->post_parent ) && '' !== get_the_title( $post->post_parent ) ) :
 					/* translators: %s: Post title. */
 					$post_title = sprintf( __( 'Go to %s', 'twentyten' ), strip_tags( get_the_title( $post->post_parent ) ) );
 					?>
@@ -65,19 +65,21 @@ if ( have_posts() ) {
 								)
 							);
 							if ( wp_attachment_is_image() ) {
-								echo ' <span class="meta-sep">|</span> ';
 								$metadata = wp_get_attachment_metadata();
-								printf(
-									/* translators: %s: Image dimensions. */
-									__( 'Full size is %s pixels', 'twentyten' ),
-									sprintf(
-										'<a href="%1$s" title="%2$s">%3$s &times; %4$s</a>',
-										esc_url( wp_get_attachment_url() ),
-										esc_attr( __( 'Link to full-size image', 'twentyten' ) ),
-										$metadata['width'],
-										$metadata['height']
-									)
-								);
+								if ( $metadata && isset( $metadata['width'], $metadata['height'] ) ) {
+									echo ' <span class="meta-sep">|</span> ';
+									printf(
+										/* translators: %s: Image dimensions. */
+										__( 'Full size is %s pixels', 'twentyten' ),
+										sprintf(
+											'<a href="%1$s" title="%2$s">%3$s &times; %4$s</a>',
+											esc_url( wp_get_attachment_url() ),
+											esc_attr( __( 'Link to full-size image', 'twentyten' ) ),
+											absint( $metadata['width'] ),
+											absint( $metadata['height'] )
+										)
+									);
+								}
 							}
 							?>
 							<?php edit_post_link( __( 'Edit', 'twentyten' ), '<span class="meta-sep">|</span> <span class="edit-link">', '</span>' ); ?>
