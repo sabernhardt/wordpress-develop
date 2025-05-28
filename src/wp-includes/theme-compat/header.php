@@ -22,6 +22,7 @@ _deprecated_file(
 	<title><?php echo wp_get_document_title(); ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
+	<style> :where(#header) { padding-left: 5%; padding-right: 5%; } </style>
 	<link rel="stylesheet" href="<?php echo esc_url( get_stylesheet_uri() ); ?>" type="text/css" media="all" />
 	<?php
 	if ( is_singular() && pings_open() ) {
