@@ -1222,7 +1222,8 @@ table.form-table td .updated p {
 	margin-top: 0;
 }
 
-.permalink-structure-optional-description code {
+.permalink-structure-optional-description code,
+.permalink-structure-has-blog-prefix code {
 	display: inline-block;
 }
 
@@ -1752,17 +1753,6 @@ table.form-table td .updated p {
 
 	.form-table.permalink-structure td input[type="text"] {
 		margin-top: 4px;
-	}
-
-	.permalink-structure-has-blog-prefix {
-		display: flex;
-		align-items: center;
-	}
-
-	.permalink-structure-has-blog-prefix code {
-		white-space: nowrap;
-		word-wrap: normal;
-		word-break: normal;
 	}
 
 	.form-table input.regular-text {
