@@ -891,6 +891,9 @@
 				"color": {
 					"text": "var(--wp--preset--color--contrast)"
 				}
+			},
+			"pre": {
+				"css": "&{overflow-x:auto;}"
 			}
 		},
 		"spacing": {

@@ -338,6 +338,9 @@
 				"color": {
 					"text": "var(--wp--preset--color--foreground)"
 				}
+			},
+			"pre": {
+				"css": "&{overflow-x:auto;}"
 			}
 		},
 		"spacing": {
