@@ -414,8 +414,7 @@ if ( ! function_exists( 'twentytwelve_content_nav' ) ) :
 	function twentytwelve_content_nav( $html_id ) {
 		global $wp_query;
 
-		if ( $wp_query->max_num_pages > 1 ) : ?>
-			<?php
+		if ( $wp_query->max_num_pages > 1 ) :
 			$order   = get_query_var( 'order', 'DESC' );
 			$is_desc = ( 'DESC' === $order );
 
@@ -436,7 +435,7 @@ if ( ! function_exists( 'twentytwelve_content_nav' ) ) :
 				<?php endif; ?>
 			</nav><!-- .navigation -->
 			<?php
-	endif;
+		endif;
 	}
 endif;
 
