@@ -682,6 +682,9 @@
 						"textDecoration": "none"
 					}
 				}
+			},
+			"pre": {
+				"css": "&{overflow-x:auto;}"
 			}
 		}
 	},

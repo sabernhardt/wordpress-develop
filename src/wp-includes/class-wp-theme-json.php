@@ -612,7 +612,8 @@ class WP_Theme_JSON {
 	 * The valid elements that can be found under styles.
 	 *
 	 * @since 5.8.0
-	 * @since 6.1.0 Added `heading`, `button`, and `caption` elements.
+	 * @since 6.1.0 Added `heading`, `button`, `caption`, and `cite` elements.
+	 * @since 6.9.0 Added `pre` element.
 	 * @var string[]
 	 */
 	const ELEMENTS = array(
@@ -629,6 +630,7 @@ class WP_Theme_JSON {
 		// The block classes are necessary to target older content that won't use the new class names.
 		'caption' => '.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption',
 		'cite'    => 'cite',
+		'pre'     => 'pre',
 	);
 
 	const __EXPERIMENTAL_ELEMENT_CLASS_NAMES = array(

@@ -699,6 +699,9 @@
 				"typography": {
 					"textDecoration": "underline"
 				}
+			},
+			"pre": {
+				"css": "&{overflow-x:auto;}"
 			}
 		},
 		"spacing": {
