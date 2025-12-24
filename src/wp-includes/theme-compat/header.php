@@ -23,7 +23,7 @@ _deprecated_file(
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
 	<style> :where(#header) { padding-left: 5%; padding-right: 5%; } </style>
-	<link rel="stylesheet" href="<?php echo esc_url( get_stylesheet_uri() ); ?>" type="text/css" media="all" />
+	<link rel="stylesheet" href="<?php echo esc_url( get_stylesheet_uri() ); ?>" media="all" />
 	<?php
 	if ( is_singular() && pings_open() ) {
 		echo '<link rel="pingback" href="', esc_url( get_bloginfo( 'pingback_url' ) ), '" />', "\n";
