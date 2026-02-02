@@ -80,14 +80,14 @@ class WP_List_Table {
 	protected $_column_headers;
 
 	/**
-	 * {@internal Missing Summary}
+	 * List of private properties made readable for backward compatibility.
 	 *
 	 * @var array
 	 */
 	protected $compat_fields = array( '_args', '_pagination_args', 'screen', '_actions', '_pagination' );
 
 	/**
-	 * {@internal Missing Summary}
+	 * List of private/protected methods made readable for backward compatibility.
 	 *
 	 * @var array
 	 */
@@ -280,7 +280,7 @@ class WP_List_Table {
 	}
 
 	/**
-	 * Checks the current user's permissions
+	 * Checks the current user's permissions.
 	 *
 	 * @since 3.1.0
 	 * @abstract
@@ -344,12 +344,7 @@ class WP_List_Table {
 		if ( 'page' === $key ) {
 			return $this->get_pagenum();
 		}
-
-		if ( isset( $this->_pagination_args[ $key ] ) ) {
-			return $this->_pagination_args[ $key ];
-		}
-
-		return 0;
+		return $this->_pagination_args[ $key ] ?? 0;
 	}
 
 	/**
