@@ -99,9 +99,6 @@ html:lang(he-il) .rtl #wpadminbar * {
 	background: #1d2327;
 	/* Only visible in Windows High Contrast mode */
 	outline: 1px solid transparent;
-	overflow-x: auto;
-	overflow-y: hidden;
-	scrollbar-width: thin;
 }
 
 #wpadminbar,
@@ -858,6 +855,18 @@ html:lang(he-il) .rtl #wpadminbar * {
 
 	#wpadminbar .ab-top-menu > .menupop > .ab-sub-wrapper a:empty {
 		display: none;
+	}
+
+	/* Scrolls any overflow, but hides all dropdowns even when there is no overflow */
+	#wpadminbar {
+		overflow-x: auto;
+		overflow-y: hidden;
+		scrollbar-width: thin;
+	}
+
+	#wpadminbar .ab-sub-wrapper,
+	#wpadminbar .shortlink-input {
+		display: none !important;
 	}
 
 	/* WP logo */
