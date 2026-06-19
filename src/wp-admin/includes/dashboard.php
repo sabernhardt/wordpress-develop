@@ -1015,7 +1015,7 @@ function wp_dashboard_recent_posts( $args ) {
 
 		$today    = current_time( 'Y-m-d' );
 		$tomorrow = current_datetime()->modify( '+1 day' )->format( 'Y-m-d' );
-		$year     = current_time( 'Y' );
+		$year     = (int) current_time( 'Y' );
 
 		while ( $posts->have_posts() ) {
 			$posts->the_post();
@@ -1053,6 +1053,106 @@ function wp_dashboard_recent_posts( $args ) {
 		}
 
 		echo '</ul>';
+
+		/*
+		 * List posts published on this day in previous years if the final post
+		 * in the recently published list is within the past year (minus 1 day).
+		 */
+		if ( 'published-posts' === $args['id'] && is_int( $time )
+			&& $time > ( current_time( 'U' ) - YEAR_IN_SECONDS + ( 1 * DAY_IN_SECONDS ) ) ) {
+
+			$wp_otd_date        = current_datetime();
+			$wp_otd_clauses     = array();
+			$window_before_days = 0; // Edit before and after if creating a range.
+			$window_after_days  = 0;
+			$user_id            = get_current_user_id();
+
+			for ( $offset = -$window_before_days; $offset <= $window_after_days; $offset++ ) {
+				$wp_otd_day_date  = $wp_otd_date->modify( ( $offset >= 0 ? '+' : '' ) . $offset . ' days' );
+				$wp_otd_clauses[] = array(
+					'month' => (int) $wp_otd_day_date->format( 'n' ),
+					'day'   => (int) $wp_otd_day_date->format( 'j' ),
+				);
+			}
+
+			$wp_otd_date_query = array(
+				'relation' => 'AND',
+				array(
+					'before' => array( 'year' => $year ),
+				),
+				array_merge(
+					array( 'relation' => 'OR' ),
+					$wp_otd_clauses
+				),
+			);
+
+			$wp_otd_args = array(
+				'author'                 => (int) $user_id,
+				'post_type'              => 'post',
+				'post_status'            => array( 'publish' ),
+				'posts_per_page'         => 50,
+				'ignore_sticky_posts'    => true,
+				'orderby'                => 'date',
+				'order'                  => 'DESC',
+				'no_found_rows'          => true,
+				'update_post_term_cache' => false,
+				'date_query'             => $wp_otd_date_query,
+			);
+
+			/**
+			 * Filters the arguments used to query posts for the On This Day dashboard widget.
+			 *
+			 * @since 7.1.0
+			 *
+			 * @param array $wp_otd_args WP_Query arguments.
+			 * @param int   $user_id     The author ID the query is scoped to.
+			 */
+			$wp_otd_args = apply_filters( 'wp_dashboard_on_this_day_query_args', $wp_otd_args, $user_id );
+
+			$wp_otd_query = new WP_Query( $wp_otd_args );
+
+			if ( $wp_otd_query->have_posts() ) {
+
+				echo '<div id="wp-on-this-day" class="activity-block">';
+
+				echo '<h3>' . __( 'Published On This Day' ) . '</h3>';
+
+				echo '<ul>';
+
+				while ( $wp_otd_query->have_posts() ) {
+					$wp_otd_query->the_post();
+
+					$time = get_the_time( 'U' );
+
+					if ( ! is_int( $time ) ) {
+						/* translators: Date and time format for recent posts on the dashboard, from a different calendar year, see https://www.php.net/manual/datetime.format.php */
+						$date = get_the_date( __( 'M jS Y' ) );
+					} else {
+						/* translators: Date and time format for recent posts on the dashboard, from a different calendar year, see https://www.php.net/manual/datetime.format.php */
+						$date = date_i18n( __( 'M jS Y' ), $time );
+					}
+
+					// Use the post edit link for those who can edit, the permalink otherwise.
+					$recent_post_link = current_user_can( 'edit_post', get_the_ID() ) ? get_edit_post_link() : get_permalink();
+
+					$draft_or_post_title = _draft_or_post_title();
+					printf(
+						'<li><span>%1$s</span> <a href="%2$s" aria-label="%3$s">%4$s</a></li>',
+						$date,
+						$recent_post_link,
+						/* translators: %s: Post title. */
+						esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;' ), $draft_or_post_title ) ),
+						$draft_or_post_title
+					);
+				}
+
+				echo '</ul>';
+				echo '</div>';
+			}
+
+			wp_reset_postdata();
+		}
+
 		echo '</div>';
 
 	} else {
