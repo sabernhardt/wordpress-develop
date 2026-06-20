@@ -1383,16 +1383,16 @@ class WP_REST_Server {
 			$input_formats  = array( 'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/avif', 'image/heic' );
 			$output_formats = array();
 			foreach ( $input_formats as $mime_type ) {
-				/** This filter is documented in wp-includes/class-wp-image-editor.php */
+				/** This filter is documented in wp-includes/media.php */
 				$output_formats = apply_filters( 'image_editor_output_format', $output_formats, '', $mime_type );
 			}
 			$available['image_output_formats'] = (object) $output_formats;
 
-			/** This filter is documented in wp-includes/class-wp-image-editor-imagick.php */
+			/** This filter is documented in wp-includes/class-wp-image-editor-gd.php */
 			$available['jpeg_interlaced'] = (bool) apply_filters( 'image_save_progressive', false, 'image/jpeg' );
-			/** This filter is documented in wp-includes/class-wp-image-editor-imagick.php */
+			/** This filter is documented in wp-includes/class-wp-image-editor-gd.php */
 			$available['png_interlaced'] = (bool) apply_filters( 'image_save_progressive', false, 'image/png' );
-			/** This filter is documented in wp-includes/class-wp-image-editor-imagick.php */
+			/** This filter is documented in wp-includes/class-wp-image-editor-gd.php */
 			$available['gif_interlaced'] = (bool) apply_filters( 'image_save_progressive', false, 'image/gif' );
 		}
 
@@ -1995,7 +1995,7 @@ class WP_REST_Server {
 			} elseif ( 'REDIRECT_HTTP_AUTHORIZATION' === $key && empty( $server['HTTP_AUTHORIZATION'] ) ) {
 				/*
 				 * In some server configurations, the authorization header is passed in this alternate location.
-				 * Since it would not be passed in in both places we do not check for both headers and resolve.
+				 * Since it would not be passed in both places we do not check for both headers and resolve.
 				 */
 				$headers['AUTHORIZATION'] = $value;
 			} elseif ( isset( $additional[ $key ] ) ) {
