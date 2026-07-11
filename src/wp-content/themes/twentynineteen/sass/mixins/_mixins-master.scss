@@ -127,10 +127,53 @@
 @mixin font-family( $font_family: $font__body ) {
 	font-family: $font_family;
 
-	@each $lang, $font__fallback in $font__fallbacks {
-		&:lang(#{$lang}) {
-			font-family: unquote( $font__fallback );
-		}
+	// Arabic
+	&:is(:lang(ar),:lang(ary),:lang(azb),:lang(ckb),:lang(fa),:lang(haz),:lang(ps)) {
+		font-family: Tahoma, Arial, sans-serif;
+ 	}
+	// Cyrillic
+	&:is(:lang(be),:lang(bg),:lang(kk),:lang(mk),:lang(mn),:lang(ru),:lang(sah),:lang(sr),:lang(tt),:lang(uk)) {
+		font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
+	}
+	// Chinese (Hong Kong)
+	&:lang(zh-HK) {
+		font-family: -apple-system, BlinkMacSystemFont, "PingFang HK", "Helvetica Neue", "Microsoft YaHei New", STHeiti Light, sans-serif;
+	}
+	// Chinese (Taiwan)
+	&:lang(zh-TW) {
+		font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Helvetica Neue", "Microsoft YaHei New", STHeiti Light, sans-serif;
+	}
+	// Chinese (China)
+	&:lang(zh-CN) {
+		font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei New", STHeiti Light, sans-serif;
+	}
+	// Devanagari and Gujarati
+	&:is(:lang(bn),:lang(gu),:lang(hi),:lang(mr),:lang(ne)) {
+		font-family: Arial, sans-serif;
+	}
+	// Greek
+	&:lang(el) {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+	// Hebrew
+	&:lang(he) {
+		font-family: "Arial Hebrew", Arial, sans-serif;
+	}
+	// Japanese
+	&:lang(ja) {
+		font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", Meiryo, "Helvetica Neue", sans-serif;
+	}
+	// Korean
+	&:lang(ko) {
+		font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Nanum Gothic", Dotum, sans-serif;
+	}
+	// Thai
+	&:lang(th) {
+		font-family: "Sukhumvit Set", "Helvetica Neue", helvetica, arial, sans-serif;
+	}
+	// Vietnamese
+	&:lang(vi) {
+		font-family: "Libre Franklin", sans-serif;
 	}
 }
 
