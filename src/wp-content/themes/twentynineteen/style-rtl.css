@@ -4727,53 +4727,53 @@ body.page .main-navigation {
   font-size: 22px;
   line-height: 1.8;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter {
+.entry .entry-content .has-drop-cap:not(:focus)::first-letter {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter:is(:lang(ar),:lang(ary),:lang(azb),:lang(ckb),:lang(fa),:lang(haz),:lang(ps)) {
+.entry .entry-content .has-drop-cap:is(:lang(ar),:lang(ary),:lang(azb),:lang(ckb),:lang(fa),:lang(haz),:lang(ps)):not(:focus)::first-letter {
   font-family: Tahoma, Arial, sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter:is(:lang(be),:lang(bg),:lang(kk),:lang(mk),:lang(mn),:lang(ru),:lang(sah),:lang(sr),:lang(tt),:lang(uk)) {
+.entry .entry-content .has-drop-cap:is(:lang(be),:lang(bg),:lang(kk),:lang(mk),:lang(mn),:lang(ru),:lang(sah),:lang(sr),:lang(tt),:lang(uk)):not(:focus)::first-letter {
   font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter:lang(zh-HK) {
+.entry .entry-content .has-drop-cap:lang(zh-HK):not(:focus)::first-letter {
   font-family: -apple-system, BlinkMacSystemFont, "PingFang HK", "Helvetica Neue", "Microsoft YaHei New", STHeiti Light, sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter:lang(zh-TW) {
+.entry .entry-content .has-drop-cap:lang(zh-TW):not(:focus)::first-letter {
   font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Helvetica Neue", "Microsoft YaHei New", STHeiti Light, sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter:lang(zh-CN) {
+.entry .entry-content .has-drop-cap:lang(zh-CN):not(:focus)::first-letter {
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei New", STHeiti Light, sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter:is(:lang(bn),:lang(gu),:lang(hi),:lang(mr),:lang(ne)) {
+.entry .entry-content .has-drop-cap:is(:lang(bn),:lang(gu),:lang(hi),:lang(mr),:lang(ne)):not(:focus)::first-letter {
   font-family: Arial, sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter:lang(el) {
+.entry .entry-content .has-drop-cap:lang(el):not(:focus)::first-letter {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter:lang(he) {
+.entry .entry-content .has-drop-cap:lang(he):not(:focus)::first-letter {
   font-family: "Arial Hebrew", Arial, sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter:lang(ja) {
+.entry .entry-content .has-drop-cap:lang(ja):not(:focus)::first-letter {
   font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", Meiryo, "Helvetica Neue", sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter:lang(ko) {
+.entry .entry-content .has-drop-cap:lang(ko):not(:focus)::first-letter {
   font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Nanum Gothic", Dotum, sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter:lang(th) {
+.entry .entry-content .has-drop-cap:lang(th):not(:focus)::first-letter {
   font-family: "Sukhumvit Set", "Helvetica Neue", helvetica, arial, sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter:lang(vi) {
+.entry .entry-content .has-drop-cap:lang(vi):not(:focus)::first-letter {
   font-family: "Libre Franklin", sans-serif;
 }
-.entry .entry-content .has-drop-cap:not(:focus):first-letter {
+.entry .entry-content .has-drop-cap:not(:focus)::first-letter {
   font-size: 3.375em;
   line-height: 1;
   font-weight: bold;
   margin: 0 0 0 0.25em;
 }
 @-moz-document url-prefix() {
-  .entry .entry-content .has-drop-cap:not(:focus):first-letter {
+  .entry .entry-content .has-drop-cap:not(:focus)::first-letter {
     margin-top: 0.2em;
   }
 }
