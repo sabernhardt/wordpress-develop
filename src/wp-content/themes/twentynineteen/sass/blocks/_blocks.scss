@@ -175,12 +175,12 @@
 			@include button-transition;
 			border: none;
 			font-size: $font__size-sm;
-			@include font-family( $font__heading );
 			box-sizing: border-box;
 			font-weight: bold;
 			text-decoration: none;
 			padding: ($size__spacing-unit * .76) $size__spacing-unit;
 			outline: none;
+			@include font-family( $font__heading );
 
 			&:not(.has-background) {
 				background-color: $color__background-button;
@@ -264,11 +264,11 @@
 		list-style: none;
 
 		li > a {
-			@include font-family( $font__heading );
 			font-size: calc(#{$font__size_base} * #{$font__size-ratio});
 			font-weight: bold;
 			line-height: $font__line-height-heading;
 			text-decoration: none;
+			@include font-family( $font__heading );
 		}
 	}
 
@@ -299,10 +299,10 @@
 	.wp-block-latest-posts {
 
 		.wp-block-latest-posts__post-date {
-			@include font-family( $font__heading );
 			font-size: $font__size-xs;
 			color: $color__text-light;
 			line-height: 1.2;
+			@include font-family( $font__heading );
 		}
 
 		.wp-block-latest-posts__post-full-content,
@@ -351,19 +351,19 @@
 
 	//! Poetry (Verse)
 	.wp-block-verse {
-		@include font-family( $font__body );
 		font-size: $font__size_base;
 		line-height: 1.8;
+		@include font-family( $font__body );
 	}
 
 	//! Paragraphs
 	.has-drop-cap {
 		&:not(:focus)::first-letter {
-			@include font-family( $font__heading );
 			font-size: $font__size-xxxl;
 			line-height: 1;
 			font-weight: bold;
 			margin: 0 0.25em 0 0;
+			@include font-family( $font__heading );
 
 			@-moz-document url-prefix()  {
 				& {
@@ -407,10 +407,10 @@
 
 		cite {
 			display: block;
-			@include font-family( $font__heading );
 			line-height: 1.6;
 			text-transform: none;
 			color: $color__text-light;
+			@include font-family( $font__heading );
 
 			/*
 			 * This requires a rem-based font size calculation instead of our normal em-based one,
@@ -634,12 +634,12 @@
 		.wp-block-cover-image-text,
 		.wp-block-cover-text,
 		h2 {
-			@include font-family( $font__heading );
 			font-size: $font__size-lg;
 			font-weight: bold;
 			line-height: 1.25;
 			padding: 0;
 			color: #fff;
+			@include font-family( $font__heading );
 
 			@include media(tablet) {
 				font-size: $font__size-xl;
@@ -699,11 +699,11 @@
 	.wp-block-gallery .blocks-gallery-image figcaption,
 	.wp-block-gallery .blocks-gallery-item figcaption {
 		font-size: $font__size-xs;
-		@include font-family( $font__heading );
 		line-height: $font__line-height-pre;
 		margin: 0;
 		padding: ( $size__spacing-unit * .5 );
 		text-align: center;
+		@include font-family( $font__heading );
 	}
 
 	//! Separator
@@ -747,12 +747,12 @@
 			}
 		}
 
-		/* Remove duplicate rule-line when a separator
-		 * is followed by an H1, or H2 */
 		& + h1,
 		& + h2 {
 
 			&:before {
+				/* Remove duplicate rule-line when a separator
+				 * is followed by an H1, or H2 */
 				display: none;
 			}
 		}
@@ -783,7 +783,6 @@
 			border-radius: 5px;
 			background: $color__background-button;
 			font-size: $font__size-base;
-			@include font-family( $font__heading );
 			line-height: $font__line-height-heading;
 			text-decoration: none;
 			font-weight: bold;
@@ -791,6 +790,7 @@
 			color: #fff;
 			margin-left: 0;
 			margin-top: calc(0.75 * #{$size__spacing-unit});
+			@include font-family( $font__heading );
 
 			@include media(desktop) {
 				font-size: $font__size-base;
@@ -942,8 +942,8 @@
 	.wp-block-latest-comments {
 
 		.wp-block-latest-comments__comment-meta {
-			@include font-family( $font__heading );
 			font-weight: bold;
+			@include font-family( $font__heading );
 
 			.wp-block-latest-comments__comment-date {
 				font-weight: normal;
