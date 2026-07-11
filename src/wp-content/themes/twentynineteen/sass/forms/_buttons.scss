@@ -10,7 +10,6 @@ input[type="submit"] {
 	border-radius: 5px;
 	box-sizing: border-box;
 	color: $color__background-body;
-	@include font-family( $font__heading );
 	font-size: $font__size-sm;
 	font-weight: 700;
 	line-height: $font__line-height-heading;
@@ -18,6 +17,7 @@ input[type="submit"] {
 	padding: ( $size__spacing-unit * .76 ) $size__spacing-unit;
 	text-decoration: none;
 	vertical-align: bottom;
+	@include font-family( $font__heading );
 
 	&:hover {
 		background: $color__background-button-hover;
