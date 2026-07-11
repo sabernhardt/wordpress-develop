@@ -10,13 +10,22 @@ var oneSelectorPerLine = function () {
                 var indent = before.substring(before.lastIndexOf('\n') + 1);
                 rule.selector = rule.selector.replace(/, :lang/g, ',:lang').split(/,\s+/).join(',\n' + indent);
             }
+        }
+    };
+};
+oneSelectorPerLine.postcss = true;
+
+var correctFirstLetterPseudoelement = function () {
+    return {
+        postcssPlugin: 'correct-first-letter-pseudoelement',
+        Rule: function (rule) {
             if (rule.selector.indexOf(':not(:focus)::first-letter:') !== -1) {
                 rule.selector = rule.selector.replace(':not(:focus)::first-letter', '') + ':not(:focus)::first-letter';
             }
         }
     };
 };
-oneSelectorPerLine.postcss = true;
+correctFirstLetterPseudoelement.postcss = true;
 
 module.exports = {
     plugins: [
@@ -24,6 +33,7 @@ module.exports = {
             disablePolyfillReadyClass: true
         }),
 		oneSelectorPerLine,
+		correctFirstLetterPseudoelement,
         autoprefixer()
     ]
 };
