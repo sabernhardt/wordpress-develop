@@ -102,6 +102,26 @@ html:lang(he-il) .rtl #wpadminbar * {
 	outline: 1px solid transparent;
 }
 
+#wpadminbar,
+#wpadminbar #wp-toolbar,
+#wpadminbar #wp-toolbar > ul,
+#wpadminbar .ab-top-menu {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+#wpadminbar #wp-toolbar {
+	justify-content: space-between;
+	width: 100%;
+}
+
+#wpadminbar #wp-toolbar > ul > li > .ab-item {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	min-width: 16px;
+	overflow: hidden;
+}
+
 #wpadminbar .ab-sub-wrapper,
 #wpadminbar ul,
 #wpadminbar ul li {
@@ -121,10 +141,6 @@ html:lang(he-il) .rtl #wpadminbar * {
 
 #wpadminbar .quicklinks ul {
 	text-align: left;
-}
-
-#wpadminbar li {
-	float: left;
 }
 
 #wpadminbar .ab-empty-item {
@@ -373,10 +389,6 @@ html:lang(he-il) .rtl #wpadminbar * {
 #wpadminbar .quicklinks a:hover span#ab-updates {
 	background: #fff;
 	color: #000;
-}
-
-#wpadminbar .ab-top-secondary {
-	float: right;
 }
 
 #wpadminbar ul li:last-child,
@@ -874,6 +886,18 @@ html:lang(he-il) .rtl #wpadminbar * {
 
 	#wpadminbar .ab-top-menu > .menupop > .ab-sub-wrapper a:empty {
 		display: none;
+	}
+
+	/* Scrolls any overflow, but hides all dropdowns even when there is no overflow */
+	#wpadminbar {
+		overflow-x: auto;
+		overflow-y: hidden;
+		scrollbar-width: thin;
+	}
+
+	#wpadminbar .ab-sub-wrapper,
+	#wpadminbar .shortlink-input {
+		display: none !important;
 	}
 
 	/* WP logo */
