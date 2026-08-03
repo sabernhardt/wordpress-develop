@@ -3625,7 +3625,8 @@ figure.wp-block-table.is-style-stripes {
 .entry-content table,
 .entry-content address,
 .entry-content .wp-caption-text,
-.entry-content .wp-block-file {
+.entry-content .wp-block-file,
+.entry-content .wp-block-search {
 	font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
 }
 
@@ -3642,7 +3643,8 @@ figure.wp-block-table.is-style-stripes {
 	.entry-content table,
 	.entry-content address,
 	.entry-content .wp-caption-text,
-	.entry-content .wp-block-file {
+	.entry-content .wp-block-file,
+	.entry-content .wp-block-search {
 		font-family: "Inter var", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
 	}
 }
