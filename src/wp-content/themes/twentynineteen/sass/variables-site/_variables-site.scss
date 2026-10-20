@@ -1,5 +1,5 @@
-@import "colors";
-@import "fonts";
-@import "structure";
-@import "columns";
-@import "transitions";
+@use "colors" as *;
+@use "fonts" as *;
+@use "structure" as *;
+@use "columns" as *;
+@use "transitions" as *;

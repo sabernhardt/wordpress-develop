@@ -1,4 +1,8 @@
+@use "../mixins/mixins-master" as *;
+@use "../variables-site/colors" as *;
+@use "../variables-site/fonts" as *;
 
+/* Typography */
 html {
 	font-size: $font__size_base;
 }
@@ -27,7 +31,3 @@ textarea {
 	line-height: $font__line-height-body;
 	text-rendering: optimizeLegibility;
 }
-
-@import "headings";
-
-@import "copy";

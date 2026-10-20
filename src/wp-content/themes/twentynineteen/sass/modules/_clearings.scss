@@ -1,3 +1,6 @@
+@use "../mixins/mixins-master" as *;
+
+/* Clearings */
 .clear:before,
 .clear:after,
 .entry-content:before,

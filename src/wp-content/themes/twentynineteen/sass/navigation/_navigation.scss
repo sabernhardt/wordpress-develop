@@ -1,16 +1,5 @@
-/*--------------------------------------------------------------
-## Links
---------------------------------------------------------------*/
-@import "links";
-
-/*--------------------------------------------------------------
-## Menus
---------------------------------------------------------------*/
-@import "menu-main-navigation";
-@import "menu-social-navigation";
-@import "menu-footer-navigation";
-
-/*--------------------------------------------------------------
-## Next / Previous
---------------------------------------------------------------*/
-@import "next-previous";
+@use "links" as *;
+@use "menu-main-navigation" as *;
+@use "menu-social-navigation" as *;
+@use "menu-footer-navigation" as *;
+@use "next-previous" as *;

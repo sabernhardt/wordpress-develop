@@ -1,3 +1,9 @@
+@use "../mixins/mixins-master" as *;
+@use "../mixins/utilities" as *;
+@use "../variables-site/colors" as *;
+@use "../variables-site/structure" as *;
+@use "../variables-site/transitions" as *;
+
 /* Social menu */
 
 .social-navigation {

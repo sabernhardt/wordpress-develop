@@ -1,3 +1,8 @@
+@use "../mixins/mixins-master" as *;
+@use "../mixins/utilities" as *;
+@use "../variables-site/structure" as *;
+
+/* Alignments */
 .alignleft {
 	/*rtl:ignore*/
 	float: left;

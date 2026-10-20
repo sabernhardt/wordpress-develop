@@ -1,3 +1,6 @@
+@use "../variables-site/transitions" as *;
+
+/* Media */
 .page-content .wp-smiley,
 .entry-content .wp-smiley,
 .comment-content .wp-smiley {
@@ -27,13 +30,3 @@ svg {
 	transition: fill $icon_transition ease-in-out;
 	fill: currentColor;
 }
-
-/*--------------------------------------------------------------
-## Captions
---------------------------------------------------------------*/
-@import "captions";
-
-/*--------------------------------------------------------------
-## Galleries
---------------------------------------------------------------*/
-@import "galleries";

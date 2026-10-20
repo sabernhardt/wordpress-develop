@@ -1,3 +1,11 @@
+@use "../../mixins/utilities" as *;
+@use "../../variables-site/colors" as *;
+@use "../../variables-site/structure" as *;
+
+/*--------------------------------------------------------------
+## Archives
+--------------------------------------------------------------*/
+
 .archive .page-header,
 .search .page-header,
 .error404 .page-header {
