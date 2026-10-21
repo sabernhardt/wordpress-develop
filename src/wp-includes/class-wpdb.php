@@ -1992,7 +1992,7 @@ class wpdb {
 		/*
 		 * If using the `mysqlnd` library, the IPv6 address needs to be enclosed
 		 * in square brackets, whereas it doesn't while using the `libmysqlclient` library.
-		 * @see https://bugs.php.net/bug.php?id=67563
+		 * @link https://bugs.php.net/bug.php?id=67563
 		 */
 		if ( $is_ipv6 && extension_loaded( 'mysqlnd' ) ) {
 			$host = "[$host]";
@@ -3951,7 +3951,7 @@ class wpdb {
 	 * @since 3.5.0
 	 */
 	protected function load_col_info() {
-		if ( $this->col_info ) {
+		if ( $this->col_info || ! $this->result instanceof mysqli_result ) {
 			return;
 		}
 
