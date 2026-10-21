@@ -1,3 +1,2 @@
-@import "buttons";
-
-@import "fields";
+@use "buttons" as *;
+@use "fields" as *;

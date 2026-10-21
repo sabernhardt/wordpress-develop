@@ -1,3 +1,13 @@
+@use "../../mixins/mixins-master" as *;
+@use "../../mixins/utilities" as *;
+@use "../../variables-site/colors" as *;
+@use "../../variables-site/fonts" as *;
+@use "../../variables-site/structure" as *;
+
+/*--------------------------------------------------------------
+## Posts and pages
+--------------------------------------------------------------*/
+
 .sticky {
 	display: block;
 }

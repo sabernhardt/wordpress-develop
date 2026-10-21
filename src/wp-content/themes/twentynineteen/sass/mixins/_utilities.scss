@@ -1,3 +1,5 @@
+@use "../variables-site/structure" as *;
+@use "../variables-site/transitions" as *;
 
 @mixin media( $res ) {
 	@if mobile == $res {

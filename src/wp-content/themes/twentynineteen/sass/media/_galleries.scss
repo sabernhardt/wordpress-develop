@@ -1,3 +1,12 @@
+@use "../mixins/mixins-master" as *;
+@use "../variables-site/colors" as *;
+@use "../variables-site/fonts" as *;
+@use "../variables-site/structure" as *;
+
+/*--------------------------------------------------------------
+## Galleries
+--------------------------------------------------------------*/
+
 .gallery {
 	display: flex;
 	flex-flow: row wrap;

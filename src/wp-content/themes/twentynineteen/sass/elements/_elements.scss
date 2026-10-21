@@ -1,3 +1,9 @@
+@use "../mixins/mixins-master" as *;
+@use "../mixins/utilities" as *;
+@use "../variables-site/colors" as *;
+@use "../variables-site/structure" as *;
+
+/* Elements */
 html {
 	box-sizing: border-box;
 }
@@ -56,8 +62,6 @@ hr {
 	height: 2px;
 }
 
-@import "lists";
-
 img {
 	height: auto;
 	max-width: 100%;
@@ -81,5 +85,3 @@ blockquote {
 		color: $color__text-light;
 	}
 }
-
-@import "tables";

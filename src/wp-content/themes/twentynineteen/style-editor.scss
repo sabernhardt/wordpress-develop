@@ -1,11 +1,9 @@
-/*!
-Twenty Nineteen Editor Styles
-*/
-
-/** === Includes === */
-
-@import "sass/variables-site/variables-site";
-@import "sass/mixins/mixins-master";
+@use "./sass/modules/file-header-editor" as *;
+@use "./sass/variables-site/colors" as *;
+@use "./sass/variables-site/fonts" as *;
+@use "./sass/variables-site/structure" as *;
+@use "./sass/mixins/mixins-master" as *;
+@use "./sass/mixins/utilities" as *;
 
 /** === Editor Frame === */
 

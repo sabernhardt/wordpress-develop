@@ -1,4 +1,9 @@
 @use "sass:string";
+@use "../variables-site/colors" as *;
+@use "../variables-site/columns" as *;
+@use "../variables-site/fonts" as *;
+@use "../variables-site/structure" as *;
+@use "utilities" as *;
 
 // Rem output with px fallback
 @mixin font-size($sizeValue: 1) {
@@ -144,5 +149,3 @@
 %non-latin-fonts {
 	@include non-latin-fonts();
 }
-
-@import "utilities";

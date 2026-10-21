@@ -1,3 +1,6 @@
+@use "../variables-site/fonts" as *;
+@use "../variables-site/structure" as *;
+
 ul,
 ol {
 	padding-left: ( 1 * $size__spacing-unit );

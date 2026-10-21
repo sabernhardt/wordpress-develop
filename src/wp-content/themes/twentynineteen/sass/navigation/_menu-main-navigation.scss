@@ -1,3 +1,12 @@
+@use "../mixins/utilities" as *;
+@use "../variables-site/colors" as *;
+@use "../variables-site/fonts" as *;
+@use "../variables-site/structure" as *;
+
+/*--------------------------------------------------------------
+## Menus
+--------------------------------------------------------------*/
+
 /** === Main menu === */
 
 .main-navigation {

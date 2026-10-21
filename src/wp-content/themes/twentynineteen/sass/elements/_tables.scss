@@ -1,3 +1,8 @@
+@use "../mixins/mixins-master" as *;
+@use "../variables-site/colors" as *;
+@use "../variables-site/fonts" as *;
+@use "../variables-site/structure" as *;
+
 table {
 	margin: 0 0 $size__spacing-unit;
 	border-collapse: collapse;
