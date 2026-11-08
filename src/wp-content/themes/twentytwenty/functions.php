@@ -197,9 +197,11 @@ add_action( 'init', 'twentytwenty_register_block_patterns' );
  */
 function twentytwenty_register_styles() {
 
-	$theme_version = wp_get_theme()->get( 'Version' );
+	// With a child theme, the version would reflect the parent theme.
+	$theme_version = wp_get_theme( get_template() )->get( 'Version' );
 
-	wp_enqueue_style( 'twentytwenty-style', get_stylesheet_uri(), array(), $theme_version );
+	// Enqueue the main stylesheet with the active theme's version.
+	wp_enqueue_style( 'twentytwenty-style', get_stylesheet_uri(), array(), wp_get_theme()->get( 'Version' ) );
 	wp_style_add_data( 'twentytwenty-style', 'rtl', 'replace' );
 
 	// Enqueue the CSS file for the variable font, Inter.
@@ -224,7 +226,7 @@ add_action( 'wp_enqueue_scripts', 'twentytwenty_register_styles' );
  */
 function twentytwenty_register_scripts() {
 
-	$theme_version = wp_get_theme()->get( 'Version' );
+	$theme_version = wp_get_theme( get_template() )->get( 'Version' );
 
 	if ( ( ! is_admin() ) && is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -442,7 +444,7 @@ add_action( 'widgets_init', 'twentytwenty_sidebar_registration' );
  */
 function twentytwenty_block_editor_styles() {
 
-	$theme_version = wp_get_theme()->get( 'Version' );
+	$theme_version = wp_get_theme( get_template() )->get( 'Version' );
 
 	// Enqueue the editor styles.
 	wp_enqueue_style( 'twentytwenty-block-editor-styles', get_theme_file_uri( '/assets/css/editor-style-block.css' ), array(), $theme_version, 'all' );
@@ -657,7 +659,7 @@ add_filter( 'the_content_more_link', 'twentytwenty_read_more_tag' );
  * @return void
  */
 function twentytwenty_customize_controls_enqueue_scripts() {
-	$theme_version = wp_get_theme()->get( 'Version' );
+	$theme_version = wp_get_theme( get_template() )->get( 'Version' );
 
 	// Add main customizer js file.
 	wp_enqueue_script( 'twentytwenty-customize', get_template_directory_uri() . '/assets/js/customize.js', array( 'jquery' ), $theme_version );
@@ -680,7 +682,7 @@ add_action( 'customize_controls_enqueue_scripts', 'twentytwenty_customize_contro
  * @return void
  */
 function twentytwenty_customize_preview_init() {
-	$theme_version = wp_get_theme()->get( 'Version' );
+	$theme_version = wp_get_theme( get_template() )->get( 'Version' );
 
 	wp_enqueue_script( 'twentytwenty-customize-preview', get_theme_file_uri( '/assets/js/customize-preview.js' ), array( 'customize-preview', 'customize-selective-refresh', 'jquery' ), $theme_version, array( 'in_footer' => true ) );
 	wp_localize_script( 'twentytwenty-customize-preview', 'twentyTwentyBgColors', twentytwenty_get_customizer_color_vars() );
