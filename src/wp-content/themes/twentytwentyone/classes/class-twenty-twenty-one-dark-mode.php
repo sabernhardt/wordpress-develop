@@ -70,7 +70,7 @@ class Twenty_Twenty_One_Dark_Mode {
 			'twentytwentyone-dark-mode-support-toggle',
 			get_template_directory_uri() . '/assets/js/dark-mode-toggler.js',
 			array(),
-			wp_get_theme()->get( 'Version' ),
+			wp_get_theme( get_template() )->get( 'Version' ),
 			array( 'in_footer' => true )
 		);
 
@@ -78,7 +78,7 @@ class Twenty_Twenty_One_Dark_Mode {
 			'twentytwentyone-editor-dark-mode-support',
 			get_template_directory_uri() . '/assets/js/editor-dark-mode-support.js',
 			array( 'twentytwentyone-dark-mode-support-toggle' ),
-			wp_get_theme()->get( 'Version' ),
+			wp_get_theme( get_template() )->get( 'Version' ),
 			array( 'in_footer' => true )
 		);
 	}
@@ -98,7 +98,7 @@ class Twenty_Twenty_One_Dark_Mode {
 		if ( is_rtl() ) {
 			$url = get_template_directory_uri() . '/assets/css/style-dark-mode-rtl.css';
 		}
-		wp_enqueue_style( 'tt1-dark-mode', $url, array( 'twenty-twenty-one-style' ), wp_get_theme()->get( 'Version' ) );
+		wp_enqueue_style( 'tt1-dark-mode', $url, array( 'twenty-twenty-one-style' ), wp_get_theme( get_template() )->get( 'Version' ) );
 	}
 
 	/**
@@ -116,7 +116,7 @@ class Twenty_Twenty_One_Dark_Mode {
 			'twentytwentyone-customize-controls',
 			get_template_directory_uri() . '/assets/js/customize.js',
 			array( 'customize-base', 'customize-controls', 'underscore', 'jquery', 'twentytwentyone-customize-helpers' ),
-			wp_get_theme()->get( 'Version' ),
+			wp_get_theme( get_template() )->get( 'Version' ),
 			array( 'in_footer' => true )
 		);
 	}
