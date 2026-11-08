@@ -392,13 +392,13 @@ add_action( 'after_setup_theme', 'twenty_twenty_one_content_width', 0 );
  */
 function twenty_twenty_one_scripts() {
 	// The standard stylesheet.
-	wp_enqueue_style( 'twenty-twenty-one-style', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->get( 'Version' ) );
+	wp_enqueue_style( 'twenty-twenty-one-style', get_template_directory_uri() . '/style.css', array(), wp_get_theme( get_template() )->get( 'Version' ) );
 
 	// RTL styles.
 	wp_style_add_data( 'twenty-twenty-one-style', 'rtl', 'replace' );
 
 	// Print styles.
-	wp_enqueue_style( 'twenty-twenty-one-print-style', get_template_directory_uri() . '/assets/css/print.css', array(), wp_get_theme()->get( 'Version' ), 'print' );
+	wp_enqueue_style( 'twenty-twenty-one-print-style', get_template_directory_uri() . '/assets/css/print.css', array(), wp_get_theme( get_template() )->get( 'Version' ), 'print' );
 
 	// Threaded comment reply styles.
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -410,14 +410,14 @@ function twenty_twenty_one_scripts() {
 		'twenty-twenty-one-ie11-polyfills-asset',
 		false,
 		array(),
-		wp_get_theme()->get( 'Version' ),
+		wp_get_theme( get_template() )->get( 'Version' ),
 		array( 'in_footer' => true )
 	);
 	wp_register_script(
 		'twenty-twenty-one-ie11-polyfills',
 		false,
 		array(),
-		wp_get_theme()->get( 'Version' ),
+		wp_get_theme( get_template() )->get( 'Version' ),
 		array( 'in_footer' => true )
 	);
 
@@ -427,7 +427,7 @@ function twenty_twenty_one_scripts() {
 			'twenty-twenty-one-primary-navigation-script',
 			get_template_directory_uri() . '/assets/js/primary-navigation.js',
 			array(),
-			wp_get_theme()->get( 'Version' ),
+			wp_get_theme( get_template() )->get( 'Version' ),
 			array(
 				'in_footer' => false, // Because involves header.
 				'strategy'  => 'defer',
@@ -440,7 +440,7 @@ function twenty_twenty_one_scripts() {
 		'twenty-twenty-one-responsive-embeds-script',
 		get_template_directory_uri() . '/assets/js/responsive-embeds.js',
 		array(),
-		wp_get_theme()->get( 'Version' ),
+		wp_get_theme( get_template() )->get( 'Version' ),
 		array( 'in_footer' => true )
 	);
 }
@@ -455,7 +455,7 @@ add_action( 'wp_enqueue_scripts', 'twenty_twenty_one_scripts' );
  */
 function twentytwentyone_block_editor_script() {
 
-	wp_enqueue_script( 'twentytwentyone-editor', get_theme_file_uri( '/assets/js/editor.js' ), array( 'wp-blocks', 'wp-dom' ), wp_get_theme()->get( 'Version' ), array( 'in_footer' => true ) );
+	wp_enqueue_script( 'twentytwentyone-editor', get_theme_file_uri( '/assets/js/editor.js' ), array( 'wp-blocks', 'wp-dom' ), wp_get_theme( get_template() )->get( 'Version' ), array( 'in_footer' => true ) );
 }
 
 add_action( 'enqueue_block_editor_assets', 'twentytwentyone_block_editor_script' );
@@ -535,7 +535,7 @@ function twentytwentyone_customize_preview_init() {
 		'twentytwentyone-customize-helpers',
 		get_theme_file_uri( '/assets/js/customize-helpers.js' ),
 		array(),
-		wp_get_theme()->get( 'Version' ),
+		wp_get_theme( get_template() )->get( 'Version' ),
 		array( 'in_footer' => true )
 	);
 
@@ -543,7 +543,7 @@ function twentytwentyone_customize_preview_init() {
 		'twentytwentyone-customize-preview',
 		get_theme_file_uri( '/assets/js/customize-preview.js' ),
 		array( 'customize-preview', 'customize-selective-refresh', 'jquery', 'twentytwentyone-customize-helpers' ),
-		wp_get_theme()->get( 'Version' ),
+		wp_get_theme( get_template() )->get( 'Version' ),
 		array( 'in_footer' => true )
 	);
 }
@@ -562,7 +562,7 @@ function twentytwentyone_customize_controls_enqueue_scripts() {
 		'twentytwentyone-customize-helpers',
 		get_theme_file_uri( '/assets/js/customize-helpers.js' ),
 		array(),
-		wp_get_theme()->get( 'Version' ),
+		wp_get_theme( get_template() )->get( 'Version' ),
 		array( 'in_footer' => true )
 	);
 }
